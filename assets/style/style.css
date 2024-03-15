@@ -1,16 +1,16 @@
 @font-face {
     font-family:"Seaweed Script";
-    src: url(/Profile-Web/assets/font/SeaweedScript-Regular.ttf)
+    src: url(/assets/font/SeaweedScript-Regular.ttf)
 }
 
 @font-face {
     font-family: "Poppins-Regular";
-    src: url(/Profile-Web/assets/font/Poppins-Regular.ttf);
+    src: url(/assets/font/Poppins-Regular.ttf);
 }
 
 @font-face {
     font-family: "Poppins-Bold";
-    src: url(/Profile-Web/assets/font/Poppins-Bold.ttf);
+    src: url(/assets/font/Poppins-Bold.ttf);
 }
 
 html, body {
