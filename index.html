@@ -5,23 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/assets/style/style.css">
 	<link rel="icon" type="image/x-icon" href="/assets/image/Foto_Biru.png">
-    <title>MyProfile Page</title>
+    <title>Muhammad Ade Dzakwan</title>
 	<script src="/assets/script/script.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script>
+		$(function(){
+    $('a').each(function(){
+        if ($(this).prop('href') == window.location.href) {
+            $(this).addClass('active'); $(this).parents('navigator').addClass('active');
+        }
+    });
+});
+	</script>
 </head>
 <body>
 	<div class="coloum">
-			<div class="header1">
-				<p class="titleHeader">Profile awan</p>
-				<ul class="navigator">
-					<li class="nav">Home</li>
-					<li class="nav">About</li>
-					<li class="nav">Portofolio</li>
-					<li class="nav">Pages</li>
-					<li class="nav">Blog</li>
-				</ul>
-				<img src="/assets/image/menubuttonofthreelines_79781.png" class="buttonMenu">
-			</div>
-		<div class="header">
+		<div class="header1">
+			<p class="titleHeader">Profile awan</p>
+			<ul class="navigator">
+				<li class="nav"><a href="#home">Home</a></li>
+				<li class="nav"><a href="#about">About</a></li>
+				<li class="nav"><a href="#experience">Experience</a></li>
+				<li class="nav"><a href="#portofolio">Portofolio</a></li>
+				<li class="nav"><a href="#blog">Blog</a></li>
+			</ul>
+			<img src="/assets/image/menubuttonofthreelines_79781.png" class="buttonMenu">
+		</div>
+		<div class="header" id="home">
 			<div>
 				<p class="title">I am Awan,<br>A Web Designer</p>
 			</div>
@@ -29,12 +39,12 @@
 			<img src="/assets/image/Foto_Biru.png" class="img">
 			</div>
 		</div>
-		<div class="header_2">
+		<div class="header_2" id="about">
 			<div class="header21">
-				<h2 style="font-size: 40px; color:white">About</h2>
+				<h2>About</h2>
 			</div>
 			<div class="header2">
-			<img src="/assets/image/1688908285904.JPG" class="img1"> 
+				<img src="/assets/image/1688908285904.JPG" class="img1"> 
 				<div class="header2-1">
 					<div class="header2-1-1">
 						<p class="intro">
@@ -64,9 +74,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="header3">
+		<div class="header3" id="experience">
 			<div class="header3-1">
-				<h2 style="font-size: 40px; color:white">Experience</h2>
+				<h2>Experience</h2>
 			</div>
 			<div class="header3-2">
 				<div class="header3-2-1">
@@ -91,9 +101,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="header4">
+		<div class="header4" id="portofolio">
 			<div class="header4-1">
 				<h2 style="font-size: 40px; color:white">Portofolio</h2>
+			</div>
+			<div class="header4-2">
+
+			</div>
+		</div>
+		<div class="header5" id="blog">
+			<div class="header5-1">
+				<h2 style="font-size: 40px; color:white">Blog</h2>
 			</div>
 			<div class="header4-2">
 
