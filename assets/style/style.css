@@ -61,6 +61,7 @@ html, body {
 
 .header1{
     display: flex;
+    flex-wrap: wrap;
     width: 100vw;
     height: fit-content;
     background-color:#009dff;
@@ -71,6 +72,8 @@ html, body {
     position:fixed;
     z-index: 2;
     top:0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
@@ -301,12 +304,14 @@ html, body {
 }
 
 .buttonMenu{
+    display: none;
     width: 35px;
     height: auto;
     margin-right: 150px;
     background-color: white;
     padding: 10px;
     border-radius: 10px;
+    margin-left:auto;
 }
 
 .intro, p, .navigator{
@@ -338,21 +343,27 @@ h2, h3 {
 
 @media screen and (max-width: 1000px) {
     .navigator{
+        width: 100vw;
+        display: none;
         align-items: center;
         justify-content: center;
         padding: 9px 5px;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 10px;
+        border-radius: 0px;
         background-color: white;
         list-style: none;
     }
     
     .navigator .nav{
-        float: left;
+        align-items: center;
+        justify-content: center;
+        float: center;
     }
     
     .navigator a{
+        align-items: center;
+        justify-content: center;
         text-align: center;
         padding: 6px 4px;
         text-decoration: none;
@@ -375,20 +386,21 @@ h2, h3 {
         justify-content: center;
         align-items: center;
     }
-    
+
     .header1{
-        display: flex;
-        width: 100vw;
-        height: fit-content;
-        background-color:#009dff;
-        align-items: center;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        position:fixed;
-        top:0px;
-    }
-    
+      display: flex;
+      flex-wrap: wrap;
+      width: 100vw;
+      height: fit-content;
+      background-color:#009dff;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      position:fixed;
+      z-index: 2;
+      top:0px;
+  }
     
     .header_2{
         width: 100vw;
@@ -632,6 +644,7 @@ h2, h3 {
     }
     
     .buttonMenu{
+        display: block;
         width: 20px;
         height: auto;
         margin-right: 20px;
