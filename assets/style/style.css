@@ -35,17 +35,17 @@ html, body {
     float: left;
 }
 
-.navigator a{
+.navbar{
     text-align: center;
     padding: 12px 16px;
     text-decoration: none;
     font-size: 20px;
-    background-color: white;
     color: black;
     border-radius: 50px;
+    transition: background-color 0.3s ease-in-out;
 }
 
-.navigator .active{
+.nav-active{
     background-color: #009dff;
 }
 

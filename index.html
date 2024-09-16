@@ -7,13 +7,46 @@
     <link rel="icon" type="image/x-icon" href="/assets/image/Foto_Biru.png" />
     <title>Muhammad Ade Dzakwan</title>
     <script src="/assets/script/script.js"></script>
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-      $(function () {
-        $("a").each(function () {
-          if ($(this).prop("href") == window.location.href) {
-            $(this).addClass("active");
-            $(this).parents("navigator").addClass("active");
+      $(document).ready(function () {
+        $(window).scroll(function () {
+          if ($(window).scrollTop() < 1000) {
+            $("#nav1").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav1").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 1000 && $(window).scrollTop() < 2000) {
+            $("#nav2").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav2").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 2000 && $(window).scrollTop() < 2300) {
+            $("#nav3").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav3").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 2300 && $(window).scrollTop() < 3000) {
+            $("#nav4").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav4").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 3000) {
+            $("#nav5").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav5").css({ "background-color": "" });
           }
         });
       });
@@ -30,11 +63,17 @@
           onclick="showNav()"
         />
         <ul class="navigator" id="navigator">
-          <li class="nav"><a href="#home">Home</a></li>
-          <li class="nav"><a href="#about">About</a></li>
-          <li class="nav"><a href="#experience">Experience</a></li>
-          <li class="nav"><a href="#portofolio">Portofolio</a></li>
-          <li class="nav"><a href="#blog">Blog</a></li>
+          <li class="nav"><a href="#home" id="nav1" class="navbar">Home</a></li>
+          <li class="nav">
+            <a href="#about" id="nav2" class="navbar">About</a>
+          </li>
+          <li class="nav">
+            <a href="#experience" id="nav3" class="navbar">Experience</a>
+          </li>
+          <li class="nav">
+            <a href="#portofolio" id="nav4" class="navbar">Portofolio</a>
+          </li>
+          <li class="nav"><a href="#blog" id="nav5" class="navbar">Blog</a></li>
         </ul>
       </header>
       <section class="header" id="home">
