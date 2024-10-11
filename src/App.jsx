@@ -51,11 +51,11 @@ function App() {
             <img src="/assets/image/Foto_Biru.png" className="img" />
           </div>
         </section>
-        <section className="header_2" id="about">
+        <section className="header_2">
           <div className="header21">
             <h2>About</h2>
           </div>
-          <div className="header2">
+          <div className="header2" id="about">
             <img src="/assets/image/1688908285904.JPG" className="img1" />
             <div className="header2-1">
               <div className="header2-1-1">
@@ -94,8 +94,8 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="header3" id="experience">
-          <div className="header3-1">
+        <section className="header3">
+          <div className="header3-1" id="experience">
             <h2>Experience</h2>
           </div>
           <div className="header3-2">
