@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./public/assets/image/Foto_Biru.png"
+    />
+    <script src="./public/assets/script/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(window).scroll(function () {
+          if ($(window).scrollTop() < 1000) {
+            $("#nav1").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav1").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 1000 && $(window).scrollTop() < 2000) {
+            $("#nav2").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav2").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 2000 && $(window).scrollTop() < 2300) {
+            $("#nav3").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav3").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 2300 && $(window).scrollTop() < 3000) {
+            $("#nav4").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav4").css({ "background-color": "" });
+          }
+        });
+
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 3000) {
+            $("#nav5").css({ "background-color": "#009dff" });
+          } else {
+            $("#nav5").css({ "background-color": "" });
+          }
+        });
+      });
+    </script>
+    <title>Muhammad Ade Dzakwan</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
