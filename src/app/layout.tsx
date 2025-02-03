@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Playfair_Display , DM_Serif_Text} from 'next/font/google';
+import { Playfair_Display, DM_Serif_Text } from "next/font/google";
 
 const playfair_display = Playfair_Display({
+  subsets: ["latin"],
   variable: "--font-playfair-display",
   weight: "400",
 });
 
 const dm_serif_text = DM_Serif_Text({
+  subsets: ["latin"],
   variable: "--font-dm-serif-text",
   weight: "400",
 });
-
 
 export const metadata: Metadata = {
   title: "Muhammad Ade Dzakwan",
@@ -25,7 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${playfair_display.variable}, ${dm_serif_text.variable}`}
+      <body
+        className={`${playfair_display.variable}, ${dm_serif_text.variable}`}
       >
         {children}
       </body>
