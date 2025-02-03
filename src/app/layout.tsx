@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Playfair_Display , DM_Serif_Text} from 'next/font/google';
+
+const playfair_display = Playfair_Display({
+  variable: "--font-playfair-display",
+  weight: "400",
+});
+
+const dm_serif_text = DM_Serif_Text({
+  variable: "--font-dm-serif-text",
+  weight: "400",
+});
 
 
 export const metadata: Metadata = {
@@ -14,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <body className={`${playfair_display.variable}, ${dm_serif_text.variable}`}
       >
         {children}
       </body>
