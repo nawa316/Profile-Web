@@ -1,13 +1,18 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import HamburgerMenu from "@/app/components/HamburgerMenu";
 import RunningText from "@/app/components/RunningText";
+import { AiFillGithub } from "react-icons/ai";
+import { FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import Image from "next/image";
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <>
       <div className="flex flex-col">
-        <nav className="flex w-full items-center flex-row justify-center fixed px-6 py-4 top-0 z-10 bg-[#009dff]">
+        <nav className="flex w-full items-center flex-row justify-center fixed px-6 py-4 top-0 z-10 bg-[#6b8af6]">
           <p className="mr-auto content-center justify-center self-center items-center text-3xl font-bold dm_serif_text text-white">
             Awan
           </p>
@@ -20,10 +25,36 @@ export default function Home() {
         </nav>
         <div className="section_wrapper">
           <section
-            className="w-full h-screen flex flex-row justify-center items-center px-0 py-2.5 section"
+            className="w-full h-screen flex flex-row gap-10 justify-center items-center px-0 py-2.5 section"
             id="home"
           >
-            
+            <div className="relative w-[350px] h-full">
+              <Image
+                src="/images/photo_ilits.png"
+                alt="Foto Awan"
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center w-fit h-fit gap-2">
+              <p className="dm_serif_text text-9xl text-[#6b8af6]">
+                Hi <br />
+                I'm Awan<span className="text-[#3c45b9]">.</span>
+              </p>
+              <div className="flex flex-row w-full h-full gap-4 items-center">
+                <Link className="relative w-[42px] h-[42px]" href="">
+                  <Image
+                    src="/images/curriculum-vitae.png"
+                    alt="Icon CV"
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </Link>
+                <Link href=""><AiFillGithub size={42} color="#6b8af6"/></Link>
+                <Link href=""><FaLinkedin size={42} color="#6b8af6"/></Link>
+                <Link href=""><MdEmail size={42} color="#6b8af6"/></Link>
+              </div>
+            </div>
           </section>
           <section
             className="w-full h-screen flex flex-col justify-center items-center section"
@@ -114,24 +145,25 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <div
-            className="w-screen flex flex-col justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"
+          <section
+            className="w-screen h-screen flex flex-col justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px] section"
             id="portofolio"
           >
             <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]">
               <h2 style={{ fontSize: 40, color: "white" }}>Portofolio</h2>
             </div>
             <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"></div>
-          </div>
-          <div
-            className="bg-gray-800 w-screen flex flex-col justify-center items-center pt-[10px] pb-[10px]"
+          </section>
+          <section
+            className="bg-gray-800 w-screen h-screen flex flex-col justify-center items-center pt-[10px] pb-[10px] section"
             id="blog"
           >
             <div className="flex flex-row justify-center items-center pt-[10px] pb-[10px]">
               <h2 style={{ fontSize: 40, color: "white" }}>Blog</h2>
             </div>
             <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"></div>
-          </div>
+          </section>
+          <footer className="h-screen w-full section">Ini Footer</footer>
         </div>
       </div>
     </>
