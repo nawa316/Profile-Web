@@ -6,7 +6,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Image from "next/image";
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -50,26 +50,37 @@ export default function Home() {
                     objectFit="contain"
                   />
                 </Link>
-                <Link href=""><AiFillGithub size={42} color="#6b8af6"/></Link>
-                <Link href=""><FaLinkedin size={42} color="#6b8af6"/></Link>
-                <Link href=""><MdEmail size={42} color="#6b8af6"/></Link>
+                <Link href="">
+                  <AiFillGithub size={42} color="#6b8af6" />
+                </Link>
+                <Link href="">
+                  <FaLinkedin size={42} color="#6b8af6" />
+                </Link>
+                <Link href="">
+                  <MdEmail size={42} color="#6b8af6" />
+                </Link>
               </div>
             </div>
           </section>
           <section
-            className="w-full h-screen flex flex-col justify-center items-center section"
+            className="flex flex-col w-full h-screen justify-center items-center section"
             id="about"
           >
-            <div className="flex flex-col justify-center items-center bg-[#009dff] mb-[50px] px-5 py-0 rounded-[30px]">
-              <h2>About</h2>
+            <div className="flex justify-center items-center bg-[#6b8af6] mb-[50px] px-5 py-0 rounded-[30px]">
+              <h2 className="dm_serif_text text-4xl">About</h2>
             </div>
-            <div className="w-screen flex flex-col justify-center items-center">
-              <img
-                src="/images/1688908285904.JPG"
-                className="w-[200px] h-auto object-cover object-top ml-0 p-0 rounded-[20px]"
-              />
-              <div className="w-screen flex flex-col items-center h-fit justify-center mr-0 mt-5 p-0">
-                <div className="w-screen flex flex-row justify-center items-center">
+            <div className="w-full flex flex-col md:flex-row justify-center items-center px-10">
+              <div className="relative w-[400px] h-full rounded">
+                <Image
+                  src="/images/1688908285904.JPG"
+                  alt="Foto Awan"
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded"
+                />
+              </div>
+              <div className="w-full flex flex-col items-center h-fit justify-center mr-0 mt-5 p-0">
+                <div className="w-full flex flex-row justify-center items-center">
                   <p>
                     <span className="text-3xl">Muhammad Ade Dzakwan</span>{" "}
                     <br />
