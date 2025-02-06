@@ -42,7 +42,7 @@ export default function Home() {
             <div className="flex flex-col justify-center items-center w-fit h-fit gap-2">
               <p className="dm_serif_text text-9xl text-[#6b8af6]">
                 Hi <br />
-                I'm Awan<span className="text-[#3c45b9]">.</span>
+                I&apos;m Awan<span className="text-[#3c45b9]">.</span>
               </p>
               <div className="flex flex-row w-full h-full gap-4 items-center">
                 <Link className="relative w-[42px] h-[42px]" href="">
