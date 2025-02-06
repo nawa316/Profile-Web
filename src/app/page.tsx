@@ -7,6 +7,9 @@ import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
+import Contact from '@/app/components/Contact';
+
+
 
 export default function Home() {
   return (
@@ -218,7 +221,7 @@ export default function Home() {
             className="w-screen h-screen flex flex-col justify-center items-center bg-[#483D8B] gap-10 section"
             id="portofolio"
           >
-            <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]">
+            <div className="flex flex-row justify-center items-center bg-[#483D8B]">
               <h2 className="dm_serif_text text-4xl text-white">Portofolio</h2>
             </div>
             <div>
@@ -236,7 +239,7 @@ export default function Home() {
             className="bg-gray-800 w-screen h-screen flex flex-col justify-center items-center gap-10 section"
             id="blog"
           >
-            <div className="flex flex-row justify-center items-center pt-[10px] pb-[10px]">
+            <div className="flex flex-row justify-center items-center">
               <h2 className="dm_serif_text text-4xl text-white">Blog</h2>
             </div>
             <div className="flex flex-col justify-center items-center gap-8">
@@ -253,7 +256,15 @@ export default function Home() {
               </Link>
             </div>
           </section>
-          <footer className="h-screen w-full section bg-[#6b8af6]">Ini Footer</footer>
+          <footer className="h-screen w-full flex flex-col justify-center items-center section bg-[#6b8af6] gap-10">
+            <div className="flex flex-col gap-2 justify-center items-center text-center">
+              <h2 className="dm_serif_text text-4xl text-white">Contact Me!</h2>
+              <p className="text-lg">Apakah Anda tertarik untuk berkolaborasi atau sekedar berdiskusi seputar Pengembangan Web dan Perangkat Lunak? <br/> Jangan ragu untuk menghubungi saya!</p>
+            </div>
+            <div className="lg:w-[1000px] h-auto flex justify-center items-center">
+              <Contact />
+            </div>
+          </footer>
         </div>
       </div>
     </>
