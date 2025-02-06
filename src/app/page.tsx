@@ -50,13 +50,13 @@ export default function Home() {
                     objectFit="contain"
                   />
                 </Link>
-                <Link href="">
+                <Link href="https://github.com/nawa316" target="_blank">
                   <AiFillGithub size={42} color="#6b8af6" />
                 </Link>
-                <Link href="">
+                <Link href="https://www.linkedin.com/in/muhammad-ade-dzakwan/" target="_blank">
                   <FaLinkedin size={42} color="#6b8af6" />
                 </Link>
-                <Link href="">
+                <Link href="mailto:muhammadadedzakwan@gmail.com" target="_blank">
                   <MdEmail size={42} color="#6b8af6" />
                 </Link>
               </div>
@@ -67,33 +67,34 @@ export default function Home() {
             id="about"
           >
             <div className="flex justify-center items-center bg-[#6b8af6] mb-[50px] px-5 py-0 rounded-[30px]">
-              <h2 className="dm_serif_text text-4xl">About</h2>
+              <h2 className="dm_serif_text text-4xl">About Me</h2>
             </div>
-            <div className="w-full flex flex-col md:flex-row justify-center items-center px-10">
-              <div className="relative w-[400px] h-full rounded">
+            <div className="w-full flex flex-col md:flex-row justify-center items-center gap-10 px-40">
                 <Image
                   src="/images/1688908285904.JPG"
                   alt="Foto Awan"
-                  layout="fill"
-                  objectFit="contain"
-                  className="rounded"
+                  width={2848}
+                  height={4288}
+                  className="w-[300px] h-fit rounded-xl"
                 />
-              </div>
-              <div className="w-full flex flex-col items-center h-fit justify-center mr-0 mt-5 p-0">
-                <div className="w-full flex flex-row justify-center items-center">
+              <div className="w-full flex flex-col items-start h-fit justify-start gap-5 p-0">
+                <div className="w-full flex flex-row justify-start items-center">
                   <p>
-                    <span className="text-3xl">Muhammad Ade Dzakwan</span>{" "}
+                    <span className="text-4xl font-bold">Muhammad Ade Dzakwan</span>{" "}
                     <br />
-                    <span className="text-xl">Bondowoso, Jawa Timur</span>
+                    <span className="text-2xl">Bondowoso, Jawa Timur</span>
                   </p>
-                  <img
+                  <Image
                     src="/images/Lambang ITS.png"
+                    alt="FSLDK"
+                    width={1559}
+                    height={1559}
                     className="w-20 h-20 ml-auto mr-5"
                   />
                 </div>
                 <div>
-                  <h2>Description</h2>
-                  <p className="medium">
+                  <h2 className="text-xl font-medium">Description</h2>
+                  <p className="text-lg">
                     Information Systems student with a passion for web
                     development, combining technical expertise with strong
                     communication skills. Proven ability to excel in team
@@ -104,8 +105,8 @@ export default function Home() {
                   </p>
                 </div>
                 <div>
-                  <h2>Education &amp; Qualifications</h2>
-                  <ul>
+                  <h2 className="text-xl font-medium">Education &amp; Qualifications</h2>
+                  <ul className="text-lg list-disc pl-10">
                     <li>
                       Information Systems, Institut Teknologi Sepuluh Nopember -
                       2023-Now
@@ -124,57 +125,135 @@ export default function Home() {
             </div>
           </section>
           <section
-            className="bg-blue-500 w-screen h-screen py-[10px] flex flex-col justify-center items-center section"
+            className="bg-[#3c45b9] w-screen h-screen gap-10 flex flex-col justify-center items-center section"
             id="experience"
           >
-            <div className="flex flex-row justify-center items-center text-[40px] py-[10px]">
-              <h2>Experience</h2>
+            <div className="flex flex-row justify-center items-center">
+              <h2 className="dm_serif_text text-4xl text-white">Experience</h2>
             </div>
-            <div className="flex flex-row justify-center items-center pt-[10px] pb-[20px]">
-              <div className="flex flex-col p-2 justify-center items-center border-[15px] bg-gray-50">
-                <img src="/images/Logo_PMII.png" className="w-auto h-24 p-2" />
-                <h3>PMII</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-                <img src="/images/Logo JMMI.png" className="w-auto h-24 p-2" />
-                <h3>JMMI</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-                <img src="/images/Logo IMBS.png" className="w-auto h-24 p-2" />
-                <h3>IMBS</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-                <img src="/images/pp.png" className="w-auto h-24 p-2" />
-                <h3>Remaja Masjid Baitul Makmur</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-                <img
-                  src="/images/Logo Ahbabur Rasul.png"
-                  className="w-auto h-24 p-2"
+            <div className="flex flex-row flex-wrap px-[100px] xl:px-[500px] justify-center items-center">
+              <div className="flex flex-col p-2 justify-center items-center border-[15px] bg-gray-50 rounded-xl mt-10">
+                <Image
+                  src="/images/FSLDK.jpeg"
+                  alt="FSLDK"
+                  width={320}
+                  height={320}
+                  className="w-auto h-24 p-2 rounded-xl"
                 />
-                <h3>Ahbabur Rasul</h3>
+                <h3 className="dm_serif_text">FSLDK Surabaya Raya</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/Ini Lho ITS!.jpeg"
+                  alt="Ini Lho ITS!"
+                  width={200}
+                  height={200}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">Ini Lho ITS!</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/ISE.jpeg"
+                  alt="ISE"
+                  width={320}
+                  height={320}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">ISE!</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/Logo_PMII.png"
+                  alt="PMII"
+                  width={307}
+                  height={325}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">PMII</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/Logo JMMI.png"
+                  alt="JMMI"
+                  width={500}
+                  height={500}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">JMMI</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/Logo IMBS.png"
+                  alt="Habits"
+                  width={500}
+                  height={500}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">Habits</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/pp.png"
+                  alt="Remaja Masjid Baitul Makmur"
+                  width={640}
+                  height={640}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">Remaja Masjid Baitul Makmur</h3>
+              </div>
+              <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px] rounded-xl mt-10">
+                <Image
+                  src="/images/Logo Ahbabur Rasul.png"
+                  alt="Remaja Masjid Baitul Makmur"
+                  width={3118}
+                  height={3881}
+                  className="w-auto h-24 p-2 rounded-xl"
+                />
+                <h3 className="dm_serif_text">Ahbabur Rasul</h3>
               </div>
             </div>
           </section>
           <section
-            className="w-screen h-screen flex flex-col justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px] section"
+            className="w-screen h-screen flex flex-col justify-center items-center bg-[#483D8B] gap-10 section"
             id="portofolio"
           >
             <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]">
-              <h2 style={{ fontSize: 40, color: "white" }}>Portofolio</h2>
+              <h2 className="dm_serif_text text-4xl text-white">Portofolio</h2>
             </div>
-            <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"></div>
-          </section>
+            <div>
+              <iframe
+                src="https://www.canva.com/design/DAGFQGwI09Y/cX4lBmKpLpEETk8VAfdk-Q/view?embed"
+                width="1000px"
+                height="500px"
+                sandbox="allow-scripts"
+                allowFullScreen
+                style={{ border: 'none' }}
+              />
+            </div>
+            </section>
           <section
-            className="bg-gray-800 w-screen h-screen flex flex-col justify-center items-center pt-[10px] pb-[10px] section"
+            className="bg-gray-800 w-screen h-screen flex flex-col justify-center items-center gap-10 section"
             id="blog"
           >
             <div className="flex flex-row justify-center items-center pt-[10px] pb-[10px]">
-              <h2 style={{ fontSize: 40, color: "white" }}>Blog</h2>
+              <h2 className="dm_serif_text text-4xl text-white">Blog</h2>
             </div>
-            <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"></div>
+            <div className="flex flex-col justify-center items-center gap-8">
+              <iframe
+                src="https://thismadura-pride.blogspot.com/"
+                width="1000px"
+                height="500px"
+                sandbox="allow-scripts"
+                allowFullScreen
+                style={{ border: 'none' }}
+              />
+              <Link href="https://thismadura-pride.blogspot.com/" target="_blank" className="p-2 px-4 bg-[#6b8af6] rounded-full">
+                <p className="text-white text-xl font-medium">Visit Site</p>
+              </Link>
+            </div>
           </section>
-          <footer className="h-screen w-full section">Ini Footer</footer>
+          <footer className="h-screen w-full section bg-[#6b8af6]">Ini Footer</footer>
         </div>
       </div>
     </>
