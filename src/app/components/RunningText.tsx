@@ -10,7 +10,7 @@ export default function RunningText() {
         animate={{ x: ["100%", "-100%"] }}
         transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
       >
-        🚀 Halo, saya Awan! | 🌐 Web Developer & Software Engineer | Information Systems Student
+        🌐 Web Developer & Software Engineer | Information Systems Student | Open To Work
       </motion.div>
     </div>
   );
