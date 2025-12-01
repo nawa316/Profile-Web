@@ -2,58 +2,63 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col">
-        <div className="flex w-screen h-fit bg-[#009dff] items-center flex-row justify-center items-center fixed top-0">
-          <p className="content-center justify-center self-center items-center text-3xl text-[white] ml-[150px] font-Poppins font-bold">Profile awan</p>
-          <ul className="items-center justify-center bg-[white] mx-auto px-2.5 py-[18px] rounded-[10px]">
-            <li className="float-left">
-              <a href="#home">Home</a>
+        {/* Navbar */}
+        <div className="flex w-full h-fit bg-[#009dff] items-center flex-row justify-between md:justify-center fixed top-0 z-50 px-4 py-2">
+          <p className="text-xl md:text-3xl text-white font-Poppins font-bold md:ml-[150px]">Profile awan</p>
+          <ul className="hidden md:flex items-center justify-center bg-white mx-auto px-2.5 py-[18px] rounded-[10px] gap-4">
+            <li>
+              <a href="#home" className="hover:text-[#009dff] transition-colors">Home</a>
             </li>
-            <li className="float-left">
-              <a href="#about">About</a>
+            <li>
+              <a href="#about" className="hover:text-[#009dff] transition-colors">About</a>
             </li>
-            <li className="float-left">
-              <a href="#experience">Experience</a>
+            <li>
+              <a href="#experience" className="hover:text-[#009dff] transition-colors">Experience</a>
             </li>
-            <li className="float-left">
-              <a href="#portofolio">Portofolio</a>
+            <li>
+              <a href="#portofolio" className="hover:text-[#009dff] transition-colors">Portofolio</a>
             </li>
-            <li className="float-left">
-              <a href="#blog">Blog</a>
+            <li>
+              <a href="#blog" className="hover:text-[#009dff] transition-colors">Blog</a>
             </li>
           </ul>
           <img
             src="/images/menubuttonofthreelines_79781.png"
-            className="w-5 h-auto bg-[white] mr-5 p-2.5 rounded-[10px]"
+            alt="Menu"
+            className="w-5 h-auto bg-white p-2.5 rounded-[10px] md:hidden cursor-pointer"
           />
         </div>
-        <div className="w-screen h-[1000px] flex flex-row justify-center items-center px-0 py-2.5" id="home">
-          <div>
-            <p className="text-3xl text-[#009dff] ml-5 font-Poppins font-bold">
+        
+        {/* Home Section */}
+        <div className="w-full min-h-screen flex flex-col-reverse md:flex-row justify-center items-center px-4 py-2.5 pt-20 md:pt-0" id="home">
+          <div className="text-center md:text-left">
+            <p className="text-2xl md:text-3xl text-[#009dff] md:ml-5 font-Poppins font-bold">
               I am Awan,
               <br />A Web Designer
             </p>
           </div>
-          <div>
-            <img src="/images/Foto_Biru.png" className="h-auto w-[250px]" />
+          <div className="mb-8 md:mb-0">
+            <img src="/images/Foto_Biru.png" alt="Profile" className="h-auto w-[180px] md:w-[250px]" />
           </div>
         </div>
-        <div className="w-screen flex flex-col justify-center items-center" id="about">
-          <div className="flex flex-col justify-center items-center bg-[#009dff] mb-[50px] px-5 py-0 rounded-[30px]">
-            <h2>About</h2>
+        {/* About Section */}
+        <div className="w-full flex flex-col justify-center items-center px-4 py-8" id="about">
+          <div className="flex flex-col justify-center items-center bg-[#009dff] mb-8 md:mb-[50px] px-5 py-2 rounded-[30px]">
+            <h2 className="text-white text-xl md:text-2xl">About</h2>
           </div>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <img src="/images/1688908285904.JPG" className="w-[200px] h-auto object-cover object-top ml-0 p-0 rounded-[20px]" />
-            <div className="w-screen flex flex-col items-center h-fit justify-center mr-0 mt-5 p-0">
-              <div className="w-screen flex flex-row justify-center items-center">
-                <p>
-                  <span className="text-3xl">Muhammad Ade Dzakwan</span> <br />
-                  <span className="text-xl">Bondowoso, Jawa Timur</span>
+          <div className="w-full max-w-4xl flex flex-col justify-center items-center">
+            <img src="/images/1688908285904.JPG" alt="About" className="w-[150px] md:w-[200px] h-auto object-cover object-top rounded-[20px]" />
+            <div className="w-full flex flex-col items-center h-fit justify-center mt-5 px-4">
+              <div className="w-full flex flex-col md:flex-row justify-center items-center gap-4">
+                <p className="text-center md:text-left">
+                  <span className="text-2xl md:text-3xl">Muhammad Ade Dzakwan</span> <br />
+                  <span className="text-lg md:text-xl">Bondowoso, Jawa Timur</span>
                 </p>
-                <img src="/images/Lambang ITS.png" className="w-20 h-20 ml-auto mr-5" />
+                <img src="/images/Lambang ITS.png" alt="ITS Logo" className="w-16 h-16 md:w-20 md:h-20 md:ml-auto" />
               </div>
-              <div>
-                <h2>Description</h2>
-                <p className="medium">
+              <div className="mt-6 text-center md:text-left w-full">
+                <h2 className="text-xl md:text-2xl font-bold mb-2">Description</h2>
+                <p className="text-sm md:text-base">
                   Information Systems student with a passion for web development,
                   combining technical expertise with strong communication skills.
                   Proven ability to excel in team environments, collaborating
@@ -62,15 +67,15 @@ export default function Home() {
                   approach to problem-solving in the world of programming.
                 </p>
               </div>
-              <div>
-                <h2>Education &amp; Qualifications</h2>
-                <ul>
+              <div className="mt-6 text-center md:text-left w-full">
+                <h2 className="text-xl md:text-2xl font-bold mb-2">Education &amp; Qualifications</h2>
+                <ul className="text-sm md:text-base list-disc list-inside md:list-outside">
                   <li>
                     Information Systems, Institut Teknologi Sepuluh Nopember -
                     2023-Now
                   </li>
                   <li>
-                    Sience, National Senior High School 1 Tenggarang - 2020-2023
+                    Science, National Senior High School 1 Tenggarang - 2020-2023
                   </li>
                   <li>National Junior High School 2 Tenggarang - 2017-2020</li>
                   <li>National Elementary School 1 Cindogo - 2014-2017</li>
@@ -79,44 +84,52 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="bg-blue-500 h-[600px] py-[10px] w-screen flex flex-col justify-center items-center" id="experience">
-          <div className="flex flex-row justify-center items-center text-[40px] py-[10px]">
-            <h2>Experience</h2>
+        {/* Experience Section */}
+        <div className="bg-blue-500 min-h-[400px] md:h-[600px] py-8 md:py-[10px] w-full flex flex-col justify-center items-center" id="experience">
+          <div className="flex flex-row justify-center items-center text-2xl md:text-[40px] py-[10px]">
+            <h2 className="text-white">Experience</h2>
           </div>
-          <div className="flex flex-row justify-center items-center pt-[10px] pb-[20px]">
-            <div className="flex flex-col p-2 justify-center items-center border-[15px] bg-gray-50">
-              <img src="/images/Logo_PMII.png" className="w-auto h-24 p-2" />
-              <h3>PMII</h3>
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-5 pt-[10px] pb-[20px] px-4">
+            <div className="flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] bg-gray-50 w-[120px] md:w-auto">
+              <img src="/images/Logo_PMII.png" alt="PMII" className="w-auto h-16 md:h-24 p-2" />
+              <h3 className="text-sm md:text-base">PMII</h3>
             </div>
-            <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-              <img src="/images/Logo JMMI.png" className="w-auto h-24 p-2" />
-              <h3>JMMI</h3>
+            <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] w-[120px] md:w-auto">
+              <img src="/images/Logo JMMI.png" alt="JMMI" className="w-auto h-16 md:h-24 p-2" />
+              <h3 className="text-sm md:text-base">JMMI</h3>
             </div>
-            <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-              <img src="/images/Logo IMBS.png" className="w-auto h-24 p-2" />
-              <h3>IMBS</h3>
+            <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] w-[120px] md:w-auto">
+              <img src="/images/Logo IMBS.png" alt="IMBS" className="w-auto h-16 md:h-24 p-2" />
+              <h3 className="text-sm md:text-base">IMBS</h3>
             </div>
-            <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-              <img src="/images/pp.png" className="w-auto h-24 p-2" />
-              <h3>Remaja Masjid Baitul Makmur</h3>
+            <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] w-[120px] md:w-auto">
+              <img src="/images/pp.png" alt="Remaja Masjid" className="w-auto h-16 md:h-24 p-2" />
+              <h3 className="text-sm md:text-base text-center">Remaja Masjid<br/>Baitul Makmur</h3>
             </div>
-            <div className="bg-white flex flex-col p-2 justify-center items-center ml-5 border-[15px]">
-              <img src="/images/Logo Ahbabur Rasul.png" className="w-auto h-24 p-2" />
-              <h3>Ahbabur Rasul</h3>
+            <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] w-[120px] md:w-auto">
+              <img src="/images/Logo Ahbabur Rasul.png" alt="Ahbabur Rasul" className="w-auto h-16 md:h-24 p-2" />
+              <h3 className="text-sm md:text-base text-center">Ahbabur Rasul</h3>
             </div>
           </div>
         </div>
-        <div className="w-screen flex flex-col justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]" id="portofolio">
-          <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]">
-            <h2 style={{ fontSize: 40, color: "white" }}>Portofolio</h2>
+        {/* Portfolio Section */}
+        <div className="w-full flex flex-col justify-center items-center bg-[#483D8B] py-12 md:py-16 px-4" id="portofolio">
+          <div className="flex flex-row justify-center items-center">
+            <h2 className="text-2xl md:text-[40px] text-white">Portofolio</h2>
           </div>
-          <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"></div>
+          <div className="flex flex-row justify-center items-center pt-4">
+            {/* Portfolio content can be added here */}
+          </div>
         </div>
-        <div className="bg-gray-800 w-screen flex flex-col justify-center items-center pt-[10px] pb-[10px]" id="blog">
-          <div className="flex flex-row justify-center items-center pt-[10px] pb-[10px]">
-            <h2 style={{ fontSize: 40, color: "white" }}>Blog</h2>
+        
+        {/* Blog Section */}
+        <div className="bg-gray-800 w-full flex flex-col justify-center items-center py-12 md:py-16 px-4" id="blog">
+          <div className="flex flex-row justify-center items-center">
+            <h2 className="text-2xl md:text-[40px] text-white">Blog</h2>
           </div>
-          <div className="flex flex-row justify-center items-center bg-[#483D8B] pt-[10px] pb-[10px]"></div>
+          <div className="flex flex-row justify-center items-center pt-4">
+            {/* Blog content can be added here */}
+          </div>
         </div>
       </div>
     </>
