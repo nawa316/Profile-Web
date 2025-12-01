@@ -130,7 +130,7 @@ export default function Home() {
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Experience</h2>
             </div>
             <div className="flex flex-row flex-wrap md:flex-nowrap gap-4 px-4 md:px-8 justify-center md:justify-start items-center w-full md:overflow-x-auto md:py-4">
-              <div className="flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] bg-gray-50 rounded-xl flex-shrink-0">
+              <div className="flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] bg-gray-50 rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/FSLDK.jpeg"
                   alt="FSLDK"
@@ -140,7 +140,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">FSLDK Surabaya Raya</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Ini Lho ITS!.jpeg"
                   alt="Ini Lho ITS!"
@@ -150,7 +150,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">Ini Lho ITS!</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/ISE.jpeg"
                   alt="ISE"
@@ -160,7 +160,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">ISE!</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo_PMII.png"
                   alt="PMII"
@@ -170,7 +170,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">PMII</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo JMMI.png"
                   alt="JMMI"
@@ -180,7 +180,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">JMMI</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo IMBS.png"
                   alt="Habits"
@@ -190,7 +190,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">Habits</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/pp.png"
                   alt="Remaja Masjid Baitul Makmur"
@@ -200,7 +200,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base text-center">Remaja Masjid<br/>Baitul Makmur</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo Ahbabur Rasul.png"
                   alt="Remaja Masjid Baitul Makmur"
