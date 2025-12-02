@@ -54,9 +54,9 @@ export default function HamburgerMenu() {
         <a href="#about" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           About
         </a>
-        <a href="#experience" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+        <Link href="/experience" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Experience
-        </a>
+        </Link>
         <Link href="/portofolio" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Portfolio
         </Link>
