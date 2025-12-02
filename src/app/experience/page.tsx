@@ -9,6 +9,15 @@ import CustomCursor from "@/app/components/CustomCursor";
 
 const MAX_VISIBLE_SKILLS = 4;
 
+const formatTypeLabel = (type: string) => {
+  switch (type) {
+    case "organization": return "Organization";
+    case "work": return "Work";
+    case "volunteer": return "Volunteer";
+    default: return type;
+  }
+};
+
 export default function ExperiencePage() {
   const [selectedType, setSelectedType] = useState<string>("All");
   
@@ -17,15 +26,6 @@ export default function ExperiencePage() {
   const filteredExperience = selectedType === "All" 
     ? experienceData 
     : experienceData.filter(item => item.type === selectedType);
-
-  const formatTypeLabel = (type: string) => {
-    switch (type) {
-      case "organization": return "Organization";
-      case "work": return "Work";
-      case "volunteer": return "Volunteer";
-      default: return type;
-    }
-  };
 
   return (
     <>
@@ -122,15 +122,6 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
       case "work": return "bg-green-500/20 text-green-300";
       case "volunteer": return "bg-purple-500/20 text-purple-300";
       default: return "bg-gray-500/20 text-gray-300";
-    }
-  };
-
-  const formatTypeLabel = (type: string) => {
-    switch (type) {
-      case "organization": return "Organization";
-      case "work": return "Work";
-      case "volunteer": return "Volunteer";
-      default: return type;
     }
   };
 
