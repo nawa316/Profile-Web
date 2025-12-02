@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { portfolioData, PortfolioItem } from "@/app/data/portfolioData";
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft } from "react-icons/fa";
+import CustomCursor from "@/app/components/CustomCursor";
 
 const MAX_VISIBLE_TECHNOLOGIES = 4;
 
@@ -17,8 +18,10 @@ export default function PortfolioPage() {
     : portfolioData.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
-      {/* Navigation */}
+    <>
+      <CustomCursor />
+      <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
+        {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#6b8af6]/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -90,6 +93,7 @@ export default function PortfolioPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

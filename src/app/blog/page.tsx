@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { blogData, BlogPost } from "@/app/data/blogData";
 import { FaArrowLeft, FaClock, FaUser, FaCalendar, FaTag } from "react-icons/fa";
+import CustomCursor from "@/app/components/CustomCursor";
 
 const MAX_VISIBLE_TAGS = 3;
 
@@ -17,8 +18,10 @@ export default function BlogPage() {
     : blogData.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Navigation */}
+    <>
+      <CustomCursor />
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -97,6 +100,7 @@ export default function BlogPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
