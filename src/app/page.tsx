@@ -2,6 +2,7 @@
 import React from "react";
 import HamburgerMenu from "@/app/components/HamburgerMenu";
 import RunningText from "@/app/components/RunningText";
+import CustomCursor from "@/app/components/CustomCursor";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -14,6 +15,7 @@ import Contact from '@/app/components/Contact';
 export default function Home() {
   return (
     <>
+      <CustomCursor />
       <div className="flex flex-col">
         <nav className="flex w-full items-center flex-row justify-center fixed px-6 py-4 top-0 z-10 bg-[#6b8af6]">
           <p className="mr-auto content-center justify-center self-center items-center text-3xl font-bold dm_serif_text text-white">
