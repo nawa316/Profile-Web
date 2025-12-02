@@ -43,7 +43,7 @@ export default function Home() {
                 Information Systems Student &amp; Web Developer
               </p>
               <div className="flex flex-row w-full h-full gap-4 items-center justify-center mt-4">
-                <Link className="relative w-[32px] h-[32px] md:w-[42px] md:h-[42px] hover:scale-110 transition-transform" href="">
+                <Link href="/cv" className="relative w-[32px] h-[32px] md:w-[42px] md:h-[42px] hover:scale-110 transition-transform">
                   <Image
                     src="/images/curriculum-vitae.png"
                     alt="Icon CV"
@@ -83,7 +83,7 @@ export default function Home() {
                   <p className="text-center md:text-left">
                     <span className="text-2xl md:text-4xl font-bold">Muhammad Ade Dzakwan</span>{" "}
                     <br />
-                    <span className="text-lg md:text-2xl">Bondowoso, Jawa Timur</span>
+                    <span className="text-lg md:text-2xl">Surabaya, Jawa Timur</span>
                   </p>
                   <Image
                     src="/images/Lambang ITS.png"
