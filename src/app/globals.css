@@ -7,6 +7,13 @@
   --font-dm-serif-text: "DM Serif Text";
 }
 
+/* Custom cursor - hide default cursor on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 .playfair_display {
   font-family: var(--font-playfair-display);
 }

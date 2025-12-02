@@ -2,6 +2,7 @@
 import React from "react";
 import HamburgerMenu from "@/app/components/HamburgerMenu";
 import RunningText from "@/app/components/RunningText";
+import CustomCursor from "@/app/components/CustomCursor";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -14,6 +15,7 @@ import Contact from '@/app/components/Contact';
 export default function Home() {
   return (
     <>
+      <CustomCursor />
       <div className="flex flex-col">
         <nav className="flex w-full items-center flex-row justify-center fixed px-6 py-4 top-0 z-10 bg-[#6b8af6]">
           <p className="mr-auto content-center justify-center self-center items-center text-3xl font-bold dm_serif_text text-white">
@@ -28,24 +30,19 @@ export default function Home() {
         </nav>
         <div className="section_wrapper">
           <section
-            className="w-full min-h-screen flex flex-col-reverse md:flex-row gap-6 md:gap-10 justify-center items-center px-4 md:px-0 py-2.5 pt-20 md:pt-2.5 section"
+            className="w-full min-h-screen flex flex-col justify-center items-center px-4 md:px-0 py-2.5 pt-20 md:pt-2.5 section"
             id="home"
           >
-            <div className="relative w-[200px] h-[300px] md:w-[350px] md:h-full">
-              <Image
-                src="/images/photo_ilits.png"
-                alt="Foto Awan"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-            <div className="flex flex-col justify-center items-center w-fit h-fit gap-2">
-              <p className="dm_serif_text text-5xl md:text-9xl text-[#6b8af6] text-center md:text-left">
+            <div className="flex flex-col justify-center items-center w-fit h-fit gap-4">
+              <p className="dm_serif_text text-5xl md:text-9xl text-[#6b8af6] text-center">
                 Hi <br />
                 I&apos;m Awan<span className="text-[#3c45b9]">.</span>
               </p>
-              <div className="flex flex-row w-full h-full gap-4 items-center justify-center md:justify-start">
-                <Link className="relative w-[32px] h-[32px] md:w-[42px] md:h-[42px]" href="">
+              <p className="text-lg md:text-2xl text-gray-600 text-center max-w-[600px]">
+                Information Systems Student &amp; Web Developer
+              </p>
+              <div className="flex flex-row w-full h-full gap-4 items-center justify-center mt-4">
+                <Link className="relative w-[32px] h-[32px] md:w-[42px] md:h-[42px] hover:scale-110 transition-transform" href="">
                   <Image
                     src="/images/curriculum-vitae.png"
                     alt="Icon CV"
@@ -53,13 +50,13 @@ export default function Home() {
                     objectFit="contain"
                   />
                 </Link>
-                <Link href="https://github.com/nawa316" target="_blank">
+                <Link href="https://github.com/nawa316" target="_blank" className="hover:scale-110 transition-transform">
                   <AiFillGithub className="w-8 h-8 md:w-[42px] md:h-[42px]" color="#6b8af6" />
                 </Link>
-                <Link href="https://www.linkedin.com/in/muhammad-ade-dzakwan/" target="_blank">
+                <Link href="https://www.linkedin.com/in/muhammad-ade-dzakwan/" target="_blank" className="hover:scale-110 transition-transform">
                   <FaLinkedin className="w-8 h-8 md:w-[42px] md:h-[42px]" color="#6b8af6" />
                 </Link>
-                <Link href="mailto:muhammadadedzakwan@gmail.com" target="_blank">
+                <Link href="mailto:muhammadadedzakwan@gmail.com" target="_blank" className="hover:scale-110 transition-transform">
                   <MdEmail className="w-8 h-8 md:w-[42px] md:h-[42px]" color="#6b8af6" />
                 </Link>
               </div>
@@ -134,8 +131,8 @@ export default function Home() {
             <div className="flex flex-row justify-center items-center">
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Experience</h2>
             </div>
-            <div className="flex flex-row flex-wrap gap-4 px-4 md:px-[100px] xl:px-[500px] justify-center items-center">
-              <div className="flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] bg-gray-50 rounded-xl">
+            <div className="flex flex-row flex-wrap md:flex-nowrap gap-4 px-4 md:px-8 justify-center md:justify-start items-center w-full md:overflow-x-auto md:py-4">
+              <div className="flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] bg-gray-50 rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/FSLDK.jpeg"
                   alt="FSLDK"
@@ -145,7 +142,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">FSLDK Surabaya Raya</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Ini Lho ITS!.jpeg"
                   alt="Ini Lho ITS!"
@@ -155,7 +152,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">Ini Lho ITS!</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/ISE.jpeg"
                   alt="ISE"
@@ -165,7 +162,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">ISE!</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo_PMII.png"
                   alt="PMII"
@@ -175,7 +172,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">PMII</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo JMMI.png"
                   alt="JMMI"
@@ -185,7 +182,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">JMMI</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo IMBS.png"
                   alt="Habits"
@@ -195,7 +192,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base">Habits</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/pp.png"
                   alt="Remaja Masjid Baitul Makmur"
@@ -205,7 +202,7 @@ export default function Home() {
                 />
                 <h3 className="dm_serif_text text-sm md:text-base text-center">Remaja Masjid<br/>Baitul Makmur</h3>
               </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl">
+              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
                 <Image
                   src="/images/Logo Ahbabur Rasul.png"
                   alt="Remaja Masjid Baitul Makmur"
