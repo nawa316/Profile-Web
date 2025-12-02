@@ -3,6 +3,7 @@ import React from "react";
 import HamburgerMenu from "@/app/components/HamburgerMenu";
 import RunningText from "@/app/components/RunningText";
 import CustomCursor from "@/app/components/CustomCursor";
+import TypeWriter from "@/app/components/TypeWriter";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -35,8 +36,8 @@ export default function Home() {
           >
             <div className="flex flex-col justify-center items-center w-fit h-fit gap-4">
               <p className="dm_serif_text text-5xl md:text-9xl text-[#6b8af6] text-center">
-                Hi <br />
-                I&apos;m Awan<span className="text-[#3c45b9]">.</span>
+                <TypeWriter text="Hi! I'm Awan" typingSpeed={150} />
+                <span className="text-[#3c45b9]">.</span>
               </p>
               <p className="text-lg md:text-2xl text-gray-600 text-center max-w-[600px]">
                 Information Systems Student &amp; Web Developer
