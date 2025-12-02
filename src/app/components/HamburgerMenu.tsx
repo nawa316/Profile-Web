@@ -2,12 +2,17 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -36,23 +41,29 @@ export default function HamburgerMenu() {
 
       {/* Menu */}
       <motion.div
-        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex flex-col items-center justify-center gap-6 transition-transform ${
+        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center gap-8 transition-transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? "0%" : "100%" }}
         transition={{ duration: 0.5 }}
       >
-        <a href="#" className="text-white text-2xl">
+        <a href="#home" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Home
         </a>
-        <a href="#" className="text-white text-2xl">
+        <a href="#about" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           About
         </a>
-        <a href="#" className="text-white text-2xl">
-          Services
+        <a href="#experience" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+          Experience
         </a>
-        <a href="#" className="text-white text-2xl">
+        <Link href="/portofolio" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+          Portfolio
+        </Link>
+        <Link href="/blog" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+          Blog
+        </Link>
+        <a href="#contact" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Contact
         </a>
       </motion.div>
