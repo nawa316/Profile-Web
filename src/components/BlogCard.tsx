@@ -2,17 +2,19 @@ import React from "react";
 import { motion } from "framer-motion";
 import type { Blog } from "@/lib/types";
 import { FaClock, FaUser, FaCalendar, FaTag } from "react-icons/fa";
+import Link from "next/link";
 
 const MAX_VISIBLE_TAGS = 3;
 
 export function FeaturedBlogCard({ post }: { post: Blog }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
-      className="group relative bg-gradient-to-r from-[#6b8af6]/20 to-[#3c45b9]/20 rounded-3xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300"
-    >
+    <Link href={`/blog/${post.slug}`} className="block h-full">
+      <motion.article
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="group relative bg-gradient-to-r from-[#6b8af6]/20 to-[#3c45b9]/20 rounded-3xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300"
+      >
       <div className="flex flex-col md:flex-row">
         {/* Image Placeholder */}
         <div className="md:w-1/2 h-64 md:h-auto bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center relative">
@@ -67,17 +69,19 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
         </div>
       </div>
     </motion.article>
+    </Link>
   );
 }
 
 export default function BlogCard({ post, index }: { post: Blog; index: number }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-      className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10 flex flex-col h-full"
-    >
+    <Link href={`/blog/${post.slug}`} className="block h-full">
+      <motion.article
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+        className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10 flex flex-col h-full"
+      >
       {/* Image Placeholder */}
       <div className="relative h-48 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center overflow-hidden flex-shrink-0">
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -138,5 +142,6 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         </div>
       </div>
     </motion.article>
+    </Link>
   );
 }
