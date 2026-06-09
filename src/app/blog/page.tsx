@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { blogApi } from "@/lib/api";
 import type { Blog } from "@/lib/types";
-import { FaArrowLeft } from "react-icons/fa";
 import CustomCursor from "@/components/CustomCursor";
 import BlogCard, { FeaturedBlogCard } from "@/components/BlogCard";
+import Navbar from "@/components/Navbar";
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -38,21 +38,7 @@ export default function BlogPage() {
       <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2 text-white hover:text-[#6b8af6] transition-colors">
-              <FaArrowLeft />
-              <span className="dm_serif_text text-xl">Back to Home</span>
-            </Link>
-            <div className="flex items-center gap-4">
-              <Link href="/portofolio" className="text-white hover:text-[#6b8af6] transition-colors dm_serif_text">
-                Portfolio
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+        <Navbar />
 
       {/* Header */}
       <div className="pt-24 pb-12 px-4">

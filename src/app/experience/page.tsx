@@ -5,9 +5,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { experienceApi } from "@/lib/api";
 import type { Experience } from "@/lib/types";
-import { FaArrowLeft } from "react-icons/fa";
 import CustomCursor from "@/components/CustomCursor";
 import ExperienceCard, { formatTypeLabel } from "@/components/ExperienceCard";
+import Navbar from "@/components/Navbar";
 
 export default function ExperiencePage() {
   const [selectedType, setSelectedType] = useState<string>("All");
@@ -39,24 +39,7 @@ export default function ExperiencePage() {
       <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#3c45b9] via-[#1a1a2e] to-[#16213e]">
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#6b8af6]/90 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <Link href="/" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
-                <FaArrowLeft />
-                <span className="dm_serif_text text-xl">Back to Home</span>
-              </Link>
-              <div className="flex items-center gap-4">
-                <Link href="/portofolio" className="text-white hover:text-gray-200 transition-colors dm_serif_text">
-                  Portfolio
-                </Link>
-                <Link href="/blog" className="text-white hover:text-gray-200 transition-colors dm_serif_text">
-                  Blog
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
+        <Navbar />
 
         {/* Header */}
         <div className="pt-24 pb-12 px-4">

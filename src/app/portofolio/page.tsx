@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { portfolioApi } from "@/lib/api";
 import type { Portfolio } from "@/lib/types";
-import { FaArrowLeft } from "react-icons/fa";
 import CustomCursor from "@/components/CustomCursor";
 import PortfolioCard from "@/components/PortfolioCard";
+import Navbar from "@/components/Navbar";
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -38,21 +38,7 @@ export default function PortfolioPage() {
       <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
         {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#6b8af6]/90 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
-              <FaArrowLeft />
-              <span className="dm_serif_text text-xl">Back to Home</span>
-            </Link>
-            <div className="flex items-center gap-4">
-              <Link href="/blog" className="text-white hover:text-gray-200 transition-colors dm_serif_text">
-                Blog
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+        <Navbar />
 
       {/* Header */}
       <div className="pt-24 pb-12 px-4">

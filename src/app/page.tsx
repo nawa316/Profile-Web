@@ -5,8 +5,7 @@ import type { Experience, Portfolio, Blog } from "@/lib/types";
 import ExperienceCard from "@/components/ExperienceCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import BlogCard from "@/components/BlogCard";
-import HamburgerMenu from "@/components/HamburgerMenu";
-import RunningText from "@/components/RunningText";
+import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import TypeWriter from "@/components/TypeWriter";
 import { AiFillGithub } from "react-icons/ai";
@@ -45,17 +44,7 @@ export default function Home() {
     <>
       <CustomCursor />
       <div className="flex flex-col">
-        <nav className="flex w-full items-center flex-row justify-center fixed px-6 py-4 top-0 z-10 bg-[#6b8af6]">
-          <p className="mr-auto content-center justify-center self-center items-center text-3xl font-bold dm_serif_text text-white">
-            Awan
-          </p>
-          <div className="hidden md:block md:max-w-[400px] lg:max-w-[600px] h-fit border rounded-full border-dashed dm_serif_text">
-            <RunningText />
-          </div>
-          <div className="ml-auto">
-            <HamburgerMenu />
-          </div>
-        </nav>
+        <Navbar />
         <div className="section_wrapper">
           <section
             className="w-full min-h-screen flex flex-col justify-center items-center px-4 md:px-0 py-2.5 pt-20 md:pt-2.5 section"
