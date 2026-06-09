@@ -2,9 +2,9 @@
 
 Panduan lengkap untuk deploy aplikasi Profile Web menggunakan Docker. Aplikasi ini terdiri dari:
 
-- **Frontend**: Next.js 15
-- **Backend**: Node.js/Express API
-- **Database**: PostgreSQL 16
+The project has been unified into a single Next.js full-stack application.
+- `profile-web-app`: Next.js App Router (handles both frontend UI and API endpoints)
+- `profile-web-db`: PostgreSQL Database16
 
 ## 📋 Prerequisites
 
