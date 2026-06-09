@@ -1,5 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { experienceApi, portfolioApi, blogApi } from "@/lib/api";
+import type { Experience, Portfolio, Blog } from "@/lib/types";
+import ExperienceCard from "@/components/ExperienceCard";
+import PortfolioCard from "@/components/PortfolioCard";
+import BlogCard from "@/components/BlogCard";
 import HamburgerMenu from "@/components/HamburgerMenu";
 import RunningText from "@/components/RunningText";
 import CustomCursor from "@/components/CustomCursor";
@@ -14,6 +19,28 @@ import Contact from '@/components/Contact';
 
 
 export default function Home() {
+  const [experienceData, setExperienceData] = useState<Experience[]>([]);
+  const [portfolioData, setPortfolioData] = useState<Portfolio[]>([]);
+  const [blogData, setBlogData] = useState<Blog[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [exp, port, blog] = await Promise.all([
+          experienceApi.getAll(),
+          portfolioApi.getAll(),
+          blogApi.getAll()
+        ]);
+        setExperienceData(exp || []);
+        setPortfolioData(port || []);
+        setBlogData(blog || []);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <CustomCursor />
@@ -132,88 +159,14 @@ export default function Home() {
             <div className="flex flex-row justify-center items-center">
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Experience</h2>
             </div>
-            <div className="flex flex-row flex-wrap md:flex-nowrap gap-4 px-4 md:px-8 justify-center md:justify-start items-center w-full md:overflow-x-auto md:py-4">
-              <div className="flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] bg-gray-50 rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/FSLDK.jpeg"
-                  alt="FSLDK"
-                  width={320}
-                  height={320}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">FSLDK Surabaya Raya</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/Ini Lho ITS!.jpeg"
-                  alt="Ini Lho ITS!"
-                  width={200}
-                  height={200}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">Ini Lho ITS!</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/ISE.jpeg"
-                  alt="ISE"
-                  width={320}
-                  height={320}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">ISE!</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/Logo_PMII.png"
-                  alt="PMII"
-                  width={307}
-                  height={325}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">PMII</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/Logo JMMI.png"
-                  alt="JMMI"
-                  width={500}
-                  height={500}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">JMMI</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/Logo IMBS.png"
-                  alt="Habits"
-                  width={500}
-                  height={500}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">Habits</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/pp.png"
-                  alt="Remaja Masjid Baitul Makmur"
-                  width={640}
-                  height={640}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base text-center">Remaja Masjid<br/>Baitul Makmur</h3>
-              </div>
-              <div className="bg-white flex flex-col p-2 justify-center items-center border-[10px] md:border-[15px] rounded-xl flex-shrink-0 hover:scale-110 transition-transform cursor-pointer">
-                <Image
-                  src="/images/Logo Ahbabur Rasul.png"
-                  alt="Remaja Masjid Baitul Makmur"
-                  width={3118}
-                  height={3881}
-                  className="w-auto h-16 md:h-24 p-2 rounded-xl"
-                />
-                <h3 className="dm_serif_text text-sm md:text-base">Ahbabur Rasul</h3>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
+              {experienceData.slice(0, 3).map((item, index) => (
+                <ExperienceCard key={item.id} item={item} index={index} />
+              ))}
             </div>
+            <Link href="/experience" className="mt-4 p-2 px-6 bg-white text-[#3c45b9] rounded-full hover:scale-105 transition-transform font-medium">
+              Lihat Semua
+            </Link>
           </section>
           <section
             className="w-full min-h-screen flex flex-col justify-center items-center bg-[#483D8B] gap-6 md:gap-10 section py-8 px-4"
@@ -222,16 +175,15 @@ export default function Home() {
             <div className="flex flex-row justify-center items-center bg-[#483D8B]">
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Portofolio</h2>
             </div>
-            <div className="w-full flex justify-center">
-              <iframe
-                src="https://www.canva.com/design/DAGFQGwI09Y/cX4lBmKpLpEETk8VAfdk-Q/view?embed"
-                className="w-full max-w-[1000px] h-[300px] md:h-[500px]"
-                sandbox="allow-scripts"
-                allowFullScreen
-                style={{ border: 'none' }}
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
+              {portfolioData.slice(0, 3).map((item, index) => (
+                <PortfolioCard key={item.id} item={item} index={index} />
+              ))}
             </div>
-            </section>
+            <Link href="/portofolio" className="mt-4 p-2 px-6 bg-[#6b8af6] text-white rounded-full hover:scale-105 transition-transform font-medium">
+              Lihat Semua
+            </Link>
+          </section>
           <section
             className="bg-gray-800 w-full min-h-screen flex flex-col justify-center items-center gap-6 md:gap-10 section py-8 px-4"
             id="blog"
@@ -239,18 +191,14 @@ export default function Home() {
             <div className="flex flex-row justify-center items-center">
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Blog</h2>
             </div>
-            <div className="flex flex-col justify-center items-center gap-8 w-full">
-              <iframe
-                src="https://thismadura-pride.blogspot.com/"
-                className="w-full max-w-[1000px] h-[300px] md:h-[500px]"
-                sandbox="allow-scripts"
-                allowFullScreen
-                style={{ border: 'none' }}
-              />
-              <Link href="https://thismadura-pride.blogspot.com/" target="_blank" className="p-2 px-4 bg-[#6b8af6] rounded-full">
-                <p className="text-white text-lg md:text-xl font-medium">Visit Site</p>
-              </Link>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
+              {blogData.slice(0, 3).map((item, index) => (
+                <BlogCard key={item.id} post={item} index={index} />
+              ))}
             </div>
+            <Link href="/blog" className="mt-4 p-2 px-6 bg-[#6b8af6] text-white rounded-full hover:scale-105 transition-transform font-medium">
+              Lihat Semua
+            </Link>
           </section>
           <footer className="min-h-screen w-full flex flex-col justify-center items-center section bg-[#6b8af6] gap-6 md:gap-10 py-8 px-4">
             <div className="flex flex-col gap-2 justify-center items-center text-center">
