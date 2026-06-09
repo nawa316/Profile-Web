@@ -180,13 +180,13 @@ export class BlogModel {
   static async getCategories(): Promise<string[]> {
     const query = 'SELECT DISTINCT category FROM blogs ORDER BY category';
     const result = await pool.query<{ category: string }>(query);
-    return result.rows.map((row) => row.category);
+    return result.rows.map((row: any) => row.category);
   }
 
   // Get all unique tags
   static async getTags(): Promise<string[]> {
     const query = 'SELECT DISTINCT UNNEST(tags) as tag FROM blogs ORDER BY tag';
     const result = await pool.query<{ tag: string }>(query);
-    return result.rows.map((row) => row.tag);
+    return result.rows.map((row: any) => row.tag);
   }
 }
