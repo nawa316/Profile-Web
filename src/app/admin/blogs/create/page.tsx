@@ -16,6 +16,7 @@ export default function CreateBlogPage() {
     excerpt: '',
     content: '',
     image: '',
+    imageFile: null as File | null,
     author: 'Muhammad Ade Dzakwan',
     category: '',
     tags: [] as string[],
@@ -28,7 +29,39 @@ export default function CreateBlogPage() {
     setIsLoading(true);
 
     try {
-      await blogApi.create(formData);
+      let imageUrl = formData.image;
+
+      if (formData.imageFile) {
+        const uploadData = new FormData();
+        uploadData.append('file', formData.imageFile);
+        uploadData.append('bucket', 'blogs');
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadData,
+        });
+
+        const data = await res.json();
+        if (!data.success) {
+          throw new Error(data.error || 'Failed to upload image');
+        }
+        imageUrl = data.url;
+      }
+
+      const submitData = {
+        title: formData.title,
+        slug: formData.slug,
+        excerpt: formData.excerpt,
+        content: formData.content,
+        image: imageUrl,
+        author: formData.author,
+        category: formData.category,
+        tags: formData.tags,
+        published_at: formData.published_at,
+        read_time: formData.read_time,
+      };
+
+      await blogApi.create(submitData);
       router.push('/admin/blogs');
     } catch (error) {
       console.error('Failed to create blog:', error);
@@ -128,18 +161,24 @@ export default function CreateBlogPage() {
                 />
               </div>
 
-              {/* Image URL */}
+              {/* Image Upload */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Image URL
+                  Image Upload
                 </label>
                 <input
-                  type="url"
-                  value={formData.image}
-                  onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      setFormData(prev => ({ ...prev, imageFile: e.target.files![0] }));
+                    }
+                  }}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6b8af6] focus:border-[#6b8af6] outline-none"
-                  placeholder="https://example.com/image.jpg"
                 />
+                {formData.image && !formData.imageFile && (
+                  <p className="mt-2 text-sm text-gray-500">Current image URL: {formData.image}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

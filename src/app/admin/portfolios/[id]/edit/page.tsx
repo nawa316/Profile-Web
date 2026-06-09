@@ -18,6 +18,7 @@ export default function EditPortfolioPage() {
     title: '',
     description: '',
     image: '',
+    imageFile: null as File | null,
     technologies: [] as string[],
     category: '',
     link: '',
@@ -54,7 +55,35 @@ export default function EditPortfolioPage() {
     setIsLoading(true);
 
     try {
-      await portfolioApi.update(id, formData);
+      let imageUrl = formData.image;
+
+      if (formData.imageFile) {
+        const uploadData = new FormData();
+        uploadData.append('file', formData.imageFile);
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadData,
+        });
+
+        const data = await res.json();
+        if (!data.success) {
+          throw new Error(data.error || 'Failed to upload image');
+        }
+        imageUrl = data.url;
+      }
+
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        image: imageUrl,
+        technologies: formData.technologies,
+        category: formData.category,
+        link: formData.link,
+        github: formData.github,
+      };
+
+      await portfolioApi.update(id, payload);
       router.push('/admin/portfolios');
     } catch (error) {
       console.error('Failed to update portfolio:', error);
@@ -119,15 +148,21 @@ export default function EditPortfolioPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Image URL
+                  Image Upload
                 </label>
                 <input
-                  type="url"
-                  value={formData.image}
-                  onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      setFormData(prev => ({ ...prev, imageFile: e.target.files![0] }));
+                    }
+                  }}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#483D8B] focus:border-[#483D8B] outline-none"
-                  placeholder="https://example.com/image.jpg"
                 />
+                {formData.image && !formData.imageFile && (
+                  <p className="mt-2 text-sm text-gray-500">Current image URL: {formData.image}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -135,14 +170,18 @@ export default function EditPortfolioPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Category *
                   </label>
-                  <input
-                    type="text"
+                  <select
                     required
                     value={formData.category}
                     onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#483D8B] focus:border-[#483D8B] outline-none"
-                    placeholder="e.g., Web Development, Mobile App"
-                  />
+                  >
+                    <option value="" disabled>Select category</option>
+                    <option value="web">Web</option>
+                    <option value="desktop">Desktop</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
 
                 <div>

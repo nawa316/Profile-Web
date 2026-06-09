@@ -15,6 +15,7 @@ export default function CreateExperiencePage() {
     role: '',
     description: '',
     image: '',
+    imageFile: null as File | null,
     start_date: '',
     end_date: '',
     type: 'organization' as 'organization' | 'work' | 'volunteer',
@@ -27,10 +28,37 @@ export default function CreateExperiencePage() {
     setIsLoading(true);
 
     try {
+      let imageUrl = formData.image;
+
+      if (formData.imageFile) {
+        const uploadData = new FormData();
+        uploadData.append('file', formData.imageFile);
+        uploadData.append('bucket', 'experiences');
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadData,
+        });
+
+        const data = await res.json();
+        if (!data.success) {
+          throw new Error(data.error || 'Failed to upload image');
+        }
+        imageUrl = data.url;
+      }
+
       const submitData = {
-        ...formData,
+        organization: formData.organization,
+        role: formData.role,
+        description: formData.description,
+        image: imageUrl,
+        start_date: formData.start_date,
         end_date: formData.end_date || null,
+        type: formData.type,
+        skills: formData.skills,
+        location: formData.location,
       };
+
       await experienceApi.create(submitData);
       router.push('/admin/experiences');
     } catch (error) {
@@ -133,15 +161,21 @@ export default function CreateExperiencePage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Image/Logo URL
+                  Image/Logo Upload
                 </label>
                 <input
-                  type="url"
-                  value={formData.image}
-                  onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      setFormData(prev => ({ ...prev, imageFile: e.target.files![0] }));
+                    }
+                  }}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3c45b9] focus:border-[#3c45b9] outline-none"
-                  placeholder="https://example.com/logo.png"
                 />
+                {formData.image && !formData.imageFile && (
+                  <p className="mt-2 text-sm text-gray-500">Current image URL: {formData.image}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
