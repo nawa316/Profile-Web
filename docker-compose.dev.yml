@@ -50,7 +50,7 @@ services:
   # Frontend (Development mode with hot reload)
   frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
       target: deps
     container_name: profile-web-frontend-dev
@@ -61,7 +61,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - ./frontend:/app
       - /app/node_modules
       - /app/.next
     depends_on:

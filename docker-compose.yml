@@ -64,7 +64,7 @@ services:
   # Frontend (Next.js)
   frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: profile-web-frontend
     restart: unless-stopped
