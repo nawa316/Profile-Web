@@ -8,6 +8,7 @@ const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    document.body.classList.add('hide-native-cursor');
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -43,6 +44,7 @@ const CustomCursor: React.FC = () => {
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      document.body.classList.remove('hide-native-cursor');
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
