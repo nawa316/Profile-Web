@@ -42,6 +42,7 @@ export default function EditBlogPage() {
         excerpt: blog.excerpt || '',
         content: blog.content,
         image: blog.image || '',
+        imageFile: null,
         author: blog.author,
         category: blog.category,
         tags: blog.tags || [],

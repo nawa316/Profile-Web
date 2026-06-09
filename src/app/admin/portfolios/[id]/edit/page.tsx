@@ -36,6 +36,7 @@ export default function EditPortfolioPage() {
         title: portfolio.title,
         description: portfolio.description,
         image: portfolio.image || '',
+        imageFile: null,
         technologies: portfolio.technologies || [],
         category: portfolio.category,
         link: portfolio.link || '',

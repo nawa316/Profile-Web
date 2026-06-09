@@ -39,6 +39,7 @@ export default function EditExperiencePage() {
         role: exp.role,
         description: exp.description,
         image: exp.image || '',
+        imageFile: null,
         start_date: exp.start_date.split('T')[0],
         end_date: exp.end_date ? exp.end_date.split('T')[0] : '',
         type: exp.type,
