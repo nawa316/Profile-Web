@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Portfolio } from "@/lib/types";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
@@ -13,12 +14,21 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10"
     >
-      {/* Image Placeholder */}
+      {/* Image */}
       <div className="relative h-48 bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-        <span className="text-white text-6xl font-bold opacity-30 group-hover:scale-110 transition-transform duration-300">
-          {item.title.charAt(0)}
-        </span>
+        {item.image ? (
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+        ) : (
+          <span className="text-white text-6xl font-bold opacity-30 group-hover:scale-110 transition-transform duration-300">
+            {item.title.charAt(0)}
+          </span>
+        )}
         <div className="absolute top-4 right-4">
           <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
             {item.category}

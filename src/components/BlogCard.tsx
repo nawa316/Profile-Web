@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Blog } from "@/lib/types";
 import { FaClock, FaUser, FaCalendar, FaTag } from "react-icons/fa";
@@ -16,13 +17,22 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
         className="group relative bg-gradient-to-r from-[#6b8af6]/20 to-[#3c45b9]/20 rounded-3xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300"
       >
       <div className="flex flex-col md:flex-row">
-        {/* Image Placeholder */}
-        <div className="md:w-1/2 h-64 md:h-auto bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center relative">
-          <div className="absolute inset-0 bg-black/20"></div>
-          <span className="text-white text-8xl font-bold opacity-30">
-            {post.title.charAt(0)}
-          </span>
-          <div className="absolute top-4 left-4">
+        {/* Image */}
+        <div className="md:w-1/2 h-64 md:h-auto bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/20 z-10"></div>
+          {post.image ? (
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <span className="text-white text-8xl font-bold opacity-30">
+              {post.title.charAt(0)}
+            </span>
+          )}
+          <div className="absolute top-4 left-4 z-20">
             <span className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
               Featured
             </span>
@@ -84,11 +94,20 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
       >
       {/* Image Placeholder */}
       <div className="relative h-48 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center overflow-hidden flex-shrink-0">
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-        <span className="text-white text-6xl font-bold opacity-20 group-hover:scale-110 transition-transform duration-300">
-          {post.title.charAt(0)}
-        </span>
-        <div className="absolute top-4 right-4">
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300 z-10"></div>
+        {post.image ? (
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+        ) : (
+          <span className="text-white text-6xl font-bold opacity-20 group-hover:scale-110 transition-transform duration-300">
+            {post.title.charAt(0)}
+          </span>
+        )}
+        <div className="absolute top-4 right-4 z-20">
           <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
             {post.category}
           </span>
