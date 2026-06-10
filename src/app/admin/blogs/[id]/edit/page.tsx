@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Header from '../../../components/Header';
 import TagInput from '../../../components/TagInput';
+import MarkdownEditor from '@/components/MarkdownEditor';
 import { blogApi } from '@/lib/api';
 import { ArrowLeft, Save } from 'lucide-react';
 
@@ -179,12 +180,9 @@ export default function EditBlogPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Content *
                 </label>
-                <textarea
-                  required
+                <MarkdownEditor
                   value={formData.content}
-                  onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                  rows={12}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6b8af6] focus:border-[#6b8af6] outline-none font-mono text-sm"
+                  onChange={(content) => setFormData(prev => ({ ...prev, content }))}
                   placeholder="Write your blog content here (supports Markdown)"
                 />
               </div>
