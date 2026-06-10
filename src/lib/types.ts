@@ -40,6 +40,7 @@ export interface Experience {
   type: 'organization' | 'work' | 'volunteer';
   skills: string[];
   location: string;
+  photos?: string[];
   created_at: string;
   updated_at: string;
 }
@@ -100,6 +101,7 @@ export interface CreateExperienceInput {
   type: 'organization' | 'work' | 'volunteer';
   skills?: string[];
   location?: string;
+  photos?: string[];
 }
 
 export interface UpdateExperienceInput {
@@ -112,4 +114,5 @@ export interface UpdateExperienceInput {
   type?: 'organization' | 'work' | 'volunteer';
   skills?: string[];
   location?: string;
+  photos?: string[];
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import type { Experience } from "@/lib/types";
 import { FaCalendar, FaMapMarkerAlt } from "react-icons/fa";
 
@@ -31,12 +32,13 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10"
-    >
+    <Link href={`/experience/${item.id}`} className="block h-full">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10 h-full flex flex-col"
+      >
       {/* Image */}
       <div className="relative h-48 bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -105,5 +107,6 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
         </div>
       </div>
     </motion.div>
+    </Link>
   );
 }

@@ -5,7 +5,7 @@ import { AppError } from '../errors';
 export class ExperienceModel {
   // Get all experiences
   static async findAll(): Promise<Experience[]> {
-    const query = 'SELECT * FROM experiences ORDER BY start_date DESC, created_at DESC';
+    const query = 'SELECT * FROM experiences ORDER BY (end_date IS NULL) DESC, start_date DESC, created_at DESC';
     const result = await pool.query<Experience>(query);
     return result.rows;
   }
@@ -47,14 +47,15 @@ export class ExperienceModel {
       end_date,
       type,
       skills, 
-      location 
+      location,
+      photos
     } = input;
     
     const query = `
       INSERT INTO experiences (
-        organization, role, description, image, start_date, end_date, type, skills, location
+        organization, role, description, image, start_date, end_date, type, skills, location, photos
       ) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
       RETURNING *
     `;
     
@@ -67,7 +68,8 @@ export class ExperienceModel {
       end_date || null,
       type,
       skills || [],
-      location || null
+      location || null,
+      photos || []
     ]);
     
     return result.rows[0];
@@ -116,6 +118,10 @@ export class ExperienceModel {
       updates.push(`location = $${paramCount++}`);
       values.push(input.location);
     }
+    if (input.photos !== undefined) {
+      updates.push(`photos = $${paramCount++}`);
+      values.push(input.photos);
+    }
 
     if (updates.length === 0) {
       throw new AppError('No fields to update', 400);
@@ -152,7 +158,7 @@ export class ExperienceModel {
     const query = `
       SELECT * FROM experiences 
       WHERE organization ILIKE $1 OR role ILIKE $1 OR description ILIKE $1
-      ORDER BY start_date DESC
+      ORDER BY (end_date IS NULL) DESC, start_date DESC
     `;
     const result = await pool.query<Experience>(query, [`%${searchTerm}%`]);
     return result.rows;

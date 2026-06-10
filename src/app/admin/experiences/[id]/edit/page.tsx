@@ -25,6 +25,8 @@ export default function EditExperiencePage() {
     type: 'organization' as 'organization' | 'work' | 'volunteer',
     skills: [] as string[],
     location: '',
+    photos: [] as string[],
+    photoFiles: [] as File[],
   });
 
   useEffect(() => {
@@ -45,6 +47,8 @@ export default function EditExperiencePage() {
         type: exp.type,
         skills: exp.skills || [],
         location: exp.location || '',
+        photos: exp.photos || [],
+        photoFiles: [],
       });
     } catch (error) {
       console.error('Failed to fetch experience:', error);
@@ -79,6 +83,25 @@ export default function EditExperiencePage() {
         imageUrl = data.url;
       }
 
+      let newPhotoUrls: string[] = [];
+      if (formData.photoFiles.length > 0) {
+        for (const file of formData.photoFiles) {
+          const uploadData = new FormData();
+          uploadData.append('file', file);
+          uploadData.append('bucket', 'experiences');
+
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            body: uploadData,
+          });
+
+          const data = await res.json();
+          if (data.success) {
+            newPhotoUrls.push(data.url);
+          }
+        }
+      }
+
       const submitData = {
         organization: formData.organization,
         role: formData.role,
@@ -89,6 +112,7 @@ export default function EditExperiencePage() {
         type: formData.type,
         skills: formData.skills,
         location: formData.location,
+        photos: [...formData.photos, ...newPhotoUrls],
       };
 
       await experienceApi.update(id, submitData);
@@ -216,6 +240,51 @@ export default function EditExperiencePage() {
                 />
                 {formData.image && !formData.imageFile && (
                   <p className="mt-2 text-sm text-gray-500">Current image URL: {formData.image}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Gallery Photos (Multiple)
+                </label>
+                
+                {formData.photos.length > 0 && (
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 mb-2">Current Photos:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.photos.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img src={url} alt={`Photo ${index}`} className="w-20 h-20 object-cover rounded" />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newPhotos = [...formData.photos];
+                              newPhotos.splice(index, 1);
+                              setFormData(prev => ({ ...prev, photos: newPhotos }));
+                            }}
+                            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      setFormData(prev => ({ ...prev, photoFiles: Array.from(e.target.files!) }));
+                    }
+                  }}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3c45b9] focus:border-[#3c45b9] outline-none"
+                />
+                {formData.photoFiles.length > 0 && (
+                  <p className="mt-2 text-sm text-gray-500">{formData.photoFiles.length} new files selected</p>
                 )}
               </div>
 

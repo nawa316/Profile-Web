@@ -21,6 +21,7 @@ export default function CreateExperiencePage() {
     type: 'organization' as 'organization' | 'work' | 'volunteer',
     skills: [] as string[],
     location: '',
+    photoFiles: [] as File[],
   });
 
   const handleSubmit = async (e: FormEvent) => {
@@ -47,6 +48,25 @@ export default function CreateExperiencePage() {
         imageUrl = data.url;
       }
 
+      let photoUrls: string[] = [];
+      if (formData.photoFiles.length > 0) {
+        for (const file of formData.photoFiles) {
+          const uploadData = new FormData();
+          uploadData.append('file', file);
+          uploadData.append('bucket', 'experiences');
+
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            body: uploadData,
+          });
+
+          const data = await res.json();
+          if (data.success) {
+            photoUrls.push(data.url);
+          }
+        }
+      }
+
       const submitData = {
         organization: formData.organization,
         role: formData.role,
@@ -57,6 +77,7 @@ export default function CreateExperiencePage() {
         type: formData.type,
         skills: formData.skills,
         location: formData.location,
+        photos: photoUrls,
       };
 
       await experienceApi.create(submitData);
@@ -175,6 +196,26 @@ export default function CreateExperiencePage() {
                 />
                 {formData.image && !formData.imageFile && (
                   <p className="mt-2 text-sm text-gray-500">Current image URL: {formData.image}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Gallery Photos (Multiple)
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      setFormData(prev => ({ ...prev, photoFiles: Array.from(e.target.files!) }));
+                    }
+                  }}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3c45b9] focus:border-[#3c45b9] outline-none"
+                />
+                {formData.photoFiles.length > 0 && (
+                  <p className="mt-2 text-sm text-gray-500">{formData.photoFiles.length} files selected</p>
                 )}
               </div>
 
