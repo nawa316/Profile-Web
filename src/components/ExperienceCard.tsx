@@ -71,12 +71,12 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
         <p className="text-[#6b8af6] font-medium mb-3">
           {item.role}
         </p>
-        <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+        <p className="text-gray-300 text-sm mb-4 line-clamp-3">
           {item.description}
         </p>
 
         {/* Date & Location */}
-        <div className="flex flex-wrap gap-3 text-gray-500 text-xs mb-4">
+        <div className="flex flex-wrap gap-3 text-gray-300 text-xs mb-4 font-medium">
           <span className="flex items-center gap-1">
             <FaCalendar className="text-[#6b8af6]" />
             {formatDate(item.start_date)} - {item.end_date ? formatDate(item.end_date) : "Present"}
