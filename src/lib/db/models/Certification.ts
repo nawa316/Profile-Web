@@ -33,7 +33,7 @@ export class CertificationModel {
     let paramCount = 1;
 
     Object.entries(input).forEach(([key, value]) => {
-      if (value !== undefined) {
+      if (value !== undefined && key !== 'id' && key !== 'created_at' && key !== 'updated_at') {
         updates.push(`${key} = $${paramCount++}`);
         values.push(value);
       }
