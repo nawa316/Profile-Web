@@ -1,13 +1,89 @@
-'use client';
+const fs = require('fs');
+const path = require('path');
+
+const adminDir = path.join(__dirname, 'src', 'app', 'admin');
+
+const templates = [
+  {
+    folder: 'educations',
+    name: 'Education',
+    plural: 'Educations',
+    api: 'educationApi',
+    searchProps: ['institution', 'degree'],
+    columns: ['Institution', 'Degree & Major', 'Period', 'Actions'],
+    renderRow: `
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="font-medium text-gray-900">{item.institution}</p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900">
+                        {item.degree} {item.major && \`- \${item.major}\`}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        {formatDate(item.start_date)} - {formatDate(item.end_date)}
+                      </td>
+    `
+  },
+  {
+    folder: 'certifications',
+    name: 'Certification',
+    plural: 'Certifications',
+    api: 'certificationApi',
+    searchProps: ['name', 'issuer'],
+    columns: ['Certification Name', 'Issuer', 'Date', 'Actions'],
+    renderRow: `
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="font-medium text-gray-900">{item.name}</p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900">
+                        {item.issuer}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        {formatDate(item.date)}
+                      </td>
+    `
+  },
+  {
+    folder: 'achievements',
+    name: 'Achievement',
+    plural: 'Achievements',
+    api: 'achievementApi',
+    searchProps: ['title'],
+    columns: ['Title', 'Description', 'Year', 'Actions'],
+    renderRow: `
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="font-medium text-gray-900">{item.title}</p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900 truncate max-w-xs">
+                        {item.description || '-'}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        {item.year}
+                      </td>
+    `
+  }
+];
+
+templates.forEach(t => {
+  const tableHeaders = t.columns.map(col => {
+    return \`<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">\${col}</th>\`;
+  }).join('\\n');
+
+  const content = \`'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../components/Header';
 import DeleteModal from '../components/DeleteModal';
-import { achievementApi } from '@/lib/api';
+import { \${t.api} } from '@/lib/api';
 import { Plus, Edit2, Trash2, Search } from 'lucide-react';
 
-export default function AchievementsPage() {
+export default function \${t.plural}Page() {
   const router = useRouter();
   const [data, setData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
@@ -28,7 +104,7 @@ export default function AchievementsPage() {
     let filtered = data;
     if (searchTerm) {
       filtered = filtered.filter(item =>
-        (item.title && item.title.toString().toLowerCase().includes(searchTerm.toLowerCase()))
+        \${t.searchProps.map(prop => \`(item.\${prop} && item.\${prop}.toString().toLowerCase().includes(searchTerm.toLowerCase()))\`).join(' ||\\n        ')}
       );
     }
     setFilteredData(filtered);
@@ -36,7 +112,7 @@ export default function AchievementsPage() {
 
   const fetchData = async () => {
     try {
-      const res = await achievementApi.getAll();
+      const res = await \${t.api}.getAll();
       setData(res);
       setFilteredData(res);
     } catch (error) {
@@ -51,7 +127,7 @@ export default function AchievementsPage() {
     
     setIsDeleting(true);
     try {
-      await achievementApi.delete(deleteModal.id);
+      await \${t.api}.delete(deleteModal.id);
       await fetchData();
       setDeleteModal({ isOpen: false, id: null, title: '' });
     } catch (error) {
@@ -62,9 +138,17 @@ export default function AchievementsPage() {
     }
   };
 
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return 'Present';
+    return new Date(dateString).toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'short',
+    });
+  };
+
   return (
     <div>
-      <Header title="Achievements" subtitle="Manage your achievements" />
+      <Header title="\${t.plural}" subtitle="Manage your \${t.plural.toLowerCase()}" />
       
       <div className="p-8">
         <div className="mb-6 flex flex-col md:flex-row gap-4 justify-between">
@@ -73,7 +157,7 @@ export default function AchievementsPage() {
               <Search size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search achievements..."
+                placeholder="Search \${t.plural.toLowerCase()}..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6b8af6] focus:border-[#6b8af6] outline-none"
@@ -82,11 +166,11 @@ export default function AchievementsPage() {
           </div>
           
           <button
-            onClick={() => router.push('/admin/achievements/create')}
+            onClick={() => router.push('/admin/\${t.folder}/create')}
             className="flex items-center gap-2 px-4 py-2 bg-[#3c45b9] text-white rounded-lg hover:bg-[#483D8B] transition-colors"
           >
             <Plus size={20} />
-            <span>New Achievement</span>
+            <span>New \${t.name}</span>
           </button>
         </div>
 
@@ -102,36 +186,23 @@ export default function AchievementsPage() {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    \${tableHeaders}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredData.map((item) => (
                     <tr key={item.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
-                        <div>
-                          <p className="font-medium text-gray-900">{item.title}</p>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 truncate max-w-xs">
-                        {item.description || '-'}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
-                        {item.year}
-                      </td>
+                      \${t.renderRow}
                       <td className="px-6 py-4 text-right text-sm font-medium">
                         <button
-                          onClick={() => router.push(`/admin/achievements/${item.id}`)}
+                          onClick={() => router.push(\`/admin/\${t.folder}/\${item.id}\`)}
                           className="text-[#3c45b9] hover:text-[#483D8B] mr-4 inline-flex items-center gap-1"
                         >
                           <Edit2 size={16} />
                           Edit
                         </button>
                         <button
-                          onClick={() => setDeleteModal({ isOpen: true, id: item.id, title: item.title || 'Item' })}
+                          onClick={() => setDeleteModal({ isOpen: true, id: item.id, title: item.\${t.searchProps[0]} || 'Item' })}
                           className="text-red-600 hover:text-red-900 inline-flex items-center gap-1"
                         >
                           <Trash2 size={16} />
@@ -155,10 +226,16 @@ export default function AchievementsPage() {
         isOpen={deleteModal.isOpen}
         onClose={() => setDeleteModal({ isOpen: false, id: null, title: '' })}
         onConfirm={handleDelete}
-        title="Delete Achievement"
-        message={`Are you sure you want to delete "${deleteModal.title}"? This action cannot be undone.`}
+        title="Delete \${t.name}"
+        message={\`Are you sure you want to delete "\${deleteModal.title}"? This action cannot be undone.\`}
         isLoading={isDeleting}
       />
     </div>
   );
 }
+\`;
+
+  fs.writeFileSync(path.join(adminDir, t.folder, 'page.tsx'), content);
+});
+
+console.log('UI Updated successfully');
