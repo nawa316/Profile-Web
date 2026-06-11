@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Header from '../../components/Header';
-import DeleteModal from '../../components/DeleteModal';
+import Header from '../components/Header';
+import DeleteModal from '../components/DeleteModal';
 import { certificationApi } from '@/lib/api';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
 

@@ -2,7 +2,7 @@
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import Header from '../../../components/Header';
+import Header from '../../components/Header';
 import { achievementApi } from '@/lib/api';
 
 export default function EditAchievementPage({ params }: { params: Promise<{ id: string }> }) {
