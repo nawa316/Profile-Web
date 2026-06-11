@@ -63,9 +63,9 @@ export default function HamburgerMenu() {
         <Link href="/blog" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Blog
         </Link>
-        <a href="#contact" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+        <Link href="/contact" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Contact
-        </a>
+        </Link>
       </motion.div>
     </div>
   );
