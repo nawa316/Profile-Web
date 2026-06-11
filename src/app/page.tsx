@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import TypeWriter from "@/components/TypeWriter";
 import { AiFillGithub } from "react-icons/ai";
-import { FaLinkedin } from "react-icons/fa";
+import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
@@ -193,11 +193,22 @@ export default function Home() {
             </Link>
           </section>
           <footer className="min-h-screen w-full flex flex-col justify-center items-center section bg-[#6b8af6] gap-6 md:gap-10 py-8 px-4">
-            <div className="flex flex-col gap-2 justify-center items-center text-center">
-              <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Contact Me!</h2>
-              <p className="text-base md:text-lg">Apakah Anda tertarik untuk berkolaborasi atau sekedar berdiskusi seputar Pengembangan Web dan Perangkat Lunak? <br/> Jangan ragu untuk menghubungi saya!</p>
+            <div className="flex flex-col gap-2 justify-center items-center text-center text-white">
+              <h2 className="dm_serif_text text-2xl md:text-4xl">Contact Me!</h2>
+              <p className="text-base md:text-lg mb-4">Apakah Anda tertarik untuk berkolaborasi atau sekedar berdiskusi seputar Pengembangan Web dan Perangkat Lunak? <br/> Jangan ragu untuk menghubungi saya!</p>
+              
+              <div className="flex flex-col md:flex-row gap-4 mt-2 mb-6">
+                <a href="mailto:muhammadadedzakwan@gmail.com" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-6 py-3 rounded-full transition-colors">
+                  <MdEmail size={20} />
+                  <span className="font-medium">muhammadadedzakwan@gmail.com</span>
+                </a>
+                <a href="https://wa.me/6289513601357" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-6 py-3 rounded-full transition-colors">
+                  <FaWhatsapp size={20} />
+                  <span className="font-medium">+62 895-1360-1357</span>
+                </a>
+              </div>
             </div>
-            <div className="w-full lg:w-[1000px] h-auto flex justify-center items-center">
+            <div className="w-full lg:w-[800px] h-auto flex justify-center items-center bg-white rounded-3xl p-6 md:p-8 shadow-xl">
               <Contact />
             </div>
           </footer>
