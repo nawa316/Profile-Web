@@ -48,12 +48,12 @@ export default function HamburgerMenu() {
         animate={{ x: isOpen ? "0%" : "100%" }}
         transition={{ duration: 0.5 }}
       >
-        <a href="#home" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+        <Link href="/" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Home
-        </a>
-        <a href="#about" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
+        </Link>
+        <Link href="/about" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           About
-        </a>
+        </Link>
         <Link href="/experience" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           Experience
         </Link>

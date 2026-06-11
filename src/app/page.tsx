@@ -140,6 +140,9 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            <Link href="/about" className="mt-8 p-2 px-6 bg-[#6b8af6] text-white rounded-full hover:scale-105 transition-transform font-medium">
+              Selengkapnya
+            </Link>
           </section>
           <section
             className="bg-[#3c45b9] w-full min-h-screen gap-6 md:gap-10 flex flex-col justify-center items-center section py-8 md:py-0 px-4"
