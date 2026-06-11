@@ -97,13 +97,6 @@ export default function LoginPage() {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
-              Demo credentials: <br />
-              <span className="font-mono text-gray-700">admin / admin123</span>
-            </p>
-          </div>
         </div>
       </div>
     </div>
