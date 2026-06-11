@@ -10,7 +10,8 @@ import {
   ListOrdered, 
   Quote, 
   Link as LinkIcon, 
-  Image as ImageIcon 
+  Image as ImageIcon,
+  Table
 } from 'lucide-react';
 
 interface MarkdownEditorProps {
@@ -162,6 +163,14 @@ export default function MarkdownEditor({ value, onChange, placeholder }: Markdow
         >
           <ImageIcon size={16} />
           {isUploading && <span className="text-xs">Uploading...</span>}
+        </button>
+        <button
+          type="button"
+          onClick={() => insertText('\n| Column 1 | Column 2 |\n| -------- | -------- |\n| Cell 1   | Cell 2   |\n| Cell 3   | Cell 4   |\n')}
+          className="p-1.5 text-gray-600 hover:bg-gray-200 rounded transition-colors"
+          title="Insert Table"
+        >
+          <Table size={16} />
         </button>
         <input 
           type="file" 
