@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { profileApi } from "@/lib/api";
+import type { Profile } from "@/lib/types";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import CustomCursor from "@/components/CustomCursor";
@@ -15,6 +17,20 @@ export default function AboutPage() {
     { name: "Problem Solving", icon: <Lightbulb className="w-6 h-6 text-[#6b8af6]" />, desc: "Algorithmic thinking, Debugging" },
     { name: "Web Technologies", icon: <Code2 className="w-6 h-6 text-[#6b8af6]" />, desc: "HTML5, CSS3, JavaScript/TypeScript" }
   ];
+
+  const [profile, setProfile] = useState<Profile | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await profileApi.get();
+        if (data) setProfile(data);
+      } catch (error) {
+        console.error("Failed to fetch profile", error);
+      }
+    };
+    fetchProfile();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -59,8 +75,8 @@ export default function AboutPage() {
               <motion.div variants={itemVariants} className="w-full md:w-1/3 flex justify-center">
                 <div className="relative w-[250px] h-[350px] md:w-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl shadow-[#6b8af6]/20 border-4 border-white/10 group">
                   <Image
-                    src="/images/1688908285904.JPG"
-                    alt="Muhammad Ade Dzakwan"
+                    src={profile?.photo_url || "/images/1688908285904.JPG"}
+                    alt={profile?.name || "Muhammad Ade Dzakwan"}
                     layout="fill"
                     objectFit="cover"
                     className="group-hover:scale-105 transition-transform duration-500"
@@ -75,18 +91,24 @@ export default function AboutPage() {
                   Tentang Saya
                 </h1>
                 <p className="text-[#6b8af6] text-xl font-medium mb-6">
-                  Information Systems Student & Web Developer
+                  {profile?.tagline || "Information Systems Student & Web Developer"}
                 </p>
-                <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
-                  <p>
-                    Halo! Saya Muhammad Ade Dzakwan, atau biasa dipanggil Awan. Saya adalah mahasiswa Sistem Informasi di Institut Teknologi Sepuluh Nopember (ITS) Surabaya.
-                  </p>
-                  <p>
-                    Saya memiliki ketertarikan yang besar dalam dunia pengembangan web (Web Development), pengembangan perangkat lunak (Software Engineering), dan eksplorasi teknologi modern seperti kecerdasan buatan (AI).
-                  </p>
-                  <p>
-                    Di luar aspek teknis, saya memiliki pengalaman luas bekerja dalam tim, menjadi pemimpin divisi, serta mengelola berbagai proyek acara. Saya dikenal teliti, komunikatif, dan selalu berusaha memberikan pendekatan dinamis serta solusi inovatif di setiap masalah pemrograman yang saya hadapi.
-                  </p>
+                <div className="space-y-4 text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
+                  {profile?.about_text ? (
+                    <p>{profile.about_text}</p>
+                  ) : (
+                    <>
+                      <p>
+                        Halo! Saya Muhammad Ade Dzakwan, atau biasa dipanggil Awan. Saya adalah mahasiswa Sistem Informasi di Institut Teknologi Sepuluh Nopember (ITS) Surabaya.
+                      </p>
+                      <p>
+                        Saya memiliki ketertarikan yang besar dalam dunia pengembangan web (Web Development), pengembangan perangkat lunak (Software Engineering), dan eksplorasi teknologi modern seperti kecerdasan buatan (AI).
+                      </p>
+                      <p>
+                        Di luar aspek teknis, saya memiliki pengalaman luas bekerja dalam tim, menjadi pemimpin divisi, serta mengelola berbagai proyek acara. Saya dikenal teliti, komunikatif, dan selalu berusaha memberikan pendekatan dinamis serta solusi inovatif di setiap masalah pemrograman yang saya hadapi.
+                      </p>
+                    </>
+                  )}
                 </div>
               </motion.div>
             </motion.div>

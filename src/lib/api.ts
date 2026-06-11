@@ -8,7 +8,18 @@ import type {
   CreatePortfolioInput,
   UpdatePortfolioInput,
   CreateExperienceInput,
-  UpdateExperienceInput
+  UpdateExperienceInput,
+  Profile,
+  UpdateProfileInput,
+  Education,
+  CreateEducationInput,
+  UpdateEducationInput,
+  Certification,
+  CreateCertificationInput,
+  UpdateCertificationInput,
+  Achievement,
+  CreateAchievementInput,
+  UpdateAchievementInput
 } from './types';
 
 const API_BASE_URL = '/api';
@@ -127,6 +138,65 @@ export const experienceApi = {
   }),
 };
 
-export { ApiError };
-export type { Blog, Portfolio, Experience };
+// Profile API
+export const profileApi = {
+  get: () => fetcher<Profile>('/profile'),
+  update: (data: UpdateProfileInput) => fetcher<Profile>('/profile', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+};
 
+// Education API
+export const educationApi = {
+  getAll: () => fetcher<Education[]>('/educations'),
+  getById: (id: number) => fetcher<Education>(`/educations/${id}`),
+  create: (data: CreateEducationInput) => fetcher<Education>('/educations', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  update: (id: number, data: UpdateEducationInput) => fetcher<Education>(`/educations/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  delete: (id: number) => fetcher<void>(`/educations/${id}`, {
+    method: 'DELETE',
+  }),
+};
+
+// Certification API
+export const certificationApi = {
+  getAll: () => fetcher<Certification[]>('/certifications'),
+  getById: (id: number) => fetcher<Certification>(`/certifications/${id}`),
+  create: (data: CreateCertificationInput) => fetcher<Certification>('/certifications', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  update: (id: number, data: UpdateCertificationInput) => fetcher<Certification>(`/certifications/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  delete: (id: number) => fetcher<void>(`/certifications/${id}`, {
+    method: 'DELETE',
+  }),
+};
+
+// Achievement API
+export const achievementApi = {
+  getAll: () => fetcher<Achievement[]>('/achievements'),
+  getById: (id: number) => fetcher<Achievement>(`/achievements/${id}`),
+  create: (data: CreateAchievementInput) => fetcher<Achievement>('/achievements', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  update: (id: number, data: UpdateAchievementInput) => fetcher<Achievement>(`/achievements/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  delete: (id: number) => fetcher<void>(`/achievements/${id}`, {
+    method: 'DELETE',
+  }),
+};
+
+export { ApiError };
+export type { Blog, Portfolio, Experience, Profile, Education, Certification, Achievement };

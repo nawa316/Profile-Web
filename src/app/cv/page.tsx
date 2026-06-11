@@ -1,10 +1,67 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Download, Mail, Phone, Linkedin, MapPin, ArrowLeft } from 'lucide-react';
 import CustomCursor from '@/components/CustomCursor';
 import Link from 'next/link';
+import { profileApi, educationApi, certificationApi, achievementApi, experienceApi } from '@/lib/api';
+import type { Profile, Education, Certification, Achievement, Experience } from '@/lib/types';
 
 export default function CVPage() {
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [educations, setEducations] = useState<Education[]>([]);
+  const [certifications, setCertifications] = useState<Certification[]>([]);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [organizations, setOrganizations] = useState<Experience[]>([]);
+  const [volunteers, setVolunteers] = useState<Experience[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [prof, edus, certs, achs, exps] = await Promise.all([
+          profileApi.get(),
+          educationApi.getAll(),
+          certificationApi.getAll(),
+          achievementApi.getAll(),
+          experienceApi.getAll()
+        ]);
+        
+        if (prof) setProfile(prof);
+        if (edus) setEducations(edus);
+        if (certs) setCertifications(certs);
+        if (achs) setAchievements(achs);
+        
+        if (exps) {
+          setOrganizations(exps.filter(e => e.type === 'organization' || e.type === 'work'));
+          setVolunteers(exps.filter(e => e.type === 'volunteer'));
+        }
+      } catch (error) {
+        console.error('Error fetching CV data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-xl font-medium text-gray-500">Loading CV Data...</div>
+      </div>
+    );
+  }
+
+  const formatYear = (dateStr: string | null) => {
+    if (!dateStr) return 'Present';
+    return new Date(dateStr).getFullYear().toString();
+  };
+
+  const formatMonthYear = (dateStr: string | null) => {
+    if (!dateStr) return 'Present';
+    return new Date(dateStr).toLocaleDateString('id-ID', { month: 'short', year: 'numeric' });
+  };
+
   return (
     <>
       <CustomCursor />
@@ -21,37 +78,36 @@ export default function CVPage() {
         {/* Header with Download Button */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden mb-8">
           <div className="bg-gradient-to-r from-blue-600 to-blue-800 px-4 sm:px-8 py-8 sm:py-12 text-white">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Muhammad Ade Dzakwan</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{profile?.name || 'Muhammad Ade Dzakwan'}</h1>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm mb-6">
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                <span>Surabaya, Jawa Timur</span>
+                <span>{profile?.location || 'Surabaya, Jawa Timur'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={16} />
-                <span>0895-1360-1357</span>
+                <span>{profile?.phone || '0895-1360-1357'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={16} />
-                <a href="mailto:muhammadadedzakwan@gmail.com" className="hover:underline">
-                  muhammadadedzakwan@gmail.com
+                <a href={`mailto:${profile?.email || 'muhammadadedzakwan@gmail.com'}`} className="hover:underline">
+                  {profile?.email || 'muhammadadedzakwan@gmail.com'}
                 </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Linkedin size={16} />
-                <a 
-                  href="https://linkedin.com/in/muhammad-ade-dzakwan" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  LinkedIn Profile
-                </a>
-              </div>
+              {profile?.linkedin && (
+                <div className="flex items-center gap-2">
+                  <Linkedin size={16} />
+                  <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    LinkedIn Profile
+                  </a>
+                </div>
+              )}
             </div>
             <a
-              href="/CV Muhammad Ade Dzakwan.pdf"
+              href={profile?.cv_url || "/CV Muhammad Ade Dzakwan.pdf"}
               download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-blue-50 transition-colors shadow-lg w-full sm:w-auto"
             >
               <Download size={18} className="sm:w-5 sm:h-5" />
@@ -67,192 +123,130 @@ export default function CVPage() {
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
               Tentang Saya
             </h2>
-            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-              Seorang mahasiswa Sistem Informasi dengan passion dalam pengembangan web, 
-              pengembangan perangkat lunak, dan kecerdasan buatan. Berpengalaman bekerja 
-              dalam tim dengan komunikasi yang kuat, teliti, dan dapat diandalkan. 
-              Memiliki pendekatan dinamis dalam menyelesaikan masalah di dunia pemrograman.
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-wrap">
+              {profile?.about_text || 'Seorang mahasiswa Sistem Informasi dengan passion dalam pengembangan web, pengembangan perangkat lunak, dan kecerdasan buatan. Berpengalaman bekerja dalam tim dengan komunikasi yang kuat, teliti, dan dapat diandalkan. Memiliki pendekatan dinamis dalam menyelesaikan masalah di dunia pemrograman.'}
             </p>
           </section>
 
           {/* Education Section */}
-          <section>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-              Pendidikan
-            </h2>
-            <div className="space-y-4">
-              <div className="border-l-4 border-blue-500 pl-3 sm:pl-4">
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-                  Institut Teknologi Sepuluh Nopember
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 italic mb-2">
-                  S1 Sistem Informasi (Agustus 2023 – Sekarang)
-                </p>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                  <li>IPK/IPS: 3,64 / 3,50</li>
-                </ul>
+          {educations.length > 0 && (
+            <section>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
+                Pendidikan
+              </h2>
+              <div className="space-y-4">
+                {educations.map((edu) => (
+                  <div key={edu.id} className="border-l-4 border-blue-500 pl-3 sm:pl-4">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                      {edu.institution}
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-600 italic mb-2">
+                      {edu.degree} {edu.major && `- ${edu.major}`} ({formatMonthYear(edu.start_date)} – {formatMonthYear(edu.end_date)})
+                    </p>
+                    <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
+                      {edu.gpa && <li>IPK/Nilai: {edu.gpa}</li>}
+                      {edu.description && <li>{edu.description}</li>}
+                    </ul>
+                  </div>
+                ))}
               </div>
-              <div className="border-l-4 border-blue-500 pl-3 sm:pl-4">
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-                  SMA Negeri 1 Tenggarang
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 italic mb-2">
-                  Jurusan MIPA (Juli 2020 – Mei 2023)
-                </p>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                  <li>Nilai Ujian Sekolah: 90,01</li>
-                </ul>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Certifications Section */}
-          <section>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-              Lisensi & Sertifikasi
-            </h2>
-            <div className="space-y-3 sm:space-y-4">
-              <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
-                  PMI Project Management Ready™ 2025
-                </h3>
-                <p className="text-sm sm:text-base text-gray-700">
-                  Project Management, Business Analysis, Agile (Scrum), Waterfall
-                </p>
+          {certifications.length > 0 && (
+            <section>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
+                Lisensi & Sertifikasi
+              </h2>
+              <div className="space-y-3 sm:space-y-4">
+                {certifications.map((cert) => (
+                  <div key={cert.id} className="bg-slate-50 rounded-lg p-3 sm:p-4">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
+                      {cert.name} — {formatYear(cert.date)}
+                    </h3>
+                    {cert.description && (
+                      <p className="text-sm sm:text-base text-gray-700">
+                        {cert.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
-              <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
-                  Frontend GENICS 2024
-                </h3>
-                <p className="text-sm sm:text-base text-gray-700">
-                  HTML, Tailwind CSS, React JS, Next.js
-                </p>
-              </div>
-              <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
-                  IT Mentoring Frontend & UI/UX — ISE! 2023
-                </h3>
-                <p className="text-sm sm:text-base text-gray-700">
-                  Figma, HTML, Tailwind CSS, React JS
-                </p>
-              </div>
-              <div className="bg-slate-50 rounded-lg p-3 sm:p-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
-                  Dicoding Academy Batch 9 — 2023
-                </h3>
-                <p className="text-sm sm:text-base text-gray-700">
-                  SQL, MySQL, Git & GitHub
-                </p>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Organization Experience Section */}
-          <section>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-              Pengalaman Organisasi
-            </h2>
-            <div className="space-y-4">
-              <div className="border-l-4 border-green-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                  Ketua Divisi IT Development — ISE! 2025
-                </h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2">(2025)</p>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 space-y-1">
-                  <li>Memimpin 20+ tim development</li>
-                  <li>Scrum Master & task management</li>
-                  <li>Deployment & server administration</li>
-                </ul>
+          {organizations.length > 0 && (
+            <section>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
+                Pengalaman Organisasi & Kerja
+              </h2>
+              <div className="space-y-4">
+                {organizations.map((org) => (
+                  <div key={org.id} className="border-l-4 border-green-500 pl-3 sm:pl-4">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900">
+                      {org.role} — {org.organization}
+                    </h3>
+                    <p className="text-gray-600 text-xs sm:text-sm mb-2">
+                      ({formatYear(org.start_date)}{org.end_date ? ` - ${formatYear(org.end_date)}` : ''})
+                    </p>
+                    <div className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 whitespace-pre-wrap">
+                      {org.description}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="border-l-4 border-green-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                  Staff Ahli Kajian Strategis — JMMI ITS 2025
-                </h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2">(2025)</p>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 space-y-1">
-                  <li>Menjalankan agenda kajian</li>
-                  <li>Output poster & artikel</li>
-                  <li>Kajian isu-isu Islam</li>
-                </ul>
-              </div>
-              <div className="border-l-4 border-green-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                  Staff IT Development — Ini Lho ITS! 2025
-                </h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2">(2024)</p>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 space-y-1">
-                  <li>Whitebox testing & unit test</li>
-                  <li>Laporan testing</li>
-                </ul>
-              </div>
-              <div className="border-l-4 border-green-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                  Staff IT Development — ISE! 2024
-                </h3>
-                <p className="text-gray-600 text-xs sm:text-sm mb-2">(2024)</p>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 space-y-1">
-                  <li>Slicing desain</li>
-                  <li>Integrasi API</li>
-                  <li>Bug fixing UI</li>
-                </ul>
-              </div>
-              <div className="border-l-4 border-green-500 pl-3 sm:pl-4">
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                  Ketua Pelaksana — Ini Lho ITS! Forum Daerah Bondowoso 2024
-                </h3>
-                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 space-y-1 mt-2">
-                  <li>Koordinasi acara 500+ peserta</li>
-                  <li>Jobdesk panitia</li>
-                  <li>Arahan & tugas panitia</li>
-                </ul>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Achievements Section */}
-          <section>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-              Prestasi
-            </h2>
-            <div className="space-y-2">
-              <div className="flex items-start gap-3">
-                <div className="mt-1.5 w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0"></div>
-                <p className="text-sm sm:text-base text-gray-700">Juara 1 OSN-K Fisika Bondowoso 2022</p>
+          {achievements.length > 0 && (
+            <section>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
+                Prestasi
+              </h2>
+              <div className="space-y-2">
+                {achievements.map((ach) => (
+                  <div key={ach.id} className="flex items-start gap-3">
+                    <div className="mt-1.5 w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0"></div>
+                    <p className="text-sm sm:text-base text-gray-700">
+                      <span className="font-semibold">{ach.title}</span> {ach.year ? `(${ach.year})` : ''}
+                      {ach.description && <span className="block text-gray-500 mt-1">{ach.description}</span>}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-start gap-3">
-                <div className="mt-1.5 w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0"></div>
-                <p className="text-sm sm:text-base text-gray-700">Juara 2 OSN-K Fisika Bondowoso 2021</p>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Volunteer Experience Section */}
-          <section>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-              Pengalaman Sukarelawan
-            </h2>
-            <div className="space-y-2">
-              <div className="flex items-start gap-3">
-                <div className="mt-1.5 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                <p className="text-sm sm:text-base text-gray-700">Mentor — Mentoring Agama Islam ITS 2025</p>
+          {volunteers.length > 0 && (
+            <section>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
+                Pengalaman Sukarelawan
+              </h2>
+              <div className="space-y-2">
+                {volunteers.map((vol) => (
+                  <div key={vol.id} className="flex items-start gap-3">
+                    <div className="mt-1.5 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
+                    <p className="text-sm sm:text-base text-gray-700">
+                      <span className="font-medium">{vol.role}</span> — {vol.organization} ({formatYear(vol.start_date)})
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-start gap-3">
-                <div className="mt-1.5 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                <p className="text-sm sm:text-base text-gray-700">Mentor — SIMETRI 2024</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="mt-1.5 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
-                <p className="text-sm sm:text-base text-gray-700">Volunteer — SINERGI Batch X 2023</p>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
         </div>
 
         {/* Footer with another download button */}
         <div className="mt-6 sm:mt-8 text-center">
           <a
-            href="/CV Muhammad Ade Dzakwan.pdf"
+            href={profile?.cv_url || "/CV Muhammad Ade Dzakwan.pdf"}
             download
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-sm sm:text-base font-semibold hover:bg-blue-700 transition-colors shadow-lg w-full sm:w-auto"
           >
             <Download size={18} className="sm:w-5 sm:h-5" />

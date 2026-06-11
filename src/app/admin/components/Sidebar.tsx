@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, FileText, Briefcase, Award, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Award, LogOut, User, GraduationCap, BadgeCheck, Trophy } from 'lucide-react';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -10,9 +10,13 @@ export default function Sidebar() {
 
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
+    { icon: User, label: 'Profile Settings', href: '/admin/profile' },
     { icon: FileText, label: 'Blogs', href: '/admin/blogs' },
     { icon: Briefcase, label: 'Portfolios', href: '/admin/portfolios' },
+    { icon: GraduationCap, label: 'Educations', href: '/admin/educations' },
+    { icon: BadgeCheck, label: 'Certifications', href: '/admin/certifications' },
     { icon: Award, label: 'Experiences', href: '/admin/experiences' },
+    { icon: Trophy, label: 'Achievements', href: '/admin/achievements' },
   ];
 
   const handleLogout = () => {
