@@ -9,7 +9,10 @@ import { Save } from 'lucide-react';
 export default function ProfileAdminPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<UpdateProfileInput>();
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<UpdateProfileInput>();
+  
+  const currentCvUrl = watch('cv_url');
 
   useEffect(() => {
     fetchProfile();
@@ -31,6 +34,23 @@ export default function ProfileAdminPage() {
   const onSubmit = async (data: UpdateProfileInput) => {
     setIsSaving(true);
     try {
+      if (cvFile) {
+        const uploadData = new FormData();
+        uploadData.append('file', cvFile);
+        uploadData.append('bucket', 'portfolios'); // You can change this to a specific bucket for CVs if created
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadData,
+        });
+
+        const uploadResult = await res.json();
+        if (!uploadResult.success) {
+          throw new Error(uploadResult.error || 'Failed to upload CV');
+        }
+        data.cv_url = uploadResult.url;
+      }
+
       await profileApi.update(data);
       alert('Profile updated successfully!');
     } catch (error) {
@@ -123,12 +143,27 @@ export default function ProfileAdminPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">CV PDF URL</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">CV PDF Upload</label>
               <input
-                {...register('cv_url')}
+                type="file"
+                accept=".pdf"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setCvFile(e.target.files[0]);
+                  }
+                }}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6b8af6] focus:border-[#6b8af6] outline-none transition-all"
-                placeholder="/CV Muhammad Ade Dzakwan.pdf"
               />
+              {currentCvUrl && !cvFile && (
+                <p className="mt-2 text-sm text-gray-500">
+                  Current CV: <a href={currentCvUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">View File</a>
+                </p>
+              )}
+              {cvFile && (
+                <p className="mt-2 text-sm text-gray-500">
+                  Selected file: {cvFile.name}
+                </p>
+              )}
             </div>
             
             <div className="md:col-span-2">
