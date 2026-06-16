@@ -13,6 +13,17 @@ interface PDFTemplateProps {
 const A4_WIDTH = "794px";
 const A4_HEIGHT = "1123px";
 
+const formatDate = (dateStr: string | null | undefined) => {
+  if (!dateStr) return "Present";
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  } catch {
+    return dateStr;
+  }
+};
+
 export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
   ({ portfolioData, experienceData, profileData }, ref) => {
     // We will show up to 6 portfolio items in the main portfolio page
@@ -34,20 +45,17 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             <div className="w-2/3 pr-8">
               <h1 className="text-6xl font-extrabold text-gray-900 leading-tight mb-2">
                 Hey I&apos;m <br />
-                <span className="text-indigo-600">Nawa</span>
+                <span className="text-indigo-600">{profileData?.name || "Awan"}</span>
               </h1>
-              <h2 className="text-2xl font-bold text-gray-600 mb-8 tracking-wide">
-                FULLSTACK DEVELOPER
+              <h2 className="text-2xl font-bold text-gray-600 mb-8 tracking-wide uppercase">
+                {profileData?.tagline || "nformation Systems Student"}
               </h2>
               <div className="mb-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 border-b-2 border-indigo-600 inline-block">
                   About Me
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  I am a passionate software developer with expertise in building scalable
-                  web applications. I love crafting beautiful and functional user interfaces
-                  and robust backend systems. Always eager to learn new technologies and
-                  solve complex problems.
+                <p className="text-gray-600 leading-relaxed text-sm whitespace-pre-wrap">
+                  {profileData?.about_text || "I am a passionate software developer with expertise in building scalable web applications. I love crafting beautiful and functional user interfaces and robust backend systems. Always eager to learn new technologies and solve complex problems."}
                 </p>
               </div>
               <div>
@@ -77,10 +85,10 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           
           {/* Footer Contact */}
           <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-            <span>WA: +62 812-3456-7890</span>
-            <span>Email: hello@example.com</span>
-            <span>LinkedIn: /in/nawa</span>
-            <span>GitHub: github.com/nawa</span>
+            <span>WA: {profileData?.phone || "+62 812-3456-7890"}</span>
+            <span>Email: {profileData?.email || "hello@example.com"}</span>
+            <span>LinkedIn: {profileData?.linkedin || "/in/nawa"}</span>
+            <span>GitHub: {profileData?.github || "github.com/nawa"}</span>
           </div>
         </div>
 
@@ -116,16 +124,20 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
               <h3 className="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-600 inline-block uppercase tracking-wider">
                 Experiences
               </h3>
-              <div className="space-y-6">
+              <div className="">
                 {experienceData.slice(0, 4).map((exp) => (
-                  <div key={exp.id} className="relative pl-6 border-l-2 border-gray-200">
+                  <div key={exp.id} className="relative pl-6 border-l-2 border-gray-200 pb-8 last:pb-0">
                     <div className="absolute w-3 h-3 bg-indigo-600 rounded-full -left-[7px] top-1.5"></div>
-                    <h4 className="text-base font-bold text-gray-800">{exp.role}</h4>
-                    <h5 className="text-sm font-semibold text-gray-600">{exp.organization}</h5>
-                    <p className="text-xs font-semibold text-indigo-600 mb-2">
-                      {exp.start_date ? String(exp.start_date) : ""} - {exp.end_date ? String(exp.end_date) : "Present"}
-                    </p>
-                    <p className="text-xs text-gray-600 leading-relaxed">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <h4 className="text-base font-bold text-gray-800">{exp.role}</h4>
+                        <h5 className="text-sm font-semibold text-gray-600">{exp.organization}</h5>
+                      </div>
+                      <p className="text-xs font-semibold text-indigo-600 whitespace-nowrap ml-4 mt-0.5">
+                        {formatDate(String(exp.start_date))} - {exp.end_date ? formatDate(String(exp.end_date)) : "Present"}
+                      </p>
+                    </div>
+                    <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-wrap">
                       {exp.description}
                     </p>
                   </div>
@@ -135,10 +147,10 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           </div>
           
           <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-            <span>WA: +62 812-3456-7890</span>
-            <span>Email: hello@example.com</span>
-            <span>LinkedIn: /in/nawa</span>
-            <span>GitHub: github.com/nawa</span>
+            <span>WA: {profileData?.phone || "+62 812-3456-7890"}</span>
+            <span>Email: {profileData?.email || "hello@example.com"}</span>
+            <span>LinkedIn: {profileData?.linkedin || "/in/nawa"}</span>
+            <span>GitHub: {profileData?.github || "github.com/nawa"}</span>
           </div>
         </div>
 
@@ -180,10 +192,10 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           </div>
           
           <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-            <span>WA: +62 812-3456-7890</span>
-            <span>Email: hello@example.com</span>
-            <span>LinkedIn: /in/nawa</span>
-            <span>GitHub: github.com/nawa</span>
+            <span>WA: {profileData?.phone || "+62 812-3456-7890"}</span>
+            <span>Email: {profileData?.email || "hello@example.com"}</span>
+            <span>LinkedIn: {profileData?.linkedin || "/in/nawa"}</span>
+            <span>GitHub: {profileData?.github || "github.com/nawa"}</span>
           </div>
         </div>
       </div>
