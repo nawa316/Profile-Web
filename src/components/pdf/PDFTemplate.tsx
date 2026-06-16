@@ -92,9 +92,9 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
         </div>
         
         {/* Section 2: Experiences & Education */}
-        <div className="flex gap-12 mb-16">
+        <div className="mb-16 relative after:content-[''] after:table after:clear-both">
           {/* Left Col: Photo & Education */}
-          <div className="w-1/3">
+          <div className="w-[30%] float-left pr-8 break-inside-avoid" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
             <div className="w-full h-64 bg-transparent mb-8 flex justify-center items-start">
               <img
                 src={profileData?.photo_url || "/images/1688908285904.JPG"}
@@ -116,13 +116,13 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           </div>
           
           {/* Right Col: Experiences */}
-          <div className="w-2/3">
+          <div className="w-[70%] float-right">
             <h3 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-indigo-600 inline-block uppercase tracking-wider">
               Experiences
             </h3>
             <div className="">
               {experienceData.map((exp) => (
-                <div key={exp.id} className="relative pl-6 border-l-2 border-gray-200 pb-8 last:pb-0 break-inside-avoid">
+                <div key={exp.id} className="relative pl-6 border-l-2 border-gray-200 pb-8 last:pb-0 break-inside-avoid" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <div className="absolute w-3 h-3 bg-indigo-600 rounded-full -left-[7px] top-1.5"></div>
                   <div className="flex justify-between items-start mb-3">
                     <div className="text-left w-full">
@@ -147,9 +147,10 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           <h2 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-widest text-center">
             Portfolio
           </h2>
-          <div className="grid grid-cols-2 gap-8">
+          <div className="flex flex-wrap -mx-4">
             {displayPortfolios.map((item) => (
-              <div key={item.id} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 break-inside-avoid">
+              <div key={item.id} className="w-1/2 px-4 mb-8 break-inside-avoid" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 h-full flex flex-col">
                 <div className="h-40 bg-gray-200 overflow-hidden">
                   <img 
                     src={item.image} 
