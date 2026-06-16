@@ -14,6 +14,7 @@ import { MdEmail } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import Contact from '@/components/Contact';
+import DownloadPDFButton from "@/components/DownloadPDFButton";
 
 
 
@@ -76,6 +77,9 @@ export default function Home() {
                 <Link href="mailto:muhammadadedzakwan@gmail.com" target="_blank" className="hover:scale-110 transition-transform">
                   <MdEmail className="w-8 h-8 md:w-[42px] md:h-[42px]" color="#6b8af6" />
                 </Link>
+              </div>
+              <div className="mt-6">
+                <DownloadPDFButton portfolioData={portfolioData} experienceData={experienceData} />
               </div>
             </div>
           </section>
