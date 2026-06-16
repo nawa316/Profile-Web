@@ -8,11 +8,23 @@ import { FaCalendar, FaMapMarkerAlt, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { formatTypeLabel } from "@/components/ExperienceCard";
+import ImageModal from "@/components/ImageModal";
 
 export default function ExperienceDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = use(params);
   const [experience, setExperience] = useState<Experience | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchExperience = async () => {
@@ -80,13 +92,19 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
               {/* Main Image */}
               <div className="w-32 h-32 md:w-48 md:h-48 rounded-2xl bg-white p-4 flex items-center justify-center flex-shrink-0">
                 {experience.image ? (
-                  <div className="relative w-full h-full">
+                  <div 
+                    className="relative w-full h-full cursor-pointer group"
+                    onClick={() => openModal(experience.image!)}
+                  >
                     <Image
                       src={experience.image}
                       alt={experience.organization}
                       fill
-                      className="object-contain"
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
                     />
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                      <span className="text-white text-xs font-medium bg-black/50 px-2 py-1 rounded">Enlarge</span>
+                    </div>
                   </div>
                 ) : (
                   <span className="text-[#6b8af6] text-6xl font-bold">
@@ -156,7 +174,8 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
                 {experience.photos.map((photoUrl, index) => (
                   <div 
                     key={index} 
-                    className="relative h-64 rounded-2xl overflow-hidden group border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300"
+                    className="relative h-64 rounded-2xl overflow-hidden group border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 cursor-pointer"
+                    onClick={() => openModal(photoUrl)}
                   >
                     <Image
                       src={photoUrl}
@@ -164,7 +183,9 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300"></div>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                      <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 px-3 py-1.5 rounded-full text-sm font-medium">Click to enlarge</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -173,6 +194,13 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
 
         </main>
       </div>
+      
+      <ImageModal 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+        imageUrl={selectedImage} 
+        altText="Experience Photo"
+      />
     </>
   );
 }

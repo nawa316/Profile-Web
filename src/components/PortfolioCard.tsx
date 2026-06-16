@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Portfolio } from "@/lib/types";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaInfoCircle } from "react-icons/fa";
 
 const MAX_VISIBLE_TECHNOLOGIES = 4;
 
@@ -15,32 +16,36 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
       className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10"
     >
       {/* Image */}
-      <div className="relative h-48 bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
-        {item.image ? (
-          <Image
-            src={item.image}
-            alt={item.title}
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-300"
-          />
-        ) : (
-          <span className="text-white text-6xl font-bold opacity-30 group-hover:scale-110 transition-transform duration-300">
-            {item.title.charAt(0)}
-          </span>
-        )}
-        <div className="absolute top-4 right-4">
-          <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
-            {item.category}
-          </span>
+      <Link href={`/portofolio/${item.id}`} className="block">
+        <div className="relative h-48 bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
+          {item.image ? (
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+          ) : (
+            <span className="text-white text-6xl font-bold opacity-30 group-hover:scale-110 transition-transform duration-300">
+              {item.title.charAt(0)}
+            </span>
+          )}
+          <div className="absolute top-4 right-4 z-10">
+            <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
+              {item.category}
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Content */}
       <div className="p-6 flex flex-col h-[calc(100%-12rem)]">
-        <h3 className="dm_serif_text text-xl text-white mb-2 group-hover:text-[#6b8af6] transition-colors">
-          {item.title}
-        </h3>
+        <Link href={`/portofolio/${item.id}`}>
+          <h3 className="dm_serif_text text-xl text-white mb-2 hover:text-[#6b8af6] transition-colors">
+            {item.title}
+          </h3>
+        </Link>
         <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
           {item.description}
         </p>
@@ -58,7 +63,14 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
         </div>
 
         {/* Links */}
-        <div className="flex gap-3 pt-4 border-t border-white/10">
+        <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10">
+          <Link
+            href={`/portofolio/${item.id}`}
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            <FaInfoCircle />
+            <span>Details</span>
+          </Link>
           {item.github && (
             <a
               href={item.github}
