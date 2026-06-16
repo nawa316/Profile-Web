@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { experienceApi, portfolioApi, blogApi } from "@/lib/api";
-import type { Experience, Portfolio, Blog } from "@/lib/types";
+import { experienceApi, portfolioApi, blogApi, profileApi } from "@/lib/api";
+import type { Experience, Portfolio, Blog, Profile } from "@/lib/types";
 import ExperienceCard from "@/components/ExperienceCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import BlogCard from "@/components/BlogCard";
@@ -14,7 +14,6 @@ import { MdEmail } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import Contact from '@/components/Contact';
-import DownloadPDFButton from "@/components/DownloadPDFButton";
 
 
 
@@ -22,18 +21,21 @@ export default function Home() {
   const [experienceData, setExperienceData] = useState<Experience[]>([]);
   const [portfolioData, setPortfolioData] = useState<Portfolio[]>([]);
   const [blogData, setBlogData] = useState<Blog[]>([]);
+  const [profileData, setProfileData] = useState<Profile | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [exp, port, blog] = await Promise.all([
+        const [exp, port, blog, profile] = await Promise.all([
           experienceApi.getAll(),
           portfolioApi.getAll(),
-          blogApi.getAll()
+          blogApi.getAll(),
+          profileApi.get()
         ]);
         setExperienceData(exp || []);
         setPortfolioData(port || []);
         setBlogData(blog || []);
+        setProfileData(profile || null);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -78,9 +80,6 @@ export default function Home() {
                   <MdEmail className="w-8 h-8 md:w-[42px] md:h-[42px]" color="#6b8af6" />
                 </Link>
               </div>
-              <div className="mt-6">
-                <DownloadPDFButton portfolioData={portfolioData} experienceData={experienceData} />
-              </div>
             </div>
           </section>
           <section
@@ -92,11 +91,11 @@ export default function Home() {
             </div>
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 px-4 md:px-40">
                 <Image
-                  src="/images/1688908285904.JPG"
-                  alt="Foto Awan"
+                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
+                  alt="Foto Profile"
                   width={2848}
                   height={4288}
-                  className="w-[200px] md:w-[300px] h-fit rounded-xl"
+                  className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
                 />
               <div className="w-full flex flex-col items-center md:items-start h-fit justify-start gap-5 p-0">
                 <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2">

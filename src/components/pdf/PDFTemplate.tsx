@@ -1,12 +1,12 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { Portfolio, Experience } from "@/lib/types";
+import { Portfolio, Experience, Profile } from "@/lib/types";
 
 interface PDFTemplateProps {
   portfolioData: Portfolio[];
   experienceData: Experience[];
-  // basic info can be hardcoded or passed as props
+  profileData: Profile | null;
 }
 
 // A4 Dimensions: 794px by 1123px (at 96 DPI)
@@ -14,10 +14,9 @@ const A4_WIDTH = "794px";
 const A4_HEIGHT = "1123px";
 
 export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
-  ({ portfolioData, experienceData }, ref) => {
-    // Separate portfolios for pages
-    const webPortfolios = portfolioData.filter((p) => p.category === "Web Development").slice(0, 4);
-    const otherPortfolios = portfolioData.filter((p) => p.category !== "Web Development").slice(0, 4);
+  ({ portfolioData, experienceData, profileData }, ref) => {
+    // We will show up to 6 portfolio items in the main portfolio page
+    const displayPortfolios = portfolioData.slice(0, 6);
 
     return (
       <div
@@ -66,9 +65,8 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             </div>
             <div className="w-1/3 flex justify-end">
               <div className="w-48 h-48 bg-indigo-100 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                {/* Fallback image if actual profile photo is missing */}
                 <img
-                  src="/images/pp.png"
+                  src={profileData?.photo_url || "/images/pp.png"}
                   alt="Profile"
                   className="w-full h-full object-cover"
                   crossOrigin="anonymous"
@@ -97,7 +95,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             <div className="w-1/3">
               <div className="w-full aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden mb-8 shadow-md">
                 <img
-                  src="/images/pp.png"
+                  src={profileData?.photo_url || "/images/pp.png"}
                   alt="Formal Profile"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
                   crossOrigin="anonymous"
@@ -144,7 +142,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           </div>
         </div>
 
-        {/* Page 3: Portfolio Category 1 */}
+        {/* Page 3: Portfolio */}
         <div
           className="bg-gray-50 flex flex-col justify-between p-12"
           style={{ width: A4_WIDTH, height: A4_HEIGHT, boxSizing: "border-box" }}
@@ -152,10 +150,10 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
         >
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-widest text-center">
-              Web Development Portfolio
+              Portfolio
             </h2>
             <div className="grid grid-cols-2 gap-8">
-              {webPortfolios.map((item) => (
+              {displayPortfolios.map((item) => (
                 <div key={item.id} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
                   <div className="h-40 bg-gray-200 overflow-hidden">
                     <img 
@@ -188,53 +186,6 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             <span>GitHub: github.com/nawa</span>
           </div>
         </div>
-
-        {/* Page 4: Portfolio Category 2 */}
-        {otherPortfolios.length > 0 && (
-          <div
-            className="bg-gray-50 flex flex-col justify-between p-12"
-            style={{ width: A4_WIDTH, height: A4_HEIGHT, boxSizing: "border-box" }}
-            data-pdf-page="4"
-          >
-            <div>
-              <h2 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-widest text-center">
-                Other Portfolios
-              </h2>
-              <div className="grid grid-cols-2 gap-8">
-                {otherPortfolios.map((item) => (
-                  <div key={item.id} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-                    <div className="h-40 bg-gray-200 overflow-hidden">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                        crossOrigin="anonymous"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
-                      <p className="text-xs text-gray-500 line-clamp-3 mb-3">{item.description}</p>
-                      <div className="flex flex-wrap gap-1">
-                        {item.technologies.slice(0, 3).map(tech => (
-                          <span key={tech} className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-              <span>WA: +62 812-3456-7890</span>
-              <span>Email: hello@example.com</span>
-              <span>LinkedIn: /in/nawa</span>
-              <span>GitHub: github.com/nawa</span>
-            </div>
-          </div>
-        )}
       </div>
     );
   }

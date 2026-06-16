@@ -1,16 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import type { Portfolio } from "@/lib/types";
+import type { Portfolio, Experience, Profile } from "@/lib/types";
 import CustomCursor from "@/components/CustomCursor";
 import PortfolioCard from "@/components/PortfolioCard";
 import Navbar from "@/components/Navbar";
+import DownloadPDFButton from "@/components/DownloadPDFButton";
 
 interface PortfolioClientProps {
   initialData: Portfolio[];
+  experienceData: Experience[];
+  profileData: Profile | null;
 }
 
-export default function PortfolioClient({ initialData }: PortfolioClientProps) {
+export default function PortfolioClient({ initialData, experienceData, profileData }: PortfolioClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const categories = ["All", ...Array.from(new Set(initialData.map(item => item.category)))];
@@ -38,13 +41,21 @@ export default function PortfolioClient({ initialData }: PortfolioClientProps) {
               My Portfolio
             </motion.h1>
             <motion.p
-              className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto"
+              className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Kumpulan proyek dan karya yang telah saya kerjakan
             </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex justify-center"
+            >
+              <DownloadPDFButton portfolioData={initialData} experienceData={experienceData} profileData={profileData} />
+            </motion.div>
           </div>
         </div>
 

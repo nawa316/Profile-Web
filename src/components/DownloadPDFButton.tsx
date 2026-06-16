@@ -5,14 +5,15 @@ import { Download, Loader2 } from "lucide-react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { PDFTemplate } from "./pdf/PDFTemplate";
-import { Portfolio, Experience } from "@/lib/types";
+import { Portfolio, Experience, Profile } from "@/lib/types";
 
 interface DownloadPDFButtonProps {
   portfolioData: Portfolio[];
   experienceData: Experience[];
+  profileData: Profile | null;
 }
 
-export default function DownloadPDFButton({ portfolioData, experienceData }: DownloadPDFButtonProps) {
+export default function DownloadPDFButton({ portfolioData, experienceData, profileData }: DownloadPDFButtonProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const pdfRef = useRef<HTMLDivElement>(null);
 
@@ -92,6 +93,7 @@ export default function DownloadPDFButton({ portfolioData, experienceData }: Dow
           ref={pdfRef} 
           portfolioData={portfolioData} 
           experienceData={experienceData} 
+          profileData={profileData}
         />
       </div>
     </>
