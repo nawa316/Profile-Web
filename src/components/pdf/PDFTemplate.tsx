@@ -66,7 +66,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             <div className="w-1/3 flex justify-end">
               <div className="w-48 h-48 bg-indigo-100 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 <img
-                  src={profileData?.photo_url || "/images/pp.png"}
+                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
                   alt="Profile"
                   className="w-full h-full object-cover"
                   crossOrigin="anonymous"
@@ -95,7 +95,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             <div className="w-1/3">
               <div className="w-full aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden mb-8 shadow-md">
                 <img
-                  src={profileData?.photo_url || "/images/pp.png"}
+                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
                   alt="Formal Profile"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
                   crossOrigin="anonymous"
