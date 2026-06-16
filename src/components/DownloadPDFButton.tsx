@@ -5,12 +5,11 @@ import { Download, Loader2 } from "lucide-react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { PDFTemplate } from "./pdf/PDFTemplate";
-import { PortfolioItem } from "@/data/portfolioData";
-import { ExperienceItem } from "@/data/experienceData";
+import { Portfolio, Experience } from "@/lib/types";
 
 interface DownloadPDFButtonProps {
-  portfolioData: PortfolioItem[];
-  experienceData: ExperienceItem[];
+  portfolioData: Portfolio[];
+  experienceData: Experience[];
 }
 
 export default function DownloadPDFButton({ portfolioData, experienceData }: DownloadPDFButtonProps) {

@@ -1,12 +1,11 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { PortfolioItem } from "@/data/portfolioData";
-import { ExperienceItem } from "@/data/experienceData";
+import { Portfolio, Experience } from "@/lib/types";
 
 interface PDFTemplateProps {
-  portfolioData: PortfolioItem[];
-  experienceData: ExperienceItem[];
+  portfolioData: Portfolio[];
+  experienceData: Experience[];
   // basic info can be hardcoded or passed as props
 }
 
@@ -126,7 +125,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                     <h4 className="text-base font-bold text-gray-800">{exp.role}</h4>
                     <h5 className="text-sm font-semibold text-gray-600">{exp.organization}</h5>
                     <p className="text-xs font-semibold text-indigo-600 mb-2">
-                      {exp.startDate} - {exp.endDate || "Present"}
+                      {exp.start_date} - {exp.end_date || "Present"}
                     </p>
                     <p className="text-xs text-gray-600 leading-relaxed">
                       {exp.description}
