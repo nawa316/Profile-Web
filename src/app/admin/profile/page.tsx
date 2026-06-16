@@ -10,9 +10,11 @@ export default function ProfileAdminPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<UpdateProfileInput>();
   
   const currentCvUrl = watch('cv_url');
+  const currentPhotoUrl = watch('photo_url');
 
   useEffect(() => {
     fetchProfile();
@@ -49,6 +51,23 @@ export default function ProfileAdminPage() {
           throw new Error(uploadResult.error || 'Failed to upload CV');
         }
         data.cv_url = uploadResult.url;
+      }
+
+      if (photoFile) {
+        const uploadPhotoData = new FormData();
+        uploadPhotoData.append('file', photoFile);
+        uploadPhotoData.append('bucket', 'portfolios'); 
+
+        const photoRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: uploadPhotoData,
+        });
+
+        const photoUploadResult = await photoRes.json();
+        if (!photoUploadResult.success) {
+          throw new Error(photoUploadResult.error || 'Failed to upload Profile Photo');
+        }
+        data.photo_url = photoUploadResult.url;
       }
 
       await profileApi.update(data);
@@ -162,6 +181,30 @@ export default function ProfileAdminPage() {
               {cvFile && (
                 <p className="mt-2 text-sm text-gray-500">
                   Selected file: {cvFile.name}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Profile Photo Upload</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setPhotoFile(e.target.files[0]);
+                  }
+                }}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6b8af6] focus:border-[#6b8af6] outline-none transition-all"
+              />
+              {currentPhotoUrl && !photoFile && (
+                <p className="mt-2 text-sm text-gray-500">
+                  Current Photo: <a href={currentPhotoUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">View Image</a>
+                </p>
+              )}
+              {photoFile && (
+                <p className="mt-2 text-sm text-gray-500">
+                  Selected file: {photoFile.name}
                 </p>
               )}
             </div>

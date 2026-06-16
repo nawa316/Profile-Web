@@ -66,8 +66,8 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             <div className="w-1/3 flex justify-end">
               <div className="w-48 h-48 bg-indigo-100 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 <img
-                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
-                  alt="Profile"
+                  src="/images/logo.png"
+                  alt="Logo"
                   className="w-full h-full object-cover"
                   crossOrigin="anonymous"
                 />
@@ -93,11 +93,11 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           <div className="flex gap-12">
             {/* Left Col: Photo & Education */}
             <div className="w-1/3">
-              <div className="w-full aspect-[3/4] bg-gray-200 rounded-xl overflow-hidden mb-8 shadow-md">
+              <div className="w-full h-64 bg-transparent mb-8 flex justify-center items-start">
                 <img
                   src={profileData?.photo_url || "/images/1688908285904.JPG"}
                   alt="Formal Profile"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+                  className="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all rounded-xl shadow-md"
                   crossOrigin="anonymous"
                 />
               </div>

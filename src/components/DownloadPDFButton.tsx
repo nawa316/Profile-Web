@@ -57,7 +57,7 @@ export default function DownloadPDFButton({ portfolioData, experienceData, profi
         pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
       }
       
-      pdf.save("Nawa_Portfolio.pdf");
+      pdf.save("Awan_Portfolio.pdf");
       
     } catch (error) {
       console.error("Error generating PDF:", error);
