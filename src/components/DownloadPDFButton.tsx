@@ -23,46 +23,53 @@ export default function DownloadPDFButton({ portfolioData, experienceData, profi
     try {
       setIsGenerating(true);
       
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "px",
-        format: "a4",
-      });
-
-      // Find all pages inside the template
-      const pages = pdfRef.current.querySelectorAll("[data-pdf-page]");
+      const content = pdfRef.current.innerHTML;
+      const printWindow = window.open('', '_blank');
       
-      for (let i = 0; i < pages.length; i++) {
-        const pageElement = pages[i] as HTMLElement;
-        
-        const canvas = await html2canvas(pageElement, {
-          scale: 2, // Higher scale for better quality
-          useCORS: true, // Important for external images
-          logging: false,
-          backgroundColor: "#ffffff",
-        });
-
-        const imgData = canvas.toDataURL("image/jpeg", 1.0);
-        
-        // A4 format dimensions in px (at 96 DPI: 794x1123)
-        // jsPDF with format 'a4' and unit 'px' will use 445.9 x 630.9 as internal dimension?
-        // Let's get internal dimensions to be safe:
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
-        
-        if (i > 0) {
-          pdf.addPage();
-        }
-        
-        pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+      if (!printWindow) {
+        alert("Please allow popups for this site to generate the PDF.");
+        setIsGenerating(false);
+        return;
       }
       
-      pdf.save("Awan_Portfolio.pdf");
+      // Copy styles from the current document to ensure Tailwind works
+      const styles = Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'))
+        .map(node => node.outerHTML)
+        .join('');
+        
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Awan_Portfolio</title>
+            ${styles}
+            <style>
+              @media print {
+                @page { margin: 0; size: A4 portrait; }
+                body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+              }
+              body { background-color: white; }
+            </style>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `);
+      
+      printWindow.document.close();
+      printWindow.focus();
+      
+      // Wait slightly for fonts and styles to load before triggering print
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+        setIsGenerating(false);
+      }, 750);
       
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert("Failed to generate PDF. Please try again later.");
-    } finally {
       setIsGenerating(false);
     }
   };
@@ -88,7 +95,7 @@ export default function DownloadPDFButton({ portfolioData, experienceData, profi
       </button>
 
       {/* Hidden PDF Template Container */}
-      <div className="overflow-hidden w-0 h-0 absolute pointer-events-none">
+      <div className="fixed -left-[9999px] top-0 opacity-0 pointer-events-none">
         <PDFTemplate 
           ref={pdfRef} 
           portfolioData={portfolioData} 

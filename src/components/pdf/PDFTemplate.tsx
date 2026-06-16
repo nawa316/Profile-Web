@@ -26,8 +26,8 @@ const formatDate = (dateStr: string | null | undefined) => {
 
 export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
   ({ portfolioData, experienceData, profileData }, ref) => {
-    // We will show up to 6 portfolio items in the main portfolio page
-    const displayPortfolios = portfolioData.slice(0, 6);
+    // We will show up to 4 portfolio items in the main portfolio page to prevent overflow
+    const displayPortfolios = portfolioData.slice(0, 4);
     
     // Extract unique technologies from portfolio items
     const uniqueSkills = Array.from(new Set(portfolioData.flatMap(p => p.technologies || [])));
