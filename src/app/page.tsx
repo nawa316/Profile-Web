@@ -90,13 +90,13 @@ export default function Home() {
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">About Me</h2>
             </div>
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 px-4 md:px-40">
-                <Image
-                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
-                  alt="Foto Profile"
-                  width={2848}
-                  height={4288}
-                  className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
-                />
+              <Image
+                src={profileData?.photo_url || "/images/1688908285904.JPG"}
+                alt="Foto Profile"
+                width={2848}
+                height={4288}
+                className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
+              />
               <div className="w-full flex flex-col items-center md:items-start h-fit justify-start gap-5 p-0">
                 <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2">
                   <p className="text-center md:text-left">
@@ -198,8 +198,8 @@ export default function Home() {
           <footer className="min-h-screen w-full flex flex-col justify-center items-center section bg-[#6b8af6] gap-6 md:gap-10 py-8 px-4">
             <div className="flex flex-col gap-2 justify-center items-center text-center text-white">
               <h2 className="dm_serif_text text-2xl md:text-4xl">Contact Me!</h2>
-              <p className="text-base md:text-lg mb-4">Apakah Anda tertarik untuk berkolaborasi atau sekedar berdiskusi seputar Pengembangan Web dan Perangkat Lunak? <br/> Jangan ragu untuk menghubungi saya!</p>
-              
+              <p className="text-base md:text-lg mb-4">Apakah Anda tertarik untuk berkolaborasi atau sekedar berdiskusi seputar Pengembangan Web dan Perangkat Lunak? <br /> Jangan ragu untuk menghubungi saya!</p>
+
               <div className="flex flex-col md:flex-row gap-4 mt-2 mb-6">
                 <a href="mailto:muhammadadedzakwan@gmail.com" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-6 py-3 rounded-full transition-colors">
                   <MdEmail size={20} />

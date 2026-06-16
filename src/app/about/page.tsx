@@ -65,7 +65,7 @@ export default function AboutPage() {
           </div>
 
           <div className="max-w-6xl mx-auto relative z-10">
-            <motion.div 
+            <motion.div
               className="flex flex-col md:flex-row items-center gap-10 md:gap-16"
               initial="hidden"
               animate="visible"
@@ -118,7 +118,7 @@ export default function AboutPage() {
         {/* Skills Section */}
         <div className="py-16 px-4 relative z-10 bg-black/20">
           <div className="max-w-6xl mx-auto">
-            <motion.div 
+            <motion.div
               className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
