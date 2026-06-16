@@ -51,7 +51,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                 {profileData?.tagline || "nformation Systems Student"}
               </h2>
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 border-b-2 border-indigo-600 inline-block">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-indigo-600 inline-block">
                   About Me
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-sm whitespace-pre-wrap">
@@ -59,7 +59,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 border-b-2 border-indigo-600 inline-block">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-indigo-600 inline-block">
                   Tech Stack & Skills
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -109,7 +109,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                   crossOrigin="anonymous"
                 />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 border-b-2 border-indigo-600 inline-block">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-indigo-600 inline-block">
                 Education
               </h3>
               <div className="mb-6">
@@ -121,7 +121,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             
             {/* Right Col: Experiences */}
             <div className="w-2/3">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-600 inline-block uppercase tracking-wider">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-indigo-600 inline-block uppercase tracking-wider">
                 Experiences
               </h3>
               <div className="">
@@ -129,15 +129,15 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                   <div key={exp.id} className="relative pl-6 border-l-2 border-gray-200 pb-8 last:pb-0">
                     <div className="absolute w-3 h-3 bg-indigo-600 rounded-full -left-[7px] top-1.5"></div>
                     <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h4 className="text-base font-bold text-gray-800">{exp.role}</h4>
-                        <h5 className="text-sm font-semibold text-gray-600">{exp.organization}</h5>
+                      <div className="text-left w-full">
+                        <h4 className="text-base font-bold text-gray-800 text-left">{exp.role}</h4>
+                        <h5 className="text-sm font-semibold text-gray-600 text-left">{exp.organization}</h5>
                       </div>
-                      <p className="text-xs font-semibold text-indigo-600 whitespace-nowrap ml-4 mt-0.5">
+                      <p className="text-xs font-semibold text-indigo-600 whitespace-nowrap ml-4 mt-0.5 text-right">
                         {formatDate(String(exp.start_date))} - {exp.end_date ? formatDate(String(exp.end_date)) : "Present"}
                       </p>
                     </div>
-                    <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-wrap">
+                    <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-wrap text-left">
                       {exp.description}
                     </p>
                   </div>
