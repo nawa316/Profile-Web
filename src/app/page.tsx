@@ -65,7 +65,7 @@ export default function Home() {
                 <span className="text-[#3c45b9]">.</span>
               </p>
               <p className="text-lg md:text-2xl text-gray-600 text-center max-w-[600px]">
-                Information Systems Student &amp; Web Developer
+                {profileData?.tagline || "Information Systems Student & Web Developer"}
               </p>
               <div className="flex flex-row w-full h-full gap-4 items-center justify-center mt-4">
                 <Link href="/cv" className="relative w-[32px] h-[32px] md:w-[42px] md:h-[42px] hover:scale-110 transition-transform">
