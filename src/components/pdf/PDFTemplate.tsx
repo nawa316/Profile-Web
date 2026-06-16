@@ -28,6 +28,21 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
   ({ portfolioData, experienceData, profileData }, ref) => {
     // We will show up to 6 portfolio items in the main portfolio page
     const displayPortfolios = portfolioData.slice(0, 6);
+    
+    // Extract unique technologies from portfolio items
+    const uniqueSkills = Array.from(new Set(portfolioData.flatMap(p => p.technologies || [])));
+    const displaySkills = uniqueSkills.length > 0 
+      ? uniqueSkills.slice(0, 15) 
+      : ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Supabase"];
+
+    const FooterContact = () => (
+      <div className="mt-auto border-t pt-6 flex justify-between text-[10px] text-gray-500 font-medium">
+        <a href={`https://wa.me/${profileData?.phone?.replace(/\D/g, '') || "6281234567890"}`} target="_blank" rel="noreferrer" className="hover:text-indigo-600 transition-colors">WA: {profileData?.phone || "+62 812-3456-7890"}</a>
+        <a href={`mailto:${profileData?.email || "hello@example.com"}`} target="_blank" rel="noreferrer" className="hover:text-indigo-600 transition-colors">Email: {profileData?.email || "hello@example.com"}</a>
+        <a href={profileData?.linkedin || "#"} target="_blank" rel="noreferrer" className="hover:text-indigo-600 transition-colors">LinkedIn: {profileData?.linkedin || "/in/nawa"}</a>
+        <a href={profileData?.github || "#"} target="_blank" rel="noreferrer" className="hover:text-indigo-600 transition-colors">GitHub: {profileData?.github || "github.com/nawa"}</a>
+      </div>
+    );
 
     return (
       <div
@@ -43,11 +58,11 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
         >
           <div className="flex justify-between items-start">
             <div className="w-2/3 pr-8">
-              <h1 className="text-6xl font-extrabold text-gray-900 leading-tight mb-2">
+              <h1 className="text-5xl font-extrabold text-gray-900 leading-tight mb-2">
                 Hey I&apos;m <br />
                 <span className="text-indigo-600">{profileData?.name || "Awan"}</span>
               </h1>
-              <h2 className="text-2xl font-bold text-gray-600 mb-8 tracking-wide uppercase">
+              <h2 className="text-xl font-bold text-gray-600 mb-8 tracking-wide uppercase">
                 {profileData?.tagline || "nformation Systems Student"}
               </h2>
               <div className="mb-8">
@@ -63,7 +78,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                   Tech Stack & Skills
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Supabase"].map((skill) => (
+                  {displaySkills.map((skill) => (
                     <span key={skill} className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">
                       {skill}
                     </span>
@@ -84,12 +99,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           </div>
           
           {/* Footer Contact */}
-          <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-            <span>WA: {profileData?.phone || "+62 812-3456-7890"}</span>
-            <span>Email: {profileData?.email || "hello@example.com"}</span>
-            <span>LinkedIn: {profileData?.linkedin || "/in/nawa"}</span>
-            <span>GitHub: {profileData?.github || "github.com/nawa"}</span>
-          </div>
+          <FooterContact />
         </div>
 
         {/* Page 2: Experiences & Education */}
@@ -146,12 +156,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             </div>
           </div>
           
-          <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-            <span>WA: {profileData?.phone || "+62 812-3456-7890"}</span>
-            <span>Email: {profileData?.email || "hello@example.com"}</span>
-            <span>LinkedIn: {profileData?.linkedin || "/in/nawa"}</span>
-            <span>GitHub: {profileData?.github || "github.com/nawa"}</span>
-          </div>
+          <FooterContact />
         </div>
 
         {/* Page 3: Portfolio */}
@@ -185,18 +190,27 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                         </span>
                       ))}
                     </div>
+                    {(item.link || item.github) && (
+                      <div className="flex gap-2 mt-3">
+                        {item.link && (
+                          <a href={item.link} target="_blank" rel="noreferrer" className="text-[10px] bg-indigo-600 text-white px-3 py-1 rounded shadow-sm hover:bg-indigo-700 transition-colors">
+                            Visit
+                          </a>
+                        )}
+                        {item.github && (
+                          <a href={item.github} target="_blank" rel="noreferrer" className="text-[10px] bg-gray-800 text-white px-3 py-1 rounded shadow-sm hover:bg-gray-900 transition-colors">
+                            GitHub
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="mt-auto border-t pt-6 flex justify-between text-xs text-gray-500 font-medium">
-            <span>WA: {profileData?.phone || "+62 812-3456-7890"}</span>
-            <span>Email: {profileData?.email || "hello@example.com"}</span>
-            <span>LinkedIn: {profileData?.linkedin || "/in/nawa"}</span>
-            <span>GitHub: {profileData?.github || "github.com/nawa"}</span>
-          </div>
+          <FooterContact />
         </div>
       </div>
     );
