@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { experienceApi, portfolioApi, blogApi, profileApi } from "@/lib/api";
-import type { Experience, Portfolio, Blog, Profile } from "@/lib/types";
+import { experienceApi, portfolioApi, blogApi, profileApi, educationApi } from "@/lib/api";
+import type { Experience, Portfolio, Blog, Profile, Education } from "@/lib/types";
 import ExperienceCard from "@/components/ExperienceCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import BlogCard from "@/components/BlogCard";
@@ -22,22 +22,28 @@ export default function Home() {
   const [portfolioData, setPortfolioData] = useState<Portfolio[]>([]);
   const [blogData, setBlogData] = useState<Blog[]>([]);
   const [profileData, setProfileData] = useState<Profile | null>(null);
+  const [educationData, setEducationData] = useState<Education[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [exp, port, blog, profile] = await Promise.all([
+        const [exp, port, blog, profile, edu] = await Promise.all([
           experienceApi.getAll(),
           portfolioApi.getAll(),
           blogApi.getAll(),
-          profileApi.get()
+          profileApi.get(),
+          educationApi.getAll()
         ]);
         setExperienceData(exp || []);
         setPortfolioData(port || []);
         setBlogData(blog || []);
         setProfileData(profile || null);
+        setEducationData(edu || []);
       } catch (error) {
         console.error("Failed to fetch data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -90,13 +96,17 @@ export default function Home() {
               <h2 className="dm_serif_text text-2xl md:text-4xl text-white">About Me</h2>
             </div>
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 px-4 md:px-40">
-              <Image
-                src={profileData?.photo_url || "/images/1688908285904.JPG"}
-                alt="Foto Profile"
-                width={2848}
-                height={4288}
-                className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
-              />
+              {isLoading ? (
+                <div className="w-[200px] md:w-[300px] h-[300px] md:h-[450px] bg-gray-300 animate-pulse rounded-xl" />
+              ) : (
+                <Image
+                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
+                  alt="Foto Profile"
+                  width={2848}
+                  height={4288}
+                  className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
+                />
+              )}
               <div className="w-full flex flex-col items-center md:items-start h-fit justify-start gap-5 p-0">
                 <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2">
                   <p className="text-center md:text-left">
@@ -114,31 +124,22 @@ export default function Home() {
                 </div>
                 <div className="text-center md:text-left">
                   <h2 className="text-lg md:text-xl font-medium">Description</h2>
-                  <p className="text-base md:text-lg">
-                    Information Systems student with a passion for web
-                    development, combining technical expertise with strong
-                    communication skills. Proven ability to excel in team
-                    environments, collaborating effectively to achieve shared
-                    goals. Known for handling responsibilities with diligence
-                    and reliability, I bring a dynamic approach to
-                    problem-solving in the world of programming.
-                  </p>
+                  <div className="text-base md:text-lg whitespace-pre-wrap">
+                    {profileData?.about_text || "Loading description..."}
+                  </div>
                 </div>
                 <div className="text-center md:text-left">
                   <h2 className="text-lg md:text-xl font-medium">Education &amp; Qualifications</h2>
                   <ul className="text-base md:text-lg list-disc pl-6 md:pl-10 text-left">
-                    <li>
-                      Information Systems, Institut Teknologi Sepuluh Nopember -
-                      2023-Now
-                    </li>
-                    <li>
-                      Science, National Senior High School 1 Tenggarang -
-                      2020-2023
-                    </li>
-                    <li>
-                      National Junior High School 2 Tenggarang - 2017-2020
-                    </li>
-                    <li>National Elementary School 1 Cindogo - 2014-2017</li>
+                    {educationData.length > 0 ? (
+                      educationData.map((edu) => (
+                        <li key={edu.id}>
+                          {edu.major ? `${edu.major}, ` : ''}{edu.institution} - {new Date(edu.start_date).getFullYear()}-{edu.end_date ? new Date(edu.end_date).getFullYear() : 'Now'}
+                        </li>
+                      ))
+                    ) : (
+                      <li>Loading education...</li>
+                    )}
                   </ul>
                 </div>
               </div>
