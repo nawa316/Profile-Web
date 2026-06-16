@@ -185,6 +185,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                   )}
                 </div>
               </div>
+            </div>
             ))}
           </div>
         </div>
