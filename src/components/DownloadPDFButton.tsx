@@ -19,6 +19,18 @@ export default function DownloadPDFButton({ portfolioData, experienceData, profi
   const handlePrint = useReactToPrint({
     contentRef,
     documentTitle: "Awan_Portfolio",
+    pageStyle: `
+      @page {
+        size: A4 portrait;
+        margin: 12mm 0;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    `,
     onBeforePrint: () => {
       setIsGenerating(true);
       return Promise.resolve();
