@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import Contact from "@/components/Contact";
 import { Mail, MapPin, Phone } from "lucide-react";
@@ -30,7 +29,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#3c45b9] via-[#1a1a2e] to-[#16213e] flex flex-col items-center">
         <Navbar />
 

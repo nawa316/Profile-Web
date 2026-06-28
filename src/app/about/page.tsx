@@ -4,7 +4,6 @@ import { profileApi, portfolioApi } from "@/lib/api";
 import type { Profile, Portfolio } from "@/lib/types";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import { Code2, Laptop, Palette, Terminal, Database, Lightbulb } from "lucide-react";
 
@@ -63,7 +62,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#3c45b9] via-[#1a1a2e] to-[#16213e] overflow-hidden">
         <Navbar />
 

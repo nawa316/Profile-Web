@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import type { Portfolio, Experience, Profile } from "@/lib/types";
-import CustomCursor from "@/components/CustomCursor";
 import PortfolioCard from "@/components/PortfolioCard";
 import Navbar from "@/components/Navbar";
 import DownloadPDFButton from "@/components/DownloadPDFButton";
@@ -24,7 +23,6 @@ export default function PortfolioClient({ initialData, experienceData, profileDa
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
         {/* Navigation */}
         <Navbar />

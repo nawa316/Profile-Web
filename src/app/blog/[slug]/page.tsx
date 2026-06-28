@@ -3,7 +3,6 @@ import React, { useEffect, useState, use } from "react";
 import { blogApi } from "@/lib/api";
 import type { Blog } from "@/lib/types";
 import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
 import { FaClock, FaUser, FaCalendar, FaTag, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -49,7 +48,6 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white pt-24 pb-20">
         <Navbar />
         

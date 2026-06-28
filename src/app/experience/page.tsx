@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { experienceApi } from "@/lib/api";
 import type { Experience } from "@/lib/types";
-import CustomCursor from "@/components/CustomCursor";
 import ExperienceCard, { formatTypeLabel } from "@/components/ExperienceCard";
 import Navbar from "@/components/Navbar";
 
@@ -36,7 +35,6 @@ export default function ExperiencePage() {
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#3c45b9] via-[#1a1a2e] to-[#16213e]">
         {/* Navigation */}
         <Navbar />

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { blogApi } from "@/lib/api";
 import type { Blog } from "@/lib/types";
-import CustomCursor from "@/components/CustomCursor";
 import BlogCard, { FeaturedBlogCard } from "@/components/BlogCard";
 import Navbar from "@/components/Navbar";
 
@@ -35,7 +34,6 @@ export default function BlogPage() {
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {/* Navigation */}
         <Navbar />

@@ -3,7 +3,6 @@ import React, { useEffect, useState, use } from "react";
 import { experienceApi } from "@/lib/api";
 import type { Experience } from "@/lib/types";
 import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
 import { FaCalendar, FaMapMarkerAlt, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -75,7 +74,6 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-[#1a1b2e] to-[#0f101a] text-white pt-24 pb-20">
         <Navbar />
         

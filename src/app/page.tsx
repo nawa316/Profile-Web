@@ -6,7 +6,6 @@ import ExperienceCard from "@/components/ExperienceCard";
 import PortfolioCard from "@/components/PortfolioCard";
 import BlogCard from "@/components/BlogCard";
 import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
 import TypeWriter from "@/components/TypeWriter";
 import { AiFillGithub } from "react-icons/ai";
 import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
@@ -51,7 +50,6 @@ export default function Home() {
 
   return (
     <>
-      <CustomCursor />
       <div className="flex flex-col">
         <Navbar />
         <div className="section_wrapper">

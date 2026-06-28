@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Download, Mail, Phone, Linkedin, MapPin, ArrowLeft } from 'lucide-react';
-import CustomCursor from '@/components/CustomCursor';
 import Link from 'next/link';
 import { profileApi, educationApi, certificationApi, achievementApi, experienceApi } from '@/lib/api';
 import type { Profile, Education, Certification, Achievement, Experience } from '@/lib/types';
@@ -64,7 +63,6 @@ export default function CVPage() {
 
   return (
     <>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
