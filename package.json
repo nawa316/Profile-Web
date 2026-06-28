@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.0",
+    "@types/aos": "^3.0.8",
     "@types/nodemailer": "^6.4.17",
+    "aos": "^2.3.4",
     "framer-motion": "^12.0.6",
     "gsap": "^3.12.7",
     "html2canvas": "^1.4.1",
