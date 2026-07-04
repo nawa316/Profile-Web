@@ -159,9 +159,6 @@ export default function ProfileCard({ photoUrl, name = "Awan" }: ProfileCardProp
             <h3 className="dm_serif_text text-2xl text-slate-800 uppercase tracking-widest leading-tight">
               {name}
             </h3>
-            <p className="text-xs text-[#6b8af6] font-bold tracking-widest mt-1 mb-3">
-              DEVELOPER
-            </p>
           </div>
           <div
             className="flex justify-center gap-[3px] opacity-[0.18]"

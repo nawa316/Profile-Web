@@ -1,7 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { experienceApi } from "@/lib/api";
 import type { Experience } from "@/lib/types";
@@ -26,32 +24,32 @@ export default function ExperiencePage() {
     };
     fetchExperience();
   }, []);
-  
+
   const types = ["All", ...Array.from(new Set(experienceData.map(item => item.type)))];
-  
-  const filteredExperience = selectedType === "All" 
-    ? experienceData 
+
+  const filteredExperience = selectedType === "All"
+    ? experienceData
     : experienceData.filter(item => item.type === selectedType);
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-[#3c45b9] via-[#1a1a2e] to-[#16213e]">
-        {/* Navigation */}
+      <div className="min-h-screen bg-slate-50 text-slate-900">
         <Navbar />
 
         {/* Header */}
-        <div className="pt-24 pb-12 px-4">
+        <div className="pt-28 pb-10 px-4">
           <div className="max-w-7xl mx-auto text-center">
-            <motion.h1 
-              className="dm_serif_text text-4xl md:text-6xl text-white mb-4"
+            <motion.h1
+              className="dm_serif_text text-4xl md:text-6xl text-slate-800 mb-2"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
               My Experience
             </motion.h1>
-            <motion.p 
-              className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto"
+            <div className="w-12 h-1 bg-[#6b8af6] rounded-full mx-auto mb-4" />
+            <motion.p
+              className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -62,8 +60,8 @@ export default function ExperiencePage() {
         </div>
 
         {/* Type Filter */}
-        <div className="max-w-7xl mx-auto px-4 mb-12">
-          <motion.div 
+        <div className="max-w-7xl mx-auto px-4 mb-10">
+          <motion.div
             className="flex flex-wrap justify-center gap-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -73,13 +71,13 @@ export default function ExperiencePage() {
               <button
                 key={type}
                 onClick={() => setSelectedType(type)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 text-sm ${
                   selectedType === type
-                    ? "bg-[#6b8af6] text-white shadow-lg shadow-[#6b8af6]/30"
-                    : "bg-white/10 text-gray-300 hover:bg-white/20"
+                    ? "bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/25"
+                    : "bg-white text-slate-600 border border-slate-200 hover:border-[#6b8af6]/50 hover:text-[#6b8af6]"
                 }`}
               >
-                {type === "All" ? "All" : formatTypeLabel(type)}
+                {type === "All" ? "Semua" : formatTypeLabel(type)}
               </button>
             ))}
           </motion.div>
@@ -87,14 +85,23 @@ export default function ExperiencePage() {
 
         {/* Experience Grid */}
         <div className="max-w-7xl mx-auto px-4 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredExperience.map((item, index) => (
-              <ExperienceCard key={item.id} item={item} index={index} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="h-72 bg-slate-200 rounded-2xl animate-pulse" />
+              ))}
+            </div>
+          ) : filteredExperience.length === 0 ? (
+            <p className="text-center text-slate-400 py-20 text-lg">Tidak ada experience yang ditemukan.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredExperience.map((item, index) => (
+                <ExperienceCard key={item.id} item={item} index={index} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
   );
 }
-
