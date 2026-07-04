@@ -64,19 +64,19 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="dm_serif_text text-xl text-white mb-1 group-hover:text-[#6b8af6] transition-colors">
           {item.organization}
         </h3>
         <p className="text-[#6b8af6] font-medium mb-3">
           {item.role}
         </p>
-        <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+        <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
           {item.description}
         </p>
 
         {/* Date & Location */}
-        <div className="flex flex-wrap gap-3 text-gray-300 text-xs mb-4 font-medium">
+        <div className="flex flex-wrap gap-3 text-gray-300 text-xs mb-4 font-medium mt-auto">
           <span className="flex items-center gap-1">
             <FaCalendar className="text-[#6b8af6]" />
             {formatDate(item.start_date)} - {item.end_date ? formatDate(item.end_date) : "Present"}
