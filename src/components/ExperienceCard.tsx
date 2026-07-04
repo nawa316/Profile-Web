@@ -37,7 +37,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10 h-full flex flex-col"
+        className="group bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200 hover:border-[#6b8af6]/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#6b8af6]/20 h-full flex flex-col hover:-translate-y-1"
       >
       {/* Image */}
       <div className="relative h-48 bg-gradient-to-br from-[#6b8af6] to-[#3c45b9] flex items-center justify-center overflow-hidden">
@@ -65,18 +65,18 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="dm_serif_text text-xl text-white mb-1 group-hover:text-[#6b8af6] transition-colors">
+        <h3 className="dm_serif_text text-xl text-slate-800 mb-1 group-hover:text-[#6b8af6] transition-colors">
           {item.organization}
         </h3>
         <p className="text-[#6b8af6] font-medium mb-3">
           {item.role}
         </p>
-        <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
+        <p className="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
           {item.description}
         </p>
 
         {/* Date & Location */}
-        <div className="flex flex-wrap gap-3 text-gray-300 text-xs mb-4 font-medium mt-auto">
+        <div className="flex flex-wrap gap-3 text-slate-500 text-xs mb-4 font-medium mt-auto">
           <span className="flex items-center gap-1">
             <FaCalendar className="text-[#6b8af6]" />
             {formatDate(item.start_date)} - {item.end_date ? formatDate(item.end_date) : "Present"}
@@ -90,7 +90,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
         </div>
 
         {/* Skills */}
-        <div className="flex flex-wrap gap-2 pt-4 border-t border-white/10">
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
           {(item.skills || []).slice(0, MAX_VISIBLE_SKILLS).map((skill) => (
             <span
               key={skill}
@@ -100,7 +100,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
             </span>
           ))}
           {(item.skills || []).length > MAX_VISIBLE_SKILLS && (
-            <span className="px-2 py-1 bg-gray-700/50 text-gray-400 rounded text-xs">
+            <span className="px-2 py-1 bg-slate-200 text-slate-600 rounded text-xs">
               +{(item.skills || []).length - MAX_VISIBLE_SKILLS} more
             </span>
           )}

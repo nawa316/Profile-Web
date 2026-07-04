@@ -14,7 +14,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="group relative bg-gradient-to-r from-[#6b8af6]/20 to-[#3c45b9]/20 rounded-3xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300"
+        className="group relative bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden border border-slate-200 hover:border-[#6b8af6]/50 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/20 hover:-translate-y-1"
       >
       <div className="flex flex-col md:flex-row">
         {/* Image */}
@@ -41,7 +41,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
 
         {/* Content */}
         <div className="md:w-1/2 p-8 flex flex-col justify-center">
-          <div className="flex items-center gap-4 text-gray-400 text-sm mb-4">
+          <div className="flex items-center gap-4 text-slate-500 text-sm mb-4">
             <span className="flex items-center gap-1">
               <FaCalendar className="text-[#6b8af6]" />
               {new Date(post.published_at).toLocaleDateString('id-ID', { 
@@ -60,11 +60,11 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
             {post.category}
           </span>
 
-          <h2 className="dm_serif_text text-2xl md:text-3xl text-white mb-4 group-hover:text-[#6b8af6] transition-colors">
+          <h2 className="dm_serif_text text-2xl md:text-3xl text-slate-800 mb-4 group-hover:text-[#6b8af6] transition-colors">
             {post.title}
           </h2>
 
-          <p className="text-gray-400 mb-6 line-clamp-3">
+          <p className="text-slate-600 mb-6 line-clamp-3">
             {post.excerpt}
           </p>
 
@@ -73,7 +73,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
               <div className="w-10 h-10 rounded-full bg-[#6b8af6] flex items-center justify-center">
                 <FaUser className="text-white" />
               </div>
-              <span className="text-gray-300">{post.author}</span>
+              <span className="text-slate-700">{post.author}</span>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-        className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10 flex flex-col h-full"
+        className="group bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200 hover:border-[#6b8af6]/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#6b8af6]/20 flex flex-col h-full hover:-translate-y-1"
       >
       {/* Image Placeholder */}
       <div className="relative h-48 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center overflow-hidden flex-shrink-0">
@@ -116,7 +116,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <div className="flex items-center gap-4 text-gray-500 text-xs mb-3">
+        <div className="flex items-center gap-4 text-slate-500 text-xs mb-3">
           <span className="flex items-center gap-1">
             <FaCalendar />
             {new Date(post.published_at).toLocaleDateString('id-ID', { 
@@ -131,11 +131,11 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
           </span>
         </div>
 
-        <h3 className="dm_serif_text text-xl text-white mb-3 group-hover:text-[#6b8af6] transition-colors line-clamp-2">
+        <h3 className="dm_serif_text text-xl text-slate-800 mb-3 group-hover:text-[#6b8af6] transition-colors line-clamp-2">
           {post.title}
         </h3>
 
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+        <p className="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">
           {post.excerpt}
         </p>
 
@@ -144,7 +144,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
           {(post.tags || []).slice(0, MAX_VISIBLE_TAGS).map((tag) => (
             <span
               key={tag}
-              className="flex items-center gap-1 px-2 py-1 bg-gray-700/50 text-gray-400 rounded text-xs"
+              className="flex items-center gap-1 px-2 py-1 bg-slate-200 text-slate-600 rounded text-xs"
             >
               <FaTag className="text-[10px]" />
               {tag}
@@ -153,11 +153,11 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         </div>
 
         {/* Author */}
-        <div className="flex items-center gap-2 pt-4 border-t border-white/10 mt-auto">
+        <div className="flex items-center gap-2 pt-4 border-t border-slate-100 mt-auto">
           <div className="w-8 h-8 rounded-full bg-[#6b8af6]/20 flex items-center justify-center">
             <FaUser className="text-[#6b8af6] text-sm" />
           </div>
-          <span className="text-gray-400 text-sm">{post.author}</span>
+          <span className="text-slate-600 text-sm">{post.author}</span>
         </div>
       </div>
     </motion.article>

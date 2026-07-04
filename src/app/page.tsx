@@ -15,6 +15,7 @@ import Link from "next/link";
 import Contact from '@/components/Contact';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 export default function Home() {
   const [experienceData, setExperienceData] = useState<Experience[]>([]);
@@ -23,6 +24,29 @@ export default function Home() {
   const [profileData, setProfileData] = useState<Profile | null>(null);
   const [educationData, setEducationData] = useState<Education[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Motion values for 3D card tilt
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Map mouse position to degree of rotation with spring physics
+  const rotateX = useSpring(useTransform(mouseY, [-150, 150], [15, -15]), { damping: 20, stiffness: 300 });
+  const rotateY = useSpring(useTransform(mouseX, [-150, 150], [-15, 15]), { damping: 20, stiffness: 300 });
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const x = event.clientX - rect.left - width / 2;
+    const y = event.clientY - rect.top - height / 2;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   useEffect(() => {
     AOS.init({
@@ -59,7 +83,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-200">
         <Navbar />
         <div className="section_wrapper">
           {/* ── Hero Section ── */}
@@ -124,15 +148,71 @@ export default function Home() {
               {isLoading ? (
                 <div className="w-[200px] md:w-[300px] h-[300px] md:h-[450px] bg-gray-300 animate-pulse rounded-xl" />
               ) : (
-                <Image
-                  src={profileData?.photo_url || "/images/1688908285904.JPG"}
-                  alt="Foto Profile"
-                  width={2848}
-                  height={4288}
-                  className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
+                <div 
+                  className="relative flex flex-col items-center origin-top group md:mt-0 mt-4 cursor-grab active:cursor-grabbing select-none"
                   data-aos="fade-up"
                   data-aos-delay="100"
-                />
+                  style={{ perspective: 1000 }}
+                >
+                  {/* Lanyard String */}
+                  <div className="w-1 h-8 md:h-12 bg-slate-300 shadow-sm -mb-2 z-0" />
+                  
+                  {/* The Clip */}
+                  <div className="w-12 h-5 bg-gradient-to-b from-slate-300 to-slate-400 rounded-sm shadow-md z-10 flex justify-center items-center border-t border-slate-200">
+                     <div className="w-3 h-1.5 bg-slate-500 rounded-full opacity-50" />
+                  </div>
+                  
+                  {/* The ID Card */}
+                  <motion.div
+                    style={{ 
+                      rotateX: rotateX, 
+                      rotateY: rotateY,
+                      transformStyle: "preserve-3d" 
+                    }}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    drag
+                    dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                    dragElastic={0.6}
+                    whileDrag={{ scale: 1.05, z: 50 }}
+                    className="w-[240px] md:w-[300px] bg-white p-4 pt-6 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 -mt-2 border border-slate-100 flex flex-col items-center relative hover:shadow-[0_25px_50px_rgba(0,0,0,0.18)]"
+                  >
+                    {/* Hole punch */}
+                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-2.5 bg-slate-100 rounded-full shadow-inner border border-slate-200" style={{ transform: "translateZ(20px)" }} />
+                    
+                    {/* Photo Container */}
+                    <div 
+                      className="relative w-full aspect-[3/4] rounded-xl overflow-hidden mt-3 mb-4 shadow-inner bg-slate-100"
+                      style={{ transform: "translateZ(30px)" }}
+                    >
+                      <Image
+                        src={profileData?.photo_url || "/images/1688908285904.JPG"}
+                        alt="Foto Profile"
+                        fill
+                        className="object-cover pointer-events-none select-none"
+                      />
+                    </div>
+                    
+                    {/* Name tag text */}
+                    <h3 className="dm_serif_text text-2xl text-slate-800 uppercase tracking-widest mt-1" style={{ transform: "translateZ(25px)" }}>Awan</h3>
+                    <p className="text-xs text-[#6b8af6] font-bold tracking-widest mt-1 mb-2" style={{ transform: "translateZ(20px)" }}>DEVELOPER</p>
+                    
+                    {/* Barcode/Pattern decoration */}
+                    <div className="w-full flex justify-center gap-[3px] mt-2 opacity-20" style={{ transform: "translateZ(15px)" }}>
+                       <div className="w-1 h-8 bg-slate-900" />
+                       <div className="w-2 h-8 bg-slate-900" />
+                       <div className="w-1 h-8 bg-slate-900" />
+                       <div className="w-3 h-8 bg-slate-900" />
+                       <div className="w-1 h-8 bg-slate-900" />
+                       <div className="w-2 h-8 bg-slate-900" />
+                       <div className="w-1 h-8 bg-slate-900" />
+                       <div className="w-[5px] h-8 bg-slate-900" />
+                       <div className="w-1 h-8 bg-slate-900" />
+                       <div className="w-2 h-8 bg-slate-900" />
+                       <div className="w-1 h-8 bg-slate-900" />
+                    </div>
+                  </motion.div>
+                </div>
               )}
               <div
                 className="w-full flex flex-col items-center md:items-start h-fit justify-start gap-5 p-0"
@@ -187,14 +267,14 @@ export default function Home() {
 
           {/* ── Experience Section ── */}
           <section
-            className="bg-[#3c45b9] w-full min-h-screen gap-6 md:gap-10 flex flex-col justify-center items-center section py-8 md:py-0 px-4"
+            className="w-full min-h-screen gap-6 md:gap-10 flex flex-col justify-center items-center section py-8 md:py-0 px-4"
             id="experience"
           >
             <div
               className="flex flex-row justify-center items-center"
               data-aos="fade-down"
             >
-              <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Experience</h2>
+              <h2 className="dm_serif_text text-2xl md:text-4xl text-[#3c45b9] drop-shadow-sm">Experience</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
               {experienceData.slice(0, 3).map((item, index) => (
@@ -209,7 +289,7 @@ export default function Home() {
             </div>
             <Link
               href="/experience"
-              className="mt-4 p-2 px-6 bg-white text-[#3c45b9] rounded-full hover:scale-105 transition-transform font-medium"
+              className="mt-4 p-2 px-6 bg-[#3c45b9] text-white shadow-md rounded-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 font-medium"
               data-aos="zoom-in"
               data-aos-delay="300"
             >
@@ -219,14 +299,14 @@ export default function Home() {
 
           {/* ── Portfolio Section ── */}
           <section
-            className="w-full min-h-screen flex flex-col justify-center items-center bg-[#483D8B] gap-6 md:gap-10 section py-8 px-4"
+            className="w-full min-h-screen flex flex-col justify-center items-center gap-6 md:gap-10 section py-8 px-4"
             id="portofolio"
           >
             <div
-              className="flex flex-row justify-center items-center bg-[#483D8B]"
+              className="flex flex-row justify-center items-center"
               data-aos="fade-down"
             >
-              <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Portofolio</h2>
+              <h2 className="dm_serif_text text-2xl md:text-4xl text-[#483D8B] drop-shadow-sm">Portofolio</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
               {portfolioData.slice(0, 3).map((item, index) => (
@@ -241,7 +321,7 @@ export default function Home() {
             </div>
             <Link
               href="/portofolio"
-              className="mt-4 p-2 px-6 bg-[#6b8af6] text-white rounded-full hover:scale-105 transition-transform font-medium"
+              className="mt-4 p-2 px-6 bg-[#6b8af6] text-white shadow-md rounded-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 font-medium"
               data-aos="zoom-in"
               data-aos-delay="300"
             >
@@ -251,14 +331,14 @@ export default function Home() {
 
           {/* ── Blog Section ── */}
           <section
-            className="bg-gray-800 w-full min-h-screen flex flex-col justify-center items-center gap-6 md:gap-10 section py-8 px-4"
+            className="w-full min-h-screen flex flex-col justify-center items-center gap-6 md:gap-10 section py-8 px-4"
             id="blog"
           >
             <div
               className="flex flex-row justify-center items-center"
               data-aos="fade-down"
             >
-              <h2 className="dm_serif_text text-2xl md:text-4xl text-white">Blog</h2>
+              <h2 className="dm_serif_text text-2xl md:text-4xl text-gray-800 drop-shadow-sm">Blog</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
               {blogData.slice(0, 3).map((item, index) => (
@@ -273,7 +353,7 @@ export default function Home() {
             </div>
             <Link
               href="/blog"
-              className="mt-4 p-2 px-6 bg-[#6b8af6] text-white rounded-full hover:scale-105 transition-transform font-medium"
+              className="mt-4 p-2 px-6 bg-[#6b8af6] text-white shadow-md rounded-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 font-medium"
               data-aos="zoom-in"
               data-aos-delay="300"
             >
@@ -282,7 +362,7 @@ export default function Home() {
           </section>
 
           {/* ── Contact / Footer Section ── */}
-          <footer className="min-h-screen w-full flex flex-col justify-center items-center section bg-[#6b8af6] gap-6 md:gap-10 py-8 px-4">
+          <footer className="w-full flex flex-col justify-center items-center section bg-gradient-to-b from-[#6b8af6] to-[#3c45b9] gap-6 md:gap-10 py-16 md:py-24 px-4 rounded-t-[40px] md:rounded-t-[80px] mt-10 md:mt-20 shadow-[0_-10px_40px_rgba(107,138,246,0.15)]">
             <div
               className="flex flex-col gap-2 justify-center items-center text-center text-white"
               data-aos="fade-up"

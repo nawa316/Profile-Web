@@ -13,7 +13,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#6b8af6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#6b8af6]/10 flex flex-col h-full"
+      className="group bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200 hover:border-[#6b8af6]/50 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#6b8af6]/20 flex flex-col h-full hover:-translate-y-1"
     >
       {/* Image */}
       <Link href={`/portofolio/${item.id}`} className="block">
@@ -42,11 +42,11 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <Link href={`/portofolio/${item.id}`}>
-          <h3 className="dm_serif_text text-xl text-white mb-2 hover:text-[#6b8af6] transition-colors">
+          <h3 className="dm_serif_text text-xl text-slate-800 mb-2 hover:text-[#6b8af6] transition-colors">
             {item.title}
           </h3>
         </Link>
-        <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+        <p className="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
           {item.description}
         </p>
 
@@ -63,10 +63,10 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10 mt-auto">
+        <div className="flex flex-wrap gap-3 pt-4 border-t border-slate-100 mt-auto">
           <Link
             href={`/portofolio/${item.id}`}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+            className="flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors text-sm"
           >
             <FaInfoCircle />
             <span>Details</span>
@@ -76,7 +76,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
               href={item.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+              className="flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors text-sm"
             >
               <FaGithub />
               <span>Code</span>
@@ -87,7 +87,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-[#6b8af6] transition-colors text-sm"
+              className="flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors text-sm"
             >
               <FaExternalLinkAlt />
               <span>Live Demo</span>
