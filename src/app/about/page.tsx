@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { profileApi, portfolioApi } from "@/lib/api";
 import type { Profile, Portfolio } from "@/lib/types";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import ProfileCard from "@/components/ProfileCard";
 import { Code2, Laptop, Palette, Terminal, Database } from "lucide-react";
 
 export default function AboutPage() {
@@ -65,21 +65,13 @@ export default function AboutPage() {
               animate="visible"
               variants={containerVariants}
             >
-              {/* Photo */}
-              <motion.div variants={itemVariants} className="w-full md:w-1/3 flex justify-center">
-                <div className="relative w-[240px] h-[320px] md:w-[280px] md:h-[380px] rounded-2xl overflow-hidden shadow-xl shadow-[#6b8af6]/10 border border-slate-200 group">
-                  {isLoading ? (
-                    <div className="w-full h-full bg-slate-200 animate-pulse" />
-                  ) : (
-                    <Image
-                      src={profile?.photo_url || "/images/1688908285904.JPG"}
-                      alt={profile?.name || "Muhammad Ade Dzakwan"}
-                      fill
-                      sizes="280px"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
-                </div>
+              {/* ProfileCard (hanging ID card) */}
+              <motion.div variants={itemVariants} className="w-full md:w-1/3 flex justify-center items-start pt-8">
+                {isLoading ? (
+                  <div className="w-[260px] h-[480px] bg-slate-200 animate-pulse rounded-2xl" />
+                ) : (
+                  <ProfileCard photoUrl={profile?.photo_url} name="Awan" />
+                )}
               </motion.div>
 
               {/* Bio */}
