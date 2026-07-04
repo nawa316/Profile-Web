@@ -6,8 +6,10 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import ProfileCard from "@/components/ProfileCard";
 import { Code2, Laptop, Palette, Terminal, Database } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutPage() {
+  const { t } = useLanguage();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -77,19 +79,19 @@ export default function AboutPage() {
               {/* Bio */}
               <motion.div variants={itemVariants} className="w-full md:w-2/3 text-center md:text-left">
                 <h1 className="dm_serif_text text-4xl md:text-6xl text-slate-800 mb-1">
-                  Tentang Saya
+                  {t("section.about")}
                 </h1>
                 <div className="w-16 h-1 bg-[#6b8af6] rounded-full mb-5 mx-auto md:mx-0" />
                 <p className="text-[#6b8af6] text-lg font-semibold mb-5">
-                  {profile?.tagline || "Information Systems Student & Web Developer"}
+                  {profile?.tagline || t("hero.tagline")}
                 </p>
                 <div className="space-y-4 text-slate-600 text-base md:text-lg leading-relaxed whitespace-pre-wrap">
                   {profile?.about_text ? (
                     <p>{profile.about_text}</p>
                   ) : (
                     <>
-                      <p>Halo! Saya Muhammad Ade Dzakwan, atau biasa dipanggil Awan. Saya adalah mahasiswa Sistem Informasi di Institut Teknologi Sepuluh Nopember (ITS) Surabaya.</p>
-                      <p>Saya memiliki ketertarikan yang besar dalam dunia pengembangan web (Web Development), pengembangan perangkat lunak (Software Engineering), dan eksplorasi teknologi modern seperti kecerdasan buatan (AI).</p>
+                      <p>{t("about.desc1")}</p>
+                      <p>{t("about.desc2")}</p>
                     </>
                   )}
                 </div>
@@ -108,7 +110,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800">Keahlian & Fokus</h2>
+              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800">{t("about.keahlian")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] mx-auto mt-3 rounded-full" />
             </motion.div>
 
@@ -130,7 +132,7 @@ export default function AboutPage() {
                   </motion.div>
                 ))
               ) : (
-                <p className="text-slate-400 text-center col-span-full">Belum ada keahlian yang ditambahkan dari portofolio.</p>
+                <p className="text-slate-400 text-center col-span-full">{t("portfolio.notFound")}</p>
               )}
             </div>
           </div>

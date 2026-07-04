@@ -4,8 +4,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,6 +17,12 @@ export default function HamburgerMenu() {
   const closeMenu = () => {
     setIsOpen(false);
   };
+
+  const languages = [
+    { code: "id", label: "ID 🇮🇩" },
+    { code: "en", label: "EN 🇬🇧" },
+    { code: "de", label: "DE 🇩🇪" }
+  ] as const;
 
   return (
     <div className="relative">
@@ -41,7 +50,7 @@ export default function HamburgerMenu() {
 
       {/* Menu */}
       <motion.div
-        className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center gap-8 transition-transform ${
+        className={`fixed top-0 left-0 w-full h-full bg-black/95 flex flex-col items-center justify-center gap-8 transition-transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         initial={{ x: "100%" }}
@@ -49,23 +58,43 @@ export default function HamburgerMenu() {
         transition={{ duration: 0.5 }}
       >
         <Link href="/" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
-          Home
+          {t("nav.home")}
         </Link>
         <Link href="/about" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
-          About
+          {t("nav.about")}
         </Link>
         <Link href="/experience" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
-          Experience
+          {t("nav.experience")}
         </Link>
         <Link href="/portofolio" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
-          Portfolio
+          {t("nav.portfolio")}
         </Link>
         <Link href="/blog" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
-          Blog
+          {t("nav.blog")}
         </Link>
         <Link href="/contact" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
-          Contact
+          {t("nav.contact")}
         </Link>
+
+        {/* Mobile Language Switcher */}
+        <div className="flex gap-4 mt-8 pt-8 border-t border-white/10 w-48 justify-center">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => {
+                setLanguage(lang.code);
+                closeMenu();
+              }}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
+                language === lang.code
+                  ? "bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/30"
+                  : "bg-white/10 text-slate-300 hover:bg-white/20"
+              }`}
+            >
+              {lang.label}
+            </button>
+          ))}
+        </div>
       </motion.div>
     </div>
   );

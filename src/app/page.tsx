@@ -16,8 +16,10 @@ import Contact from '@/components/Contact';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ProfileCard from "@/components/ProfileCard";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
+  const { t } = useLanguage();
   const [experienceData, setExperienceData] = useState<Experience[]>([]);
   const [portfolioData, setPortfolioData] = useState<Portfolio[]>([]);
   const [blogData, setBlogData] = useState<Blog[]>([]);
@@ -74,7 +76,7 @@ export default function Home() {
                 data-aos="fade-down"
                 data-aos-delay="100"
               >
-                <TypeWriter text="Hi! I'm Awan" typingSpeed={150} />
+                <TypeWriter text={t("hero.greeting")} typingSpeed={150} />
                 <span className="text-[#3c45b9]">.</span>
               </p>
               <p
@@ -82,7 +84,7 @@ export default function Home() {
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
-                {profileData?.tagline || "Information Systems Student & Web Developer"}
+                {profileData?.tagline || t("hero.tagline")}
               </p>
               <div
                 className="flex flex-row w-full h-full gap-4 items-center justify-center mt-4"
@@ -116,7 +118,7 @@ export default function Home() {
             id="about"
           >
             <div className="flex flex-col items-center mb-8 md:mb-12" data-aos="fade-down">
-              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">About Me</h2>
+              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.about")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 px-4 md:px-40">
@@ -146,14 +148,14 @@ export default function Home() {
                     className="w-16 h-16 md:w-20 md:h-20 md:ml-auto md:mr-5"
                   />
                 </div>
-                <div className="text-center md:text-left">
-                  <h2 className="text-lg md:text-xl font-medium">Description</h2>
+                 <div className="text-center md:text-left">
+                  <h2 className="text-lg md:text-xl font-medium">{t("desc.title")}</h2>
                   <div className="text-base md:text-lg whitespace-pre-wrap">
-                    {profileData?.about_text || "Loading description..."}
+                    {profileData?.about_text || t("about.desc1")}
                   </div>
                 </div>
                 <div className="text-center md:text-left">
-                  <h2 className="text-lg md:text-xl font-medium">Education &amp; Qualifications</h2>
+                  <h2 className="text-lg md:text-xl font-medium">{t("edu.title")}</h2>
                   <ul className="text-base md:text-lg list-disc pl-6 md:pl-10 text-left">
                     {educationData.length > 0 ? (
                       educationData.map((edu) => (
@@ -162,7 +164,7 @@ export default function Home() {
                         </li>
                       ))
                     ) : (
-                      <li>Loading education...</li>
+                      <li>{t("loading.data")}</li>
                     )}
                   </ul>
                 </div>
@@ -174,7 +176,7 @@ export default function Home() {
               data-aos="zoom-in"
               data-aos-delay="300"
             >
-              Selengkapnya
+              {t("btn.more")}
             </Link>
           </section>
 
@@ -184,7 +186,7 @@ export default function Home() {
             id="experience"
           >
             <div className="flex flex-col items-center mb-8 md:mb-12" data-aos="fade-down">
-              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">Experience</h2>
+              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.experience")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
@@ -204,7 +206,7 @@ export default function Home() {
               data-aos="zoom-in"
               data-aos-delay="300"
             >
-              Lihat Semua
+              {t("btn.viewAll")}
             </Link>
           </section>
 
@@ -214,7 +216,7 @@ export default function Home() {
             id="portofolio"
           >
             <div className="flex flex-col items-center mb-8 md:mb-12" data-aos="fade-down">
-              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">Portofolio</h2>
+              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.portfolio")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
@@ -234,7 +236,7 @@ export default function Home() {
               data-aos="zoom-in"
               data-aos-delay="300"
             >
-              Lihat Semua
+              {t("btn.viewAll")}
             </Link>
           </section>
 
@@ -244,7 +246,7 @@ export default function Home() {
             id="blog"
           >
             <div className="flex flex-col items-center mb-8 md:mb-12" data-aos="fade-down">
-              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">Blog</h2>
+              <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.blog")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
@@ -264,7 +266,7 @@ export default function Home() {
               data-aos="zoom-in"
               data-aos-delay="300"
             >
-              Lihat Semua
+              {t("btn.viewAll")}
             </Link>
           </section>
 
@@ -274,8 +276,8 @@ export default function Home() {
               className="flex flex-col gap-2 justify-center items-center text-center text-white"
               data-aos="fade-up"
             >
-              <h2 className="dm_serif_text text-2xl md:text-4xl">Contact Me!</h2>
-              <p className="text-base md:text-lg mb-4">Apakah Anda tertarik untuk berkolaborasi atau sekedar berdiskusi seputar Pengembangan Web dan Perangkat Lunak? <br /> Jangan ragu untuk menghubungi saya!</p>
+              <h2 className="dm_serif_text text-2xl md:text-4xl">{t("section.contact")}</h2>
+              <p className="text-base md:text-lg mb-4">{t("contact.desc")}</p>
 
               <div
                 className="flex flex-col md:flex-row gap-4 mt-2 mb-6"

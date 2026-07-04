@@ -5,6 +5,7 @@ import type { Portfolio, Experience, Profile } from "@/lib/types";
 import PortfolioCard from "@/components/PortfolioCard";
 import Navbar from "@/components/Navbar";
 import DownloadPDFButton from "@/components/DownloadPDFButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface PortfolioClientProps {
   initialData: Portfolio[];
@@ -13,6 +14,7 @@ interface PortfolioClientProps {
 }
 
 export default function PortfolioClient({ initialData, experienceData, profileData }: PortfolioClientProps) {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const categories = ["All", ...Array.from(new Set(initialData.map(item => item.category)))];
@@ -35,7 +37,7 @@ export default function PortfolioClient({ initialData, experienceData, profileDa
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              My Portfolio
+              {t("section.portfolio")}
             </motion.h1>
             <div className="w-12 h-1 bg-[#6b8af6] rounded-full mx-auto mb-4" />
             <motion.p
@@ -44,7 +46,7 @@ export default function PortfolioClient({ initialData, experienceData, profileDa
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Kumpulan proyek dan karya yang telah saya kerjakan
+              {t("portfolio.desc")}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -75,7 +77,7 @@ export default function PortfolioClient({ initialData, experienceData, profileDa
                     : "bg-white text-slate-600 border border-slate-200 hover:border-[#6b8af6]/50 hover:text-[#6b8af6]"
                 }`}
               >
-                {category}
+                {category === "All" ? t("filter.all") : category}
               </button>
             ))}
           </motion.div>
@@ -84,7 +86,7 @@ export default function PortfolioClient({ initialData, experienceData, profileDa
         {/* Portfolio Grid */}
         <div className="max-w-7xl mx-auto px-4 pb-20">
           {filteredPortfolio.length === 0 ? (
-            <p className="text-center text-slate-400 py-20 text-lg">Tidak ada portofolio yang ditemukan.</p>
+            <p className="text-center text-slate-400 py-20 text-lg">{t("portfolio.notFound")}</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPortfolio.map((item, index) => (

@@ -5,11 +5,14 @@ import Navbar from "@/components/Navbar";
 import Contact from "@/components/Contact";
 import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 export default function ContactPage() {
+  const { t } = useLanguage();
   const contactInfo = [
     {
       icon: <Mail className="w-5 h-5 text-[#6b8af6]" />,
-      title: "Email",
+      title: t("form.email"),
       value: "muhammadadedzakwan@gmail.com",
       link: "mailto:muhammadadedzakwan@gmail.com",
     },
@@ -21,7 +24,7 @@ export default function ContactPage() {
     },
     {
       icon: <MapPin className="w-5 h-5 text-[#6b8af6]" />,
-      title: "Location",
+      title: t("contact.info").split(" ")[1] || "Location",
       value: "Surabaya, Jawa Timur, Indonesia",
       link: null,
     },
@@ -63,7 +66,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Get in Touch
+              {t("contact.getInTouch")}
             </motion.h1>
             <div className="w-12 h-1 bg-[#6b8af6] rounded-full mx-auto mb-4" />
             <motion.p
@@ -72,7 +75,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Tertarik untuk berkolaborasi, berdiskusi, atau menawarkan peluang baru? Jangan ragu untuk menghubungi saya!
+              {t("contact.desc")}
             </motion.p>
           </div>
         </div>
@@ -90,7 +93,7 @@ export default function ContactPage() {
               variants={itemVariants}
               className="w-full lg:w-2/5 flex flex-col gap-4"
             >
-              <h2 className="dm_serif_text text-2xl text-slate-800 mb-2">Informasi Kontak</h2>
+              <h2 className="dm_serif_text text-2xl text-slate-800 mb-2">{t("contact.info")}</h2>
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
@@ -123,7 +126,7 @@ export default function ContactPage() {
               variants={itemVariants}
               className="w-full lg:w-3/5 bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-10"
             >
-              <h2 className="dm_serif_text text-3xl text-slate-800 mb-1">Kirim Pesan</h2>
+              <h2 className="dm_serif_text text-3xl text-slate-800 mb-1">{t("contact.send")}</h2>
               <div className="w-10 h-1 bg-[#6b8af6] rounded-full mb-6" />
               <Contact />
             </motion.div>

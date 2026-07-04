@@ -7,8 +7,10 @@ import { FaClock, FaUser, FaCalendar, FaTag, FaArrowLeft } from "react-icons/fa"
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { t } = useLanguage();
   const unwrappedParams = use(params);
   const [blog, setBlog] = useState<Blog | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +34,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 rounded-full border-4 border-[#6b8af6] border-t-transparent animate-spin" />
-          <p className="text-slate-500 text-sm">Memuat artikel...</p>
+          <p className="text-slate-500 text-sm">{t("blog.loading")}</p>
         </div>
       </div>
     );
@@ -41,9 +43,9 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   if (!blog) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center gap-4">
-        <p className="text-slate-700 text-2xl font-semibold">Artikel tidak ditemukan.</p>
+        <p className="text-slate-700 text-2xl font-semibold">{t("blog.notFound")}</p>
         <Link href="/blog" className="px-6 py-3 bg-[#6b8af6] hover:bg-[#5271df] transition-colors text-white rounded-full font-medium shadow-md shadow-[#6b8af6]/25">
-          Kembali ke Blog
+          {t("btn.backToBlog")}
         </Link>
       </div>
     );
@@ -58,7 +60,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           {/* Back Button */}
           <Link href="/blog" className="inline-flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors mb-8 group">
             <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium">Kembali ke Blog</span>
+            <span className="font-medium">{t("btn.backToBlog")}</span>
           </Link>
 
           {/* Header */}
@@ -120,7 +122,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           {/* Tags */}
           {(blog.tags || []).length > 0 && (
             <div className="mt-16 pt-8 border-t border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-700 mb-4">Tags</h3>
+              <h3 className="text-lg font-semibold text-slate-700 mb-4">{t("blog.tags")}</h3>
               <div className="flex flex-wrap gap-2">
                 {(blog.tags || []).map((tag) => (
                   <span

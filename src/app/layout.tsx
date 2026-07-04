@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: "Profile Web",
 };
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSerifText.variable} ${playfairDisplay.variable}`}>
       <body>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -5,8 +5,10 @@ import { experienceApi } from "@/lib/api";
 import type { Experience } from "@/lib/types";
 import ExperienceCard, { formatTypeLabel } from "@/components/ExperienceCard";
 import Navbar from "@/components/Navbar";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ExperiencePage() {
+  const { t } = useLanguage();
   const [selectedType, setSelectedType] = useState<string>("All");
   const [experienceData, setExperienceData] = useState<Experience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +47,7 @@ export default function ExperiencePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              My Experience
+              {t("section.experience")}
             </motion.h1>
             <div className="w-12 h-1 bg-[#6b8af6] rounded-full mx-auto mb-4" />
             <motion.p
@@ -54,7 +56,7 @@ export default function ExperiencePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Perjalanan dan pengalaman organisasi serta kegiatan yang telah saya ikuti
+              {t("experience.desc")}
             </motion.p>
           </div>
         </div>
@@ -77,7 +79,7 @@ export default function ExperiencePage() {
                     : "bg-white text-slate-600 border border-slate-200 hover:border-[#6b8af6]/50 hover:text-[#6b8af6]"
                 }`}
               >
-                {type === "All" ? "Semua" : formatTypeLabel(type)}
+                {type === "All" ? t("filter.all") : formatTypeLabel(type)}
               </button>
             ))}
           </motion.div>
@@ -92,7 +94,7 @@ export default function ExperiencePage() {
               ))}
             </div>
           ) : filteredExperience.length === 0 ? (
-            <p className="text-center text-slate-400 py-20 text-lg">Tidak ada experience yang ditemukan.</p>
+            <p className="text-center text-slate-400 py-20 text-lg">{t("experience.notFound")}</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredExperience.map((item, index) => (

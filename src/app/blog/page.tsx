@@ -5,8 +5,10 @@ import { blogApi } from "@/lib/api";
 import type { Blog } from "@/lib/types";
 import BlogCard, { FeaturedBlogCard } from "@/components/BlogCard";
 import Navbar from "@/components/Navbar";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogPage() {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [blogData, setBlogData] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +47,7 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Blog
+              {t("nav.blog")}
             </motion.h1>
             <div className="w-12 h-1 bg-[#6b8af6] rounded-full mx-auto mb-4" />
             <motion.p
@@ -54,7 +56,7 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Artikel dan tulisan seputar teknologi, programming, dan pengembangan diri
+              {t("blog.desc")}
             </motion.p>
           </div>
         </div>
@@ -77,7 +79,7 @@ export default function BlogPage() {
                     : "bg-white text-slate-600 border border-slate-200 hover:border-[#6b8af6]/50 hover:text-[#6b8af6]"
                 }`}
               >
-                {category}
+                {category === "All" ? t("filter.all") : category}
               </button>
             ))}
           </motion.div>
@@ -94,7 +96,7 @@ export default function BlogPage() {
             </div>
           </div>
         ) : filteredPosts.length === 0 ? (
-          <p className="text-center text-slate-400 py-20 text-lg">Tidak ada artikel yang ditemukan.</p>
+          <p className="text-center text-slate-400 py-20 text-lg">{t("blog.notFound")}</p>
         ) : (
           <>
             {/* Featured Post */}
