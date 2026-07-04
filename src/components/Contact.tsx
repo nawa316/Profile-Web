@@ -22,48 +22,48 @@ const Contact: FC = () => {
       <div className='mb-5'>
         <label
           htmlFor='name'
-          className='mb-3 block text-base font-medium text-black'
+          className='mb-2 block text-sm font-semibold text-slate-600 uppercase tracking-wide'
         >
           Full Name
         </label>
         <input
           type='text'
           placeholder='Full Name'
-          className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-[#3c45b9] focus:shadow-md'
+          className='w-full rounded-xl border border-slate-200 bg-slate-50 py-3 px-5 text-base text-slate-700 outline-none focus:border-[#6b8af6] focus:ring-2 focus:ring-[#6b8af6]/20 transition-all'
           {...register('name', { required: true })}
         />
       </div>
       <div className='mb-5'>
         <label
           htmlFor='email'
-          className='mb-3 block text-base font-medium text-black'
+          className='mb-2 block text-sm font-semibold text-slate-600 uppercase tracking-wide'
         >
           Email Address
         </label>
         <input
           type='email'
           placeholder='example@domain.com'
-          className='w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-[#3c45b9] focus:shadow-md'
+          className='w-full rounded-xl border border-slate-200 bg-slate-50 py-3 px-5 text-base text-slate-700 outline-none focus:border-[#6b8af6] focus:ring-2 focus:ring-[#6b8af6]/20 transition-all'
           {...register('email', { required: true })}
         />
       </div>
-      <div className='mb-5'>
+      <div className='mb-6'>
         <label
           htmlFor='message'
-          className='mb-3 block text-base font-medium text-black'
+          className='mb-2 block text-sm font-semibold text-slate-600 uppercase tracking-wide'
         >
           Message
         </label>
         <textarea
-          rows={4}
-          placeholder='Type your message'
-          className='w-full resize-none rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-[#3c45b9] focus:shadow-md'
+          rows={5}
+          placeholder='Type your message here...'
+          className='w-full resize-none rounded-xl border border-slate-200 bg-slate-50 py-3 px-5 text-base text-slate-700 outline-none focus:border-[#6b8af6] focus:ring-2 focus:ring-[#6b8af6]/20 transition-all'
           {...register('message', { required: true })}
         ></textarea>
       </div>
       <div>
-        <button className='hover:shadow-form rounded-md bg-[#3c45b9] py-3 px-8 text-base font-semibold text-white outline-none'>
-          Submit
+        <button className='w-full rounded-xl bg-[#6b8af6] py-3 px-8 text-base font-semibold text-white shadow-md shadow-[#6b8af6]/20 hover:bg-[#5271df] hover:shadow-lg hover:shadow-[#6b8af6]/30 hover:-translate-y-0.5 transition-all duration-300 outline-none'>
+          Kirim Pesan
         </button>
       </div>
     </form>
