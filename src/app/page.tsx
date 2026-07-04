@@ -130,13 +130,13 @@ export default function Home() {
                   width={2848}
                   height={4288}
                   className="w-[200px] md:w-[300px] h-fit rounded-xl object-cover"
-                  data-aos="fade-right"
+                  data-aos="fade-up"
                   data-aos-delay="100"
                 />
               )}
               <div
                 className="w-full flex flex-col items-center md:items-start h-fit justify-start gap-5 p-0"
-                data-aos="fade-left"
+                data-aos="fade-up"
                 data-aos-delay="200"
               >
                 <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center gap-2">
