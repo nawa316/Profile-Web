@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import type { Experience } from "@/lib/types";
 import { FaCalendar, FaMapMarkerAlt } from "react-icons/fa";
+import { useLanguage } from "@/context/LanguageContext";
 
 const MAX_VISIBLE_SKILLS = 4;
 
@@ -17,6 +18,8 @@ export const formatTypeLabel = (type: string) => {
 };
 
 export default function ExperienceCard({ item, index }: { item: Experience; index: number }) {
+  const { t } = useLanguage();
+  
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('id-ID', { year: 'numeric', month: 'short' });
@@ -58,7 +61,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
         </div>
         <div className="absolute top-4 right-4">
           <span className={`px-3 py-1 backdrop-blur-sm rounded-full text-sm ${getTypeColor(item.type)}`}>
-            {formatTypeLabel(item.type)}
+            {t(item.type)}
           </span>
         </div>
       </div>
@@ -66,25 +69,25 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="dm_serif_text text-xl text-slate-800 mb-1 group-hover:text-[#6b8af6] transition-colors">
-          {item.organization}
+          {t(item.organization)}
         </h3>
         <p className="text-[#6b8af6] font-medium mb-3">
-          {item.role}
+          {t(item.role)}
         </p>
         <p className="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
-          {item.description}
+          {t(item.description)}
         </p>
 
         {/* Date & Location */}
         <div className="flex flex-wrap gap-3 text-slate-500 text-xs mb-4 font-medium mt-auto">
           <span className="flex items-center gap-1">
             <FaCalendar className="text-[#6b8af6]" />
-            {formatDate(item.start_date)} - {item.end_date ? formatDate(item.end_date) : "Present"}
+            {formatDate(item.start_date)} - {item.end_date ? formatDate(item.end_date) : t("Present")}
           </span>
           {item.location && (
             <span className="flex items-center gap-1">
               <FaMapMarkerAlt className="text-[#6b8af6]" />
-              {item.location}
+              {t(item.location)}
             </span>
           )}
         </div>
@@ -96,7 +99,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
               key={skill}
               className="px-2 py-1 bg-[#6b8af6]/20 text-[#6b8af6] rounded text-xs"
             >
-              {skill}
+              {t(skill)}
             </span>
           ))}
           {(item.skills || []).length > MAX_VISIBLE_SKILLS && (

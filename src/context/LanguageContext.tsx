@@ -103,6 +103,189 @@ export const translations: Translations = {
   "loading.data": { id: "Memuat data...", en: "Loading data...", de: "Daten werden geladen..." },
   "desc.title": { id: "Deskripsi", en: "Description", de: "Beschreibung" },
   "edu.title": { id: "Pendidikan & Kualifikasi", en: "Education & Qualifications", de: "Ausbildung & Qualifikationen" },
+
+  // --- DATABASE TRANSLATION MAPPINGS ---
+  
+  // Custom Date / Helper strings
+  "Present": { id: "Sekarang", en: "Present", de: "Heute" },
+  "Details": { id: "Detail", en: "Details", de: "Details" },
+  "View Source Code": { id: "Lihat Kode Sumber", en: "View Source Code", de: "Quellcode anzeigen" },
+  "Live Demo": { id: "Demo Langsung", en: "Live Demo", de: "Live-Demo" },
+  "Technologies Used": { id: "Teknologi yang Digunakan", en: "Technologies Used", de: "Verwendete Technologien" },
+  "Skills & Technologies": { id: "Keahlian & Teknologi", en: "Skills & Technologies", de: "Fähigkeiten & Technologien" },
+  "Gallery": { id: "Galeri", en: "Gallery", de: "Galerie" },
+  "Enlarge": { id: "Perbesar", en: "Enlarge", de: "Vergrößern" },
+  "Click to enlarge": { id: "Klik untuk memperbesar", en: "Click to enlarge", de: "Zum Vergrößern klicken" },
+
+  // Profile Table Data
+  "Information Systems Student & Web Developer": {
+    id: "Mahasiswa Sistem Informasi & Web Developer",
+    en: "Information Systems Student & Web Developer",
+    de: "Wirtschaftsinformatik-Student & Webentwickler"
+  },
+  "Seorang mahasiswa Sistem Informasi dengan passion dalam pengembangan web...": {
+    id: "Seorang mahasiswa Sistem Informasi dengan passion dalam pengembangan web...",
+    en: "An Information Systems student with a passion for web development...",
+    de: "Ein Wirtschaftsinformatik-Student mit einer Leidenschaft für Webentwicklung..."
+  },
+  "Surabaya, Jawa Timur": {
+    id: "Surabaya, Jawa Timur",
+    en: "Surabaya, East Java",
+    de: "Surabaya, Ost-Java"
+  },
+
+  // Educations Table Data
+  "Institut Teknologi Sepuluh Nopember": {
+    id: "Institut Teknologi Sepuluh Nopember",
+    en: "Sepuluh Nopember Institute of Technology",
+    de: "Sepuluh Nopember Institut für Technologie"
+  },
+  "Sistem Informasi": {
+    id: "Sistem Informasi",
+    en: "Information Systems",
+    de: "Wirtschaftsinformatik"
+  },
+  "Active student.": {
+    id: "Mahasiswa aktif.",
+    en: "Active student.",
+    de: "Aktiver Student."
+  },
+
+  // Experiences Categories / Types
+  "organization": { id: "Organisasi", en: "Organization", de: "Organisation" },
+  "work": { id: "Pekerjaan", en: "Work", de: "Arbeit" },
+  "volunteer": { id: "Volunter", en: "Volunteer", de: "Ehrenamtlich" },
+
+  // Experiences Role names
+  "Staff Media & Informasi": {
+    id: "Staf Media & Informasi",
+    en: "Media & Information Staff",
+    de: "Mitarbeiter für Medien & Information"
+  },
+  "Staff Divisi IT": {
+    id: "Staf Divisi IT",
+    en: "IT Division Staff",
+    de: "Mitarbeiter der IT-Abteilung"
+  },
+  "Staff Web Developer": {
+    id: "Staf Web Developer",
+    en: "Staff Web Developer",
+    de: "Webentwickler-Mitarbeiter"
+  },
+
+  // Experiences Descriptions
+  "Berkontribusi dalam pengelolaan media sosial dan penyebaran informasi kegiatan dakwah kampus di wilayah Surabaya Raya.": {
+    id: "Berkontribusi dalam pengelolaan media sosial dan penyebaran informasi kegiatan dakwah kampus di wilayah Surabaya Raya.",
+    en: "Contributed to social media management and the dissemination of campus preaching activities' information in the Surabaya Raya region.",
+    de: "Mitarbeit an der Social-Media-Verwaltung und Verbreitung von Informationen über Campus-Predigtaktivitäten in der Region Surabaya Raya."
+  },
+  "Berkontribusi dalam pengembangan sistem informasi dan website untuk kegiatan open campus terbesar di ITS.": {
+    id: "Berkontribusi dalam pengembangan sistem informasi dan website untuk kegiatan open campus terbesar di ITS.",
+    en: "Contributed to the development of the information system and website for the largest open campus event at ITS.",
+    de: "Mitarbeit an der Entwicklung des Informationssystems und der Website für die größte Open-Campus-Veranstaltung am ITS."
+  },
+  "Mengembangkan website untuk acara expo tahunan departemen Sistem Informasi ITS.": {
+    id: "Mengembangkan website untuk acara expo tahunan departemen Sistem Informasi ITS.",
+    en: "Developed the website for the annual expo of the ITS Information Systems department.",
+    de: "Entwicklung der Website für die jährliche Expo-Veranstaltung der Abteilung für Wirtschaftsinformatik am ITS."
+  },
+  "Surabaya": {
+    id: "Surabaya",
+    en: "Surabaya",
+    de: "Surabaya"
+  },
+
+  // Portfolios Categories / Titles / Descriptions
+  "Web Development": { id: "Pengembangan Web", en: "Web Development", de: "Webentwicklung" },
+  "Mobile Development": { id: "Pengembangan Mobile", en: "Mobile Development", de: "Mobile Entwicklung" },
+
+  "E-Commerce Website": {
+    id: "Website E-Commerce",
+    en: "E-Commerce Website",
+    de: "E-Commerce-Website"
+  },
+  "Platform e-commerce lengkap dengan fitur keranjang belanja, pembayaran, dan manajemen produk. Dibangun dengan Next.js dan Tailwind CSS untuk performa optimal.": {
+    id: "Platform e-commerce lengkap dengan fitur keranjang belanja, pembayaran, dan manajemen produk. Dibangun dengan Next.js dan Tailwind CSS untuk performa optimal.",
+    en: "A complete e-commerce platform with shopping cart, payment, and product management features. Built with Next.js and Tailwind CSS for optimal performance.",
+    de: "Eine komplette E-Commerce-Plattform mit Warenkorb-, Zahlungs- und Produktverwaltungsfunktionen. Erstellt mit Next.js und Tailwind CSS für optimale Leistung."
+  },
+
+  "Mobile Banking App": {
+    id: "Aplikasi Mobile Banking",
+    en: "Mobile Banking App",
+    de: "Mobile-Banking-App"
+  },
+  "Aplikasi mobile banking dengan fitur transfer, pembayaran tagihan, dan monitoring transaksi secara real-time.": {
+    id: "Aplikasi mobile banking dengan fitur transfer, pembayaran tagihan, dan monitoring transaksi secara real-time.",
+    en: "A mobile banking application with features for transfers, bill payments, and real-time transaction monitoring.",
+    de: "Eine Mobile-Banking-Anwendung mit Überweisungs-, Rechnungszahlungs- und Echtzeit-Transaktionsüberwachungsfunktionen."
+  },
+
+  "Dashboard Analytics": {
+    id: "Dashboard Analitik",
+    en: "Analytics Dashboard",
+    de: "Analyse-Dashboard"
+  },
+  "Dashboard interaktif untuk visualisasi data bisnis dengan grafik dan laporan yang komprehensif.": {
+    id: "Dashboard interaktif untuk visualisasi data bisnis dengan grafik dan laporan yang komprehensif.",
+    en: "An interactive dashboard for business data visualization with comprehensive charts and reports.",
+    de: "Ein interaktives Dashboard zur Visualisierung von Geschäftsdaten mit umfassenden Diagrammen und Berichten."
+  },
+
+  // Blog Titles
+  "Memulai Karir sebagai Web Developer di 2024": {
+    id: "Memulai Karir sebagai Web Developer di 2024",
+    en: "Starting a Career as a Web Developer in 2024",
+    de: "Karriere als Webentwickler im Jahr 2024 starten"
+  },
+  "Tips Optimasi Performa Website dengan Next.js": {
+    id: "Tips Optimasi Performa Website dengan Next.js",
+    en: "Website Performance Optimization Tips with Next.js",
+    de: "Tipps zur Optimierung der Website-Performance mit Next.js"
+  },
+  "Pentingnya UI/UX dalam Pengembangan Aplikasi": {
+    id: "Pentingnya UI/UX dalam Pengembangan Aplikasi",
+    en: "The Importance of UI/UX in App Development",
+    de: "Die Bedeutung von UI/UX in der App-Entwicklung"
+  },
+
+  // Blog Excerpts
+  "Panduan lengkap untuk memulai karir sebagai web developer, dari belajar dasar-dasar hingga mendapatkan pekerjaan pertama.": {
+    id: "Panduan lengkap untuk memulai karir sebagai web developer, dari belajar dasar-dasar hingga mendapatkan pekerjaan pertama.",
+    en: "A complete guide to starting a career as a web developer, from learning the basics to landing your first job.",
+    de: "Ein kompletter Leitfaden für den Start einer Karriere als Webentwickler, vom Erlernen der Grundlagen bis zum ersten Job."
+  },
+  "Pelajari cara mengoptimalkan performa website Next.js Anda dengan teknik-teknik terbaik.": {
+    id: "Pelajari cara mengoptimalkan performa website Next.js Anda dengan teknik-teknik terbaik.",
+    en: "Learn how to optimize your Next.js website performance with the best techniques.",
+    de: "Erfahren Sie, wie Sie die Leistung Ihrer Next.js-Website mit den besten Techniken optimieren."
+  },
+  "Mengapa UI/UX sangat penting dalam pengembangan aplikasi dan bagaimana cara menerapkannya dengan baik.": {
+    id: "Mengapa UI/UX sangat penting dalam pengembangan aplikasi dan bagaimana cara menerapkannya dengan baik.",
+    en: "Why UI/UX is very important in application development and how to implement it well.",
+    de: "Warum UI/UX bei der Anwendungsentwicklung sehr wichtig ist und wie man es gut umsetzt."
+  },
+
+  // Blog Content 1
+  "Web development adalah salah satu bidang yang paling diminati saat ini. Dengan semakin banyaknya bisnis yang beralih ke platform digital, kebutuhan akan web developer terus meningkat.\n\n## Langkah Pertama: Pelajari Dasar-Dasar\n\nMulailah dengan mempelajari HTML, CSS, dan JavaScript. Ketiga teknologi ini adalah fondasi dari web development.\n\n## Framework Modern\n\nSetelah menguasai dasar-dasar, pelajari framework modern seperti React, Vue, atau Angular untuk frontend, dan Node.js, Express, atau Laravel untuk backend.\n\n## Bangun Portfolio\n\nBuat proyek-proyek kecil untuk mengisi portfolio Anda. Ini akan membantu Anda mendapatkan pekerjaan pertama.": {
+    id: "Web development adalah salah satu bidang yang paling diminati saat ini. Dengan semakin banyaknya bisnis yang beralih ke platform digital, kebutuhan akan web developer terus meningkat.\n\n## Langkah Pertama: Pelajari Dasar-Dasar\n\nMulailah dengan mempelajari HTML, CSS, dan JavaScript. Ketiga teknologi ini adalah fondasi dari web development.\n\n## Framework Modern\n\nSetelah menguasai dasar-dasar, pelajari framework modern seperti React, Vue, atau Angular untuk frontend, dan Node.js, Express, atau Laravel untuk backend.\n\n## Bangun Portfolio\n\nBuat proyek-proyek kecil untuk mengisi portfolio Anda. Ini akan membantu Anda mendapatkan pekerjaan pertama.",
+    en: "Web development is one of the most in-demand fields today. With more and more businesses moving to digital platforms, the need for web developers continues to rise.\n\n## First Step: Learn the Basics\n\nStart by learning HTML, CSS, and JavaScript. These three technologies are the foundation of web development.\n\n## Modern Frameworks\n\nAfter mastering the basics, learn modern frameworks like React, Vue, or Angular for the frontend, and Node.js, Express, or Laravel for the backend.\n\n## Build a Portfolio\n\nCreate small projects to fill your portfolio. This will help you land your first job.",
+    de: "Webentwicklung ist heute einer der gefragtesten Bereiche. Da immer mehr Unternehmen auf digitale Plattformen umsteigen, steigt der Bedarf an Webentwicklern stetig.\n\n## Erster Schritt: Grundlagen lernen\n\nLernen Sie zunächst HTML, CSS und JavaScript. Diese drei Technologien sind die Grundlage der Webentwicklung.\n\n## Moderne Frameworks\n\nNachdem Sie die Grundlagen beherrschen, lernen Sie moderne Frameworks wie React, Vue oder Angular für das Frontend und Node.js, Express oder Laravel für das Backend.\n\n## Portfolio aufbauen\n\nErstellen Sie kleine Projekte, um Ihr Portfolio zu füllen. Dies wird Ihnen helfen, Ihren ersten Job zu bekommen."
+  },
+
+  // Blog Content 2
+  "Next.js adalah framework React yang powerful untuk membangun website dengan performa tinggi. Berikut adalah tips untuk mengoptimalkan website Next.js Anda.\n\n## Image Optimization\n\nGunakan komponen Image dari Next.js untuk mengoptimalkan gambar secara otomatis.\n\n## Code Splitting\n\nNext.js secara otomatis melakukan code splitting, tetapi Anda bisa mengoptimalkannya lebih lanjut dengan dynamic imports.\n\n## Caching Strategy\n\nImplementasikan strategi caching yang tepat untuk meningkatkan waktu loading.": {
+    id: "Next.js adalah framework React yang powerful untuk membangun website dengan performa tinggi. Berikut adalah tips untuk mengoptimalkan website Next.js Anda.\n\n## Image Optimization\n\nGunakan komponen Image dari Next.js untuk mengoptimalkan gambar secara otomatis.\n\n## Code Splitting\n\nNext.js secara otomatis melakukan code splitting, tetapi Anda bisa mengoptimalkannya lebih lanjut dengan dynamic imports.\n\n## Caching Strategy\n\nImplementasikan strategi caching yang tepat untuk meningkatkan waktu loading.",
+    en: "Next.js is a powerful React framework for building high-performance websites. Here are tips to optimize your Next.js website.\n\n## Image Optimization\n\nUse the Image component from Next.js to optimize images automatically.\n\n## Code Splitting\n\nNext.js automatically does code splitting, but you can optimize it further with dynamic imports.\n\n## Caching Strategy\n\nImplement appropriate caching strategies to improve loading times.",
+    de: "Next.js ist ein leistungsstarkes React-Framework für die Erstellung hochperformanter Websites. Hier sind Tipps zur Optimierung Ihrer Next.js-Website.\n\n## Bildoptimierung\n\nVerwenden Sie die Image-Komponente von Next.js, um Bilder automatisch zu optimieren.\n\n## Code-Splitting\n\nNext.js führt automatisch Code-Splitting durch, aber Sie können dies mit dynamischen Importen weiter optimieren.\n\n## Caching-Strategie\n\nImplementieren Sie geeignete Caching-Strategien, um die Ladezeiten zu verkürzen."
+  },
+
+  // Blog Content 3
+  "UI/UX adalah aspek yang sering diabaikan dalam pengembangan aplikasi, padahal sangat penting untuk kesuksesan produk.\n\n## Apa itu UI/UX?\n\nUI (User Interface) adalah tampilan visual dari aplikasi, sedangkan UX (User Experience) adalah pengalaman pengguna saat menggunakan aplikasi.\n\n## Mengapa Penting?\n\nAplikasi dengan UI/UX yang baik akan meningkatkan kepuasan pengguna dan retensi.\n\n## Best Practices\n\n- Konsisten dalam desain\n- Fokus pada kebutuhan pengguna\n- Lakukan user testing": {
+    id: "UI/UX adalah aspek yang sering diabaikan dalam pengembangan aplikasi, padahal sangat penting untuk kesuksesan produk.\n\n## Apa itu UI/UX?\n\nUI (User Interface) adalah tampilan visual dari aplikasi, sedangkan UX (User Experience) adalah pengalaman pengguna saat menggunakan aplikasi.\n\n## Mengapa Penting?\n\nAplikasi dengan UI/UX yang baik akan meningkatkan kepuasan pengguna dan retensi.\n\n## Best Practices\n\n- Konsisten dalam desain\n- Fokus pada kebutuhan pengguna\n- Lakukan user testing",
+    en: "UI/UX is an aspect often overlooked in application development, even though it is crucial for a product's success.\n\n## What is UI/UX?\n\nUI (User Interface) is the visual look of the application, while UX (User Experience) is the user experience when using the application.\n\n## Why is it Important?\n\nApplications with good UI/UX will increase user satisfaction and retention.\n\n## Best Practices\n\n- Consistency in design\n- Focus on user needs\n- Perform user testing",
+    de: "UI/UX ist ein Aspekt, der bei der Anwendungsentwicklung oft übersehen wird, obwohl er für den Erfolg eines Produkts entscheidend ist.\n\n## Was ist UI/UX?\n\nUI (User Interface) ist das visuelle Erscheinungsbild der Anwendung, während UX (User Experience) die Erfahrung des Benutzers bei der Verwendung der Anwendung ist.\n\n## Warum ist es wichtig?\n\nAnwendungen mit einer guten UI/UX erhöhen die Benutzerzufriedenheit und die Benutzerbindung.\n\n## Best Practices\n\n- Konsistenz im Design\n- Fokus auf Benutzerbedürfnisse\n- Benutzertests durchführen"
+  }
 };
 
 interface LanguageContextProps {
@@ -131,8 +314,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const t = (key: string): string => {
-    if (!translations[key]) return key;
-    return translations[key][language] || translations[key]["en"] || key;
+    if (!key) return "";
+    const trimmedKey = key.trim();
+    if (!translations[trimmedKey]) return key;
+    return translations[trimmedKey][language] || translations[trimmedKey]["en"] || key;
   };
 
   return (

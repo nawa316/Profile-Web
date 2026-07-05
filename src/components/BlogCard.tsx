@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import type { Blog } from "@/lib/types";
 import { FaClock, FaUser, FaCalendar, FaTag } from "react-icons/fa";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 const MAX_VISIBLE_TAGS = 3;
 
 export function FeaturedBlogCard({ post }: { post: Blog }) {
+  const { t } = useLanguage();
   return (
     <Link href={`/blog/${post.slug}`} className="block h-full">
       <motion.article
@@ -34,7 +36,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
           )}
           <div className="absolute top-4 left-4 z-20">
             <span className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
-              Featured
+              {t("blog.featured")}
             </span>
           </div>
         </div>
@@ -57,15 +59,15 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
           </div>
 
           <span className="inline-block px-3 py-1 bg-[#6b8af6]/20 text-[#6b8af6] rounded-full text-sm w-fit mb-4">
-            {post.category}
+            {t(post.category)}
           </span>
 
           <h2 className="dm_serif_text text-2xl md:text-3xl text-slate-800 mb-4 group-hover:text-[#6b8af6] transition-colors">
-            {post.title}
+            {t(post.title)}
           </h2>
 
           <p className="text-slate-600 mb-6 line-clamp-3">
-            {post.excerpt}
+            {t(post.excerpt)}
           </p>
 
           <div className="flex items-center gap-4">
@@ -84,6 +86,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
 }
 
 export default function BlogCard({ post, index }: { post: Blog; index: number }) {
+  const { t } = useLanguage();
   return (
     <Link href={`/blog/${post.slug}`} className="block h-full">
       <motion.article
@@ -109,7 +112,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         )}
         <div className="absolute top-4 right-4 z-20">
           <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
-            {post.category}
+            {t(post.category)}
           </span>
         </div>
       </div>
@@ -132,11 +135,11 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         </div>
 
         <h3 className="dm_serif_text text-xl text-slate-800 mb-3 group-hover:text-[#6b8af6] transition-colors line-clamp-2">
-          {post.title}
+          {t(post.title)}
         </h3>
 
         <p className="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">
-          {post.excerpt}
+          {t(post.excerpt)}
         </p>
 
         {/* Tags */}
@@ -147,7 +150,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
               className="flex items-center gap-1 px-2 py-1 bg-slate-200 text-slate-600 rounded text-xs"
             >
               <FaTag className="text-[10px]" />
-              {tag}
+              {t(tag)}
             </span>
           ))}
         </div>

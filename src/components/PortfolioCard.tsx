@@ -4,10 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Portfolio } from "@/lib/types";
 import { FaGithub, FaExternalLinkAlt, FaInfoCircle } from "react-icons/fa";
+import { useLanguage } from "@/context/LanguageContext";
 
 const MAX_VISIBLE_TECHNOLOGIES = 4;
 
 export default function PortfolioCard({ item, index }: { item: Portfolio; index: number }) {
+  const { t } = useLanguage();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -33,7 +36,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
           )}
           <div className="absolute top-4 right-4 z-10">
             <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
-              {item.category}
+              {t(item.category)}
             </span>
           </div>
         </div>
@@ -43,11 +46,11 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
       <div className="p-6 flex flex-col flex-grow">
         <Link href={`/portofolio/${item.id}`}>
           <h3 className="dm_serif_text text-xl text-slate-800 mb-2 hover:text-[#6b8af6] transition-colors">
-            {item.title}
+            {t(item.title)}
           </h3>
         </Link>
         <p className="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
-          {item.description}
+          {t(item.description)}
         </p>
 
         {/* Technologies */}
@@ -69,7 +72,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
             className="flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors text-sm"
           >
             <FaInfoCircle />
-            <span>Details</span>
+            <span>{t("Details")}</span>
           </Link>
           {item.github && (
             <a
