@@ -39,25 +39,34 @@ export default function Navbar() {
 
   return (
     <nav className="flex w-full items-center flex-row justify-between fixed px-6 py-4 top-0 z-50 bg-[#6b8af6] md:px-12 shadow-sm border-b border-white/10">
-      <Link href="/" className="text-3xl font-bold dm_serif_text text-white hover:text-gray-200 transition-colors">
-        Awan
-      </Link>
+      {/* Left: Logo */}
+      <div className="flex-1 flex justify-start">
+        <Link href="/" className="text-3xl font-bold dm_serif_text text-white hover:text-gray-200 transition-colors">
+          Awan
+        </Link>
+      </div>
       
-      {/* Desktop Navigation Links & Language Selector */}
-      <div className="hidden md:flex items-center gap-8">
-        <div className="flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-white hover:text-gray-200 transition-colors dm_serif_text text-lg"
-            >
-              {link.name}
-            </Link>
-          ))}
+      {/* Center: Desktop Navigation Links */}
+      <div className="hidden md:flex flex-initial justify-center items-center gap-8 mx-auto">
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="text-white hover:text-gray-200 transition-colors dm_serif_text text-lg"
+          >
+            {link.name}
+          </Link>
+        ))}
+      </div>
+
+      {/* Right: Desktop Action Buttons */}
+      <div className="hidden md:flex flex-1 justify-end items-center gap-4">
+        {/* Placeholder for future Theme Toggle button */}
+        <div className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white cursor-pointer transition-all opacity-40 hover:opacity-100" title="Theme Toggle (Placeholder)">
+          <span className="text-xs">🌓</span>
         </div>
 
-        {/* Custom Custom Language Dropdown Switcher */}
+        {/* Custom Language Dropdown Switcher */}
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -93,7 +102,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Hamburger Menu */}
-      <div className="md:hidden">
+      <div className="md:hidden flex items-center gap-4">
         <HamburgerMenu />
       </div>
     </nav>

@@ -76,24 +76,35 @@ export default function HamburgerMenu() {
           {t("nav.contact")}
         </Link>
 
-        {/* Mobile Language Switcher */}
-        <div className="flex gap-4 mt-8 pt-8 border-t border-white/10 w-48 justify-center">
-          {languages.map((lang) => (
-            <button
-              key={lang.code}
-              onClick={() => {
-                setLanguage(lang.code);
-                closeMenu();
-              }}
-              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
-                language === lang.code
-                  ? "bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/30"
-                  : "bg-white/10 text-slate-300 hover:bg-white/20"
-              }`}
-            >
-              {lang.label}
-            </button>
-          ))}
+        {/* Mobile Actions (Language & Theme Switcher Placeholder) */}
+        <div className="flex flex-col items-center gap-6 mt-8 pt-8 border-t border-white/10 w-52 justify-center">
+          {/* Theme Toggle Placeholder */}
+          <div className="flex items-center gap-3">
+            <span className="text-white/80 text-sm font-medium">Theme:</span>
+            <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white cursor-pointer transition-all" title="Theme Toggle (Placeholder)">
+              <span className="text-sm">🌓</span>
+            </div>
+          </div>
+
+          {/* Language Switcher */}
+          <div className="flex gap-2">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => {
+                  setLanguage(lang.code);
+                  closeMenu();
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  language === lang.code
+                    ? "bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/30"
+                    : "bg-white/10 text-slate-300 hover:bg-white/20"
+                }`}
+              >
+                {lang.label}
+              </button>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
