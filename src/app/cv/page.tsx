@@ -4,7 +4,7 @@ import { Download, Mail, Phone, Linkedin, MapPin, ArrowLeft } from 'lucide-react
 import Link from 'next/link';
 import { profileApi, educationApi, certificationApi, achievementApi, experienceApi } from '@/lib/api';
 import type { Profile, Education, Certification, Achievement, Experience } from '@/lib/types';
-import { useLanguage } from '@/context/LanguageContext';
+import { useLanguage, Translate } from '@/context/LanguageContext';
 
 export default function CVPage() {
   const { t, language } = useLanguage();
@@ -83,7 +83,7 @@ export default function CVPage() {
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm mb-6">
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                <span>{t(profile?.location || 'Surabaya, Jawa Timur')}</span>
+                <span><Translate text={profile?.location || 'Surabaya, Jawa Timur'} /></span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={16} />
@@ -125,7 +125,7 @@ export default function CVPage() {
               {t("desc.title")}
             </h2>
             <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-wrap">
-              {profile?.about_text ? t(profile.about_text) : t("cv.defaultBio")}
+              {profile?.about_text ? <Translate text={profile.about_text} /> : t("cv.defaultBio")}
             </p>
           </section>
 
@@ -139,14 +139,14 @@ export default function CVPage() {
                 {educations.map((edu) => (
                   <div key={edu.id} className="border-l-4 border-blue-500 pl-3 sm:pl-4">
                     <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-                      {t(edu.institution)}
+                      <Translate text={edu.institution} />
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 italic mb-2">
-                      {t(edu.degree)} {edu.major && `- ${t(edu.major)}`} ({formatMonthYear(edu.start_date)} – {formatMonthYear(edu.end_date)})
+                      <Translate text={edu.degree} /> {edu.major && <>- <Translate text={edu.major} /></>} ({formatMonthYear(edu.start_date)} – {formatMonthYear(edu.end_date)})
                     </p>
                     <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
                       {edu.gpa && <li>{t("GPA / Grade")}: {edu.gpa}</li>}
-                      {edu.description && <li>{t(edu.description)}</li>}
+                      {edu.description && <li><Translate text={edu.description} /></li>}
                     </ul>
                   </div>
                 ))}
@@ -164,11 +164,11 @@ export default function CVPage() {
                 {certifications.map((cert) => (
                   <div key={cert.id} className="bg-slate-50 rounded-lg p-3 sm:p-4">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
-                      {t(cert.name)} — {formatYear(cert.date)}
+                      <Translate text={cert.name} /> — {formatYear(cert.date)}
                     </h3>
                     {cert.description && (
                       <p className="text-sm sm:text-base text-gray-700">
-                        {t(cert.description)}
+                        <Translate text={cert.description} />
                       </p>
                     )}
                   </div>
@@ -187,13 +187,13 @@ export default function CVPage() {
                 {organizations.map((org) => (
                   <div key={org.id} className="border-l-4 border-green-500 pl-3 sm:pl-4">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                      {t(org.role)} — {t(org.organization)}
+                      <Translate text={org.role} /> — <Translate text={org.organization} />
                     </h3>
                     <p className="text-gray-600 text-xs sm:text-sm mb-2">
                       ({formatYear(org.start_date)}{org.end_date ? ` - ${formatYear(org.end_date)}` : ''})
                     </p>
                     <div className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 whitespace-pre-wrap">
-                      {t(org.description)}
+                      <Translate text={org.description} />
                     </div>
                   </div>
                 ))}
@@ -212,8 +212,8 @@ export default function CVPage() {
                   <div key={ach.id} className="flex items-start gap-3">
                     <div className="mt-1.5 w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0"></div>
                     <p className="text-sm sm:text-base text-gray-700">
-                      <span className="font-semibold">{t(ach.title)}</span> {ach.year ? `(${ach.year})` : ''}
-                      {ach.description && <span className="block text-gray-500 mt-1">{t(ach.description)}</span>}
+                      <span className="font-semibold"><Translate text={ach.title} /></span> {ach.year ? `(${ach.year})` : ''}
+                      {ach.description && <span className="block text-gray-500 mt-1"><Translate text={ach.description} /></span>}
                     </p>
                   </div>
                 ))}
@@ -232,7 +232,7 @@ export default function CVPage() {
                   <div key={vol.id} className="flex items-start gap-3">
                     <div className="mt-1.5 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
                     <p className="text-sm sm:text-base text-gray-700">
-                      <span className="font-medium">{t(vol.role)}</span> — {t(vol.organization)} ({formatYear(vol.start_date)})
+                      <span className="font-medium"><Translate text={vol.role} /></span> — <Translate text={vol.organization} /> ({formatYear(vol.start_date)})
                     </p>
                   </div>
                 ))}

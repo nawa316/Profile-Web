@@ -16,7 +16,7 @@ import Contact from '@/components/Contact';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ProfileCard from "@/components/ProfileCard";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Translate } from "@/context/LanguageContext";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -138,7 +138,7 @@ export default function Home() {
                   <p className="text-center md:text-left">
                     <span className="text-2xl md:text-4xl font-bold">{profileData?.name || "Muhammad Ade Dzakwan"}</span>{" "}
                     <br />
-                    <span className="text-lg md:text-2xl">{t(profileData?.location || "Surabaya, Jawa Timur")}</span>
+                    <span className="text-lg md:text-2xl"><Translate text={profileData?.location || "Surabaya, Jawa Timur"} /></span>
                   </p>
                   <Image
                     src="/images/Lambang ITS.png"
@@ -151,7 +151,7 @@ export default function Home() {
                  <div className="text-center md:text-left">
                   <h2 className="text-lg md:text-xl font-medium">{t("desc.title")}</h2>
                   <div className="text-base md:text-lg whitespace-pre-wrap">
-                    {profileData?.about_text ? t(profileData.about_text) : t("about.desc1")}
+                    <Translate text={profileData?.about_text || "Seorang mahasiswa Sistem Informasi dengan passion..."} />
                   </div>
                 </div>
                 <div className="text-center md:text-left">

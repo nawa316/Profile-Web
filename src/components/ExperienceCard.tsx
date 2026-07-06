@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import type { Experience } from "@/lib/types";
 import { FaCalendar, FaMapMarkerAlt } from "react-icons/fa";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Translate } from "@/context/LanguageContext";
 
 const MAX_VISIBLE_SKILLS = 4;
 
@@ -70,13 +70,13 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="dm_serif_text text-xl text-slate-800 mb-1 group-hover:text-[#6b8af6] transition-colors">
-          {t(item.organization)}
+          <Translate text={item.organization} />
         </h3>
         <p className="text-[#6b8af6] font-medium mb-3">
-          {t(item.role)}
+          <Translate text={item.role} />
         </p>
         <p className="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow">
-          {t(item.description)}
+          <Translate text={item.description} />
         </p>
 
         {/* Date & Location */}
@@ -88,7 +88,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
           {item.location && (
             <span className="flex items-center gap-1">
               <FaMapMarkerAlt className="text-[#6b8af6]" />
-              {t(item.location)}
+              <Translate text={item.location} />
             </span>
           )}
         </div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { Blog } from "@/lib/types";
 import { FaClock, FaUser, FaCalendar, FaTag } from "react-icons/fa";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Translate } from "@/context/LanguageContext";
 
 const MAX_VISIBLE_TAGS = 3;
 
@@ -59,15 +59,15 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
           </div>
 
           <span className="inline-block px-3 py-1 bg-[#6b8af6]/20 text-[#6b8af6] rounded-full text-sm w-fit mb-4">
-            {t(post.category)}
+            <Translate text={post.category} />
           </span>
 
           <h2 className="dm_serif_text text-2xl md:text-3xl text-slate-800 mb-4 group-hover:text-[#6b8af6] transition-colors">
-            {t(post.title)}
+            <Translate text={post.title} />
           </h2>
 
           <p className="text-slate-600 mb-6 line-clamp-3">
-            {t(post.excerpt)}
+            <Translate text={post.excerpt} />
           </p>
 
           <div className="flex items-center gap-4">
@@ -112,7 +112,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         )}
         <div className="absolute top-4 right-4 z-20">
           <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm">
-            {t(post.category)}
+            <Translate text={post.category} />
           </span>
         </div>
       </div>
@@ -135,11 +135,11 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         </div>
 
         <h3 className="dm_serif_text text-xl text-slate-800 mb-3 group-hover:text-[#6b8af6] transition-colors line-clamp-2">
-          {t(post.title)}
+          <Translate text={post.title} />
         </h3>
 
         <p className="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">
-          {t(post.excerpt)}
+          <Translate text={post.excerpt} />
         </p>
 
         {/* Tags */}

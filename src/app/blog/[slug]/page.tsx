@@ -7,13 +7,16 @@ import { FaClock, FaUser, FaCalendar, FaTag, FaArrowLeft } from "react-icons/fa"
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, useTranslate } from "@/context/LanguageContext";
 
 export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { t, language } = useLanguage();
   const unwrappedParams = use(params);
   const [blog, setBlog] = useState<Blog | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const translatedContent = useTranslate(blog?.content);
+  const translatedTitle = useTranslate(blog?.title);
+  const translatedCategory = useTranslate(blog?.category);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -67,7 +70,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           <header className="mb-10">
             <div className="flex flex-wrap items-center gap-3 text-slate-500 text-sm mb-6">
               <span className="px-4 py-1.5 bg-[#6b8af6]/10 text-[#6b8af6] rounded-full font-semibold">
-                {t(blog.category)}
+                {translatedCategory}
               </span>
               <span className="flex items-center gap-1.5">
                 <FaCalendar className="text-[#6b8af6]" />
@@ -84,7 +87,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <h1 className="dm_serif_text text-4xl md:text-5xl lg:text-6xl text-slate-800 mb-8 leading-tight">
-              {t(blog.title)}
+              {translatedTitle}
             </h1>
 
             <div className="flex items-center gap-4 border-b border-slate-200 pb-8">
@@ -115,7 +118,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
             [&>hr]:border-slate-200 [&>hr]:my-8
           ">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {t(blog.content)}
+              {translatedContent}
             </ReactMarkdown>
           </article>
 

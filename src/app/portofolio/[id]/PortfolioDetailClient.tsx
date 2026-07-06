@@ -6,7 +6,7 @@ import { FaArrowLeft, FaGithub, FaExternalLinkAlt, FaTag } from "react-icons/fa"
 import Link from "next/link";
 import Image from "next/image";
 import ImageModal from "@/components/ImageModal";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Translate } from "@/context/LanguageContext";
 
 interface PortfolioDetailClientProps {
   portfolio: Portfolio;
@@ -69,16 +69,16 @@ export default function PortfolioDetailClient({ portfolio }: PortfolioDetailClie
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   <span className="px-4 py-1.5 border rounded-full text-sm font-medium bg-blue-500/10 text-blue-600 border-blue-200/40 flex items-center gap-2">
                     <FaTag className="text-blue-500" />
-                    {t(portfolio.category)}
+                    <Translate text={portfolio.category} />
                   </span>
                 </div>
 
                 <h1 className="dm_serif_text text-4xl md:text-5xl text-slate-800 mb-6 leading-tight">
-                  {t(portfolio.title)}
+                  <Translate text={portfolio.title} />
                 </h1>
                 
                 <p className="text-slate-600 text-lg leading-relaxed max-w-4xl whitespace-pre-wrap mb-8">
-                  {t(portfolio.description)}
+                  <Translate text={portfolio.description} />
                 </p>
 
                 {/* Links */}

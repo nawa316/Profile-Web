@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import { FaCalendar, FaMapMarkerAlt, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Translate } from "@/context/LanguageContext";
 import ImageModal from "@/components/ImageModal";
 
 export default function ExperienceDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -130,21 +130,21 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
                   {experience.location && (
                     <span className="flex items-center gap-1.5 text-slate-500 text-sm">
                       <FaMapMarkerAlt className="text-[#6b8af6]" />
-                      {t(experience.location)}
+                      <Translate text={experience.location} />
                     </span>
                   )}
                 </div>
 
                 <h1 className="dm_serif_text text-4xl md:text-5xl text-slate-800 mb-2 leading-tight">
-                  {t(experience.organization)}
+                  <Translate text={experience.organization} />
                 </h1>
                 
                 <h2 className="text-2xl text-[#6b8af6] font-medium mb-6">
-                  {t(experience.role)}
+                  <Translate text={experience.role} />
                 </h2>
                 
                 <p className="text-slate-600 text-lg leading-relaxed max-w-3xl whitespace-pre-wrap">
-                  {t(experience.description)}
+                  <Translate text={experience.description} />
                 </p>
               </div>
             </div>

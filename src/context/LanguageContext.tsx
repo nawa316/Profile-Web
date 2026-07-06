@@ -574,3 +574,68 @@ export const useLanguage = () => {
   }
   return context;
 };
+
+export const useTranslate = (text: string | null | undefined): string => {
+  const { language, t } = useLanguage();
+  const [translated, setTranslated] = useState(text || "");
+
+  useEffect(() => {
+    if (!text) {
+      setTranslated("");
+      return;
+    }
+
+    const staticTranslation = t(text);
+    if (staticTranslation !== text) {
+      setTranslated(staticTranslation);
+      return;
+    }
+
+    if (language === "id") {
+      setTranslated(text);
+      return;
+    }
+
+    let isMounted = true;
+    const cacheKey = `tr_${language}_${text.substring(0, 100)}_${text.length}`;
+    
+    let cached = null;
+    try {
+      cached = localStorage.getItem(cacheKey);
+    } catch (e) {}
+
+    if (cached) {
+      setTranslated(cached);
+      return;
+    }
+
+    fetch(
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${language}&dt=t&q=${encodeURIComponent(text)}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data && data[0]) {
+          const translatedVal = data[0].map((item: any) => item[0]).join("");
+          try {
+            localStorage.setItem(cacheKey, translatedVal);
+          } catch (e) {}
+          setTranslated(translatedVal);
+        }
+      })
+      .catch((err) => {
+        console.error("Dynamic translation error:", err);
+        if (isMounted) setTranslated(text);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [text, language, t]);
+
+  return translated;
+};
+
+export const Translate: React.FC<{ text: string | null | undefined }> = ({ text }) => {
+  const translated = useTranslate(text);
+  return <>{translated}</>;
+};

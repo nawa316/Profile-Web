@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import ProfileCard from "@/components/ProfileCard";
 import { Code2, Laptop, Palette, Terminal, Database } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage, Translate } from "@/context/LanguageContext";
 
 export default function AboutPage() {
   const { t } = useLanguage();
@@ -83,11 +83,11 @@ export default function AboutPage() {
                 </h1>
                 <div className="w-16 h-1 bg-[#6b8af6] rounded-full mb-5 mx-auto md:mx-0" />
                 <p className="text-[#6b8af6] text-lg font-semibold mb-5">
-                  {profile?.tagline ? t(profile.tagline) : t("hero.tagline")}
+                  {profile?.tagline ? <Translate text={profile.tagline} /> : t("hero.tagline")}
                 </p>
                 <div className="space-y-4 text-slate-600 text-base md:text-lg leading-relaxed whitespace-pre-wrap">
                   {profile?.about_text ? (
-                    <p>{t(profile.about_text)}</p>
+                    <p><Translate text={profile.about_text} /></p>
                   ) : (
                     <>
                       <p>{t("about.desc1")}</p>
