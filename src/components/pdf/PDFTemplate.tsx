@@ -3,6 +3,8 @@
 import React, { forwardRef } from "react";
 import { Portfolio, Experience, Profile } from "@/lib/types";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 interface PDFTemplateProps {
   portfolioData: Portfolio[];
   experienceData: Experience[];
@@ -11,12 +13,13 @@ interface PDFTemplateProps {
 
 const A4_WIDTH = "794px";
 
-const formatDate = (dateStr: string | null | undefined) => {
-  if (!dateStr) return "Present";
+const formatDate = (dateStr: string | null | undefined, language: string) => {
+  if (!dateStr) return language === "id" ? "Sekarang" : language === "de" ? "Heute" : "Present";
   try {
     const date = new Date(dateStr);
     if (isNaN(date.getTime())) return dateStr;
-    return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+    const locale = language === "id" ? "id-ID" : language === "de" ? "de-DE" : "en-US";
+    return date.toLocaleDateString(locale, { month: "short", year: "numeric" });
   } catch {
     return dateStr;
   }
@@ -24,6 +27,8 @@ const formatDate = (dateStr: string | null | undefined) => {
 
 export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
   ({ portfolioData, experienceData, profileData }, ref) => {
+    const { t, language } = useLanguage();
+    
     // Show all portfolios
     const displayPortfolios = portfolioData;
     
@@ -52,28 +57,28 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
         <div className="flex justify-between items-start mb-16 break-inside-avoid">
           <div className="w-2/3 pr-8">
             <h1 className="text-5xl font-extrabold text-gray-900 leading-tight mb-2">
-              Hey I&apos;m <br />
+              {t("Hey I'm")} <br />
               <span className="text-indigo-600">{profileData?.name || "Awan"}</span>
             </h1>
             <h2 className="text-xl font-bold text-gray-600 mb-8 tracking-wide uppercase">
-              {profileData?.tagline || "Information Systems Student"}
+              {profileData?.tagline ? t(profileData.tagline) : t("hero.tagline")}
             </h2>
             <div className="mb-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-indigo-600 inline-block">
-                About Me
+                {t("desc.title")}
               </h3>
               <p className="text-gray-600 leading-relaxed text-sm whitespace-pre-wrap">
-                {profileData?.about_text || "I am a passionate software developer with expertise in building scalable web applications. I love crafting beautiful and functional user interfaces and robust backend systems. Always eager to learn new technologies and solve complex problems."}
+                {profileData?.about_text ? t(profileData.about_text) : t("cv.defaultBio")}
               </p>
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-indigo-600 inline-block">
-                Tech Stack & Skills
+                {t("Tech Stack & Skills")}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {displaySkills.map((skill) => (
                   <span key={skill} className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">
-                    {skill}
+                    {t(skill)}
                   </span>
                 ))}
               </div>
@@ -105,12 +110,12 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
             </div>
             <div className="break-inside-avoid">
               <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-indigo-600 inline-block">
-                Education
+                {t("Education")}
               </h3>
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 text-sm">Institut Teknologi Sepuluh Nopember</h4>
-                <p className="text-xs text-gray-500 mb-1">Information Systems</p>
-                <p className="text-xs font-semibold text-indigo-600">2023 - Present</p>
+                <h4 className="font-bold text-gray-800 text-sm">{t("Institut Teknologi Sepuluh Nopember")}</h4>
+                <p className="text-xs text-gray-500 mb-1">{t("Sistem Informasi")}</p>
+                <p className="text-xs font-semibold text-indigo-600">2023 - {t("Present")}</p>
               </div>
             </div>
           </div>
@@ -118,7 +123,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
           {/* Right Col: Experiences */}
           <div className="w-[70%] float-right">
             <h3 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-indigo-600 inline-block uppercase tracking-wider">
-              Experiences
+              {t("Experiences")}
             </h3>
             <div className="">
               {experienceData.map((exp) => (
@@ -126,15 +131,15 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                   <div className="absolute w-3 h-3 bg-indigo-600 rounded-full -left-[7px] top-1.5"></div>
                   <div className="flex justify-between items-start mb-3">
                     <div className="text-left w-full">
-                      <h4 className="text-base font-bold text-gray-800 text-left">{exp.role}</h4>
-                      <h5 className="text-sm font-semibold text-gray-600 text-left">{exp.organization}</h5>
+                      <h4 className="text-base font-bold text-gray-800 text-left">{t(exp.role)}</h4>
+                      <h5 className="text-sm font-semibold text-gray-600 text-left">{t(exp.organization)}</h5>
                     </div>
                     <p className="text-xs font-semibold text-indigo-600 whitespace-nowrap ml-4 mt-0.5 text-right">
-                      {formatDate(String(exp.start_date))} - {exp.end_date ? formatDate(String(exp.end_date)) : "Present"}
+                      {formatDate(String(exp.start_date), language)} - {exp.end_date ? formatDate(String(exp.end_date), language) : t("Present")}
                     </p>
                   </div>
                   <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-wrap text-left">
-                    {exp.description}
+                    {t(exp.description)}
                   </p>
                 </div>
               ))}
@@ -145,7 +150,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
         {/* Section 3: Portfolio */}
         <div className="mb-8">
           <h2 className="text-3xl font-extrabold text-gray-900 mb-8 uppercase tracking-widest text-center">
-            Portfolio
+            {t("Portfolio")}
           </h2>
           <div className="flex flex-wrap -mx-4">
             {displayPortfolios.map((item) => (
@@ -160,12 +165,12 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
-                  <p className="text-xs text-gray-500 line-clamp-3 mb-3">{item.description}</p>
+                  <h3 className="font-bold text-gray-900 mb-1">{t(item.title)}</h3>
+                  <p className="text-xs text-gray-500 line-clamp-3 mb-3">{t(item.description)}</p>
                   <div className="flex flex-wrap gap-1">
                     {item.technologies.slice(0, 3).map(tech => (
                       <span key={tech} className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">
-                        {tech}
+                        {t(tech)}
                       </span>
                     ))}
                   </div>
@@ -173,7 +178,7 @@ export const PDFTemplate = forwardRef<HTMLDivElement, PDFTemplateProps>(
                     <div className="flex gap-2 mt-3">
                       {item.link && (
                         <a href={item.link} target="_blank" rel="noreferrer" className="text-[10px] bg-indigo-600 text-white px-3 py-1 rounded shadow-sm hover:bg-indigo-700 transition-colors">
-                          Visit
+                          {t("Visit")}
                         </a>
                       )}
                       {item.github && (

@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const MAX_VISIBLE_TAGS = 3;
 
 export function FeaturedBlogCard({ post }: { post: Blog }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <Link href={`/blog/${post.slug}`} className="block h-full">
       <motion.article
@@ -46,7 +46,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
           <div className="flex items-center gap-4 text-slate-500 text-sm mb-4">
             <span className="flex items-center gap-1">
               <FaCalendar className="text-[#6b8af6]" />
-              {new Date(post.published_at).toLocaleDateString('id-ID', { 
+              {new Date(post.published_at).toLocaleDateString(language === 'id' ? 'id-ID' : language === 'de' ? 'de-DE' : 'en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
@@ -54,7 +54,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
             </span>
             <span className="flex items-center gap-1">
               <FaClock className="text-[#6b8af6]" />
-              {post.read_time} min read
+              {post.read_time} {t("min.read")}
             </span>
           </div>
 
@@ -86,7 +86,7 @@ export function FeaturedBlogCard({ post }: { post: Blog }) {
 }
 
 export default function BlogCard({ post, index }: { post: Blog; index: number }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   return (
     <Link href={`/blog/${post.slug}`} className="block h-full">
       <motion.article
@@ -122,7 +122,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
         <div className="flex items-center gap-4 text-slate-500 text-xs mb-3">
           <span className="flex items-center gap-1">
             <FaCalendar />
-            {new Date(post.published_at).toLocaleDateString('id-ID', { 
+            {new Date(post.published_at).toLocaleDateString(language === 'id' ? 'id-ID' : language === 'de' ? 'de-DE' : 'en-US', { 
               year: 'numeric', 
               month: 'short', 
               day: 'numeric' 
@@ -130,7 +130,7 @@ export default function BlogCard({ post, index }: { post: Blog; index: number })
           </span>
           <span className="flex items-center gap-1">
             <FaClock />
-            {post.read_time} min
+            {post.read_time} {t("min")}
           </span>
         </div>
 

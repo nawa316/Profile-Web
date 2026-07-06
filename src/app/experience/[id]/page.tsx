@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import ImageModal from "@/components/ImageModal";
 
 export default function ExperienceDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const unwrappedParams = use(params);
   const [experience, setExperience] = useState<Experience | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +64,8 @@ export default function ExperienceDetailPage({ params }: { params: Promise<{ id:
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('id-ID', { year: 'numeric', month: 'long' });
+    const locale = language === 'id' ? 'id-ID' : language === 'de' ? 'de-DE' : 'en-US';
+    return date.toLocaleDateString(locale, { year: 'numeric', month: 'long' });
   };
 
   const getTypeColor = (type: string) => {

@@ -4,8 +4,10 @@ import { Download, Mail, Phone, Linkedin, MapPin, ArrowLeft } from 'lucide-react
 import Link from 'next/link';
 import { profileApi, educationApi, certificationApi, achievementApi, experienceApi } from '@/lib/api';
 import type { Profile, Education, Certification, Achievement, Experience } from '@/lib/types';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function CVPage() {
+  const { t, language } = useLanguage();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [educations, setEducations] = useState<Education[]>([]);
   const [certifications, setCertifications] = useState<Certification[]>([]);
@@ -46,19 +48,20 @@ export default function CVPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-xl font-medium text-gray-500">Loading CV Data...</div>
+        <div className="text-xl font-medium text-gray-500">{t("Loading CV Data...")}</div>
       </div>
     );
   }
 
   const formatYear = (dateStr: string | null) => {
-    if (!dateStr) return 'Present';
+    if (!dateStr) return t('Present');
     return new Date(dateStr).getFullYear().toString();
   };
 
   const formatMonthYear = (dateStr: string | null) => {
-    if (!dateStr) return 'Present';
-    return new Date(dateStr).toLocaleDateString('id-ID', { month: 'short', year: 'numeric' });
+    if (!dateStr) return t('Present');
+    const locale = language === 'id' ? 'id-ID' : language === 'de' ? 'de-DE' : 'en-US';
+    return new Date(dateStr).toLocaleDateString(locale, { month: 'short', year: 'numeric' });
   };
 
   return (
@@ -71,7 +74,7 @@ export default function CVPage() {
           className="inline-flex items-center gap-2 text-gray-700 hover:text-blue-600 mb-6 transition-colors group"
         >
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="font-medium">Kembali ke Halaman Utama</span>
+          <span className="font-medium">{t("Back to Main Page")}</span>
         </Link>
         {/* Header with Download Button */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden mb-8">
@@ -80,7 +83,7 @@ export default function CVPage() {
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm mb-6">
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                <span>{profile?.location || 'Surabaya, Jawa Timur'}</span>
+                <span>{t(profile?.location || 'Surabaya, Jawa Timur')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={16} />
@@ -96,7 +99,7 @@ export default function CVPage() {
                 <div className="flex items-center gap-2">
                   <Linkedin size={16} />
                   <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                    LinkedIn Profile
+                    {t("LinkedIn Profile")}
                   </a>
                 </div>
               )}
@@ -109,7 +112,7 @@ export default function CVPage() {
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-blue-50 transition-colors shadow-lg w-full sm:w-auto"
             >
               <Download size={18} className="sm:w-5 sm:h-5" />
-              Download CV (PDF)
+              {t("Download CV (PDF)")}
             </a>
           </div>
         </div>
@@ -119,10 +122,10 @@ export default function CVPage() {
           {/* About Section */}
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-              Tentang Saya
+              {t("desc.title")}
             </h2>
             <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-wrap">
-              {profile?.about_text || 'Seorang mahasiswa Sistem Informasi dengan passion dalam pengembangan web, pengembangan perangkat lunak, dan kecerdasan buatan. Berpengalaman bekerja dalam tim dengan komunikasi yang kuat, teliti, dan dapat diandalkan. Memiliki pendekatan dinamis dalam menyelesaikan masalah di dunia pemrograman.'}
+              {profile?.about_text ? t(profile.about_text) : t("cv.defaultBio")}
             </p>
           </section>
 
@@ -130,20 +133,20 @@ export default function CVPage() {
           {educations.length > 0 && (
             <section>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-                Pendidikan
+                {t("Education")}
               </h2>
               <div className="space-y-4">
                 {educations.map((edu) => (
                   <div key={edu.id} className="border-l-4 border-blue-500 pl-3 sm:pl-4">
                     <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-                      {edu.institution}
+                      {t(edu.institution)}
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 italic mb-2">
-                      {edu.degree} {edu.major && `- ${edu.major}`} ({formatMonthYear(edu.start_date)} – {formatMonthYear(edu.end_date)})
+                      {t(edu.degree)} {edu.major && `- ${t(edu.major)}`} ({formatMonthYear(edu.start_date)} – {formatMonthYear(edu.end_date)})
                     </p>
                     <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                      {edu.gpa && <li>IPK/Nilai: {edu.gpa}</li>}
-                      {edu.description && <li>{edu.description}</li>}
+                      {edu.gpa && <li>{t("GPA / Grade")}: {edu.gpa}</li>}
+                      {edu.description && <li>{t(edu.description)}</li>}
                     </ul>
                   </div>
                 ))}
@@ -155,17 +158,17 @@ export default function CVPage() {
           {certifications.length > 0 && (
             <section>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-                Lisensi & Sertifikasi
+                {t("Licenses & Certifications")}
               </h2>
               <div className="space-y-3 sm:space-y-4">
                 {certifications.map((cert) => (
                   <div key={cert.id} className="bg-slate-50 rounded-lg p-3 sm:p-4">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">
-                      {cert.name} — {formatYear(cert.date)}
+                      {t(cert.name)} — {formatYear(cert.date)}
                     </h3>
                     {cert.description && (
                       <p className="text-sm sm:text-base text-gray-700">
-                        {cert.description}
+                        {t(cert.description)}
                       </p>
                     )}
                   </div>
@@ -178,19 +181,19 @@ export default function CVPage() {
           {organizations.length > 0 && (
             <section>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-                Pengalaman Organisasi & Kerja
+                {t("Experiences")}
               </h2>
               <div className="space-y-4">
                 {organizations.map((org) => (
                   <div key={org.id} className="border-l-4 border-green-500 pl-3 sm:pl-4">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                      {org.role} — {org.organization}
+                      {t(org.role)} — {t(org.organization)}
                     </h3>
                     <p className="text-gray-600 text-xs sm:text-sm mb-2">
                       ({formatYear(org.start_date)}{org.end_date ? ` - ${formatYear(org.end_date)}` : ''})
                     </p>
                     <div className="text-sm sm:text-base text-gray-700 space-y-1 mt-2 whitespace-pre-wrap">
-                      {org.description}
+                      {t(org.description)}
                     </div>
                   </div>
                 ))}
@@ -202,15 +205,15 @@ export default function CVPage() {
           {achievements.length > 0 && (
             <section>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-                Prestasi
+                {t("Achievements")}
               </h2>
               <div className="space-y-2">
                 {achievements.map((ach) => (
                   <div key={ach.id} className="flex items-start gap-3">
                     <div className="mt-1.5 w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0"></div>
                     <p className="text-sm sm:text-base text-gray-700">
-                      <span className="font-semibold">{ach.title}</span> {ach.year ? `(${ach.year})` : ''}
-                      {ach.description && <span className="block text-gray-500 mt-1">{ach.description}</span>}
+                      <span className="font-semibold">{t(ach.title)}</span> {ach.year ? `(${ach.year})` : ''}
+                      {ach.description && <span className="block text-gray-500 mt-1">{t(ach.description)}</span>}
                     </p>
                   </div>
                 ))}
@@ -222,14 +225,14 @@ export default function CVPage() {
           {volunteers.length > 0 && (
             <section>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 border-b-2 border-blue-600 pb-2">
-                Pengalaman Sukarelawan
+                {t("Volunteer Experience")}
               </h2>
               <div className="space-y-2">
                 {volunteers.map((vol) => (
                   <div key={vol.id} className="flex items-start gap-3">
                     <div className="mt-1.5 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
                     <p className="text-sm sm:text-base text-gray-700">
-                      <span className="font-medium">{vol.role}</span> — {vol.organization} ({formatYear(vol.start_date)})
+                      <span className="font-medium">{t(vol.role)}</span> — {t(vol.organization)} ({formatYear(vol.start_date)})
                     </p>
                   </div>
                 ))}
@@ -248,7 +251,7 @@ export default function CVPage() {
             className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-sm sm:text-base font-semibold hover:bg-blue-700 transition-colors shadow-lg w-full sm:w-auto"
           >
             <Download size={18} className="sm:w-5 sm:h-5" />
-            Download CV (PDF)
+            {t("Download CV (PDF)")}
           </a>
         </div>
       </div>

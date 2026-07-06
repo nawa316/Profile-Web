@@ -18,11 +18,12 @@ export const formatTypeLabel = (type: string) => {
 };
 
 export default function ExperienceCard({ item, index }: { item: Experience; index: number }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('id-ID', { year: 'numeric', month: 'short' });
+    const locale = language === 'id' ? 'id-ID' : language === 'de' ? 'de-DE' : 'en-US';
+    return date.toLocaleDateString(locale, { year: 'numeric', month: 'short' });
   };
 
   const getTypeColor = (type: string) => {
@@ -104,7 +105,7 @@ export default function ExperienceCard({ item, index }: { item: Experience; inde
           ))}
           {(item.skills || []).length > MAX_VISIBLE_SKILLS && (
             <span className="px-2 py-1 bg-slate-200 text-slate-600 rounded text-xs">
-              +{(item.skills || []).length - MAX_VISIBLE_SKILLS} more
+              +{(item.skills || []).length - MAX_VISIBLE_SKILLS} {t("more")}
             </span>
           )}
         </div>

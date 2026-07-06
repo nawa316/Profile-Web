@@ -5,6 +5,7 @@ import { Download, Loader2 } from "lucide-react";
 import { useReactToPrint } from "react-to-print";
 import { PDFTemplate } from "./pdf/PDFTemplate";
 import { Portfolio, Experience, Profile } from "@/lib/types";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface DownloadPDFButtonProps {
   portfolioData: Portfolio[];
@@ -13,6 +14,7 @@ interface DownloadPDFButtonProps {
 }
 
 export default function DownloadPDFButton({ portfolioData, experienceData, profileData }: DownloadPDFButtonProps) {
+  const { t } = useLanguage();
   const [isGenerating, setIsGenerating] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,7 @@ export default function DownloadPDFButton({ portfolioData, experienceData, profi
     },
     onPrintError: () => {
       setIsGenerating(false);
-      alert("Failed to generate PDF. Please try again later.");
+      alert(t("Failed to generate PDF. Please try again later."));
     }
   });
 
@@ -54,12 +56,12 @@ export default function DownloadPDFButton({ portfolioData, experienceData, profi
         {isGenerating ? (
           <>
             <Loader2 className="w-5 h-5 animate-spin" />
-            <span>Generating PDF...</span>
+            <span>{t("Generating PDF...")}</span>
           </>
         ) : (
           <>
             <Download className="w-5 h-5" />
-            <span>Download Portfolio (PDF)</span>
+            <span>{t("Download Portfolio (PDF)")}</span>
           </>
         )}
       </button>

@@ -79,7 +79,7 @@ export default function ExperiencePage() {
                     : "bg-white text-slate-600 border border-slate-200 hover:border-[#6b8af6]/50 hover:text-[#6b8af6]"
                 }`}
               >
-                {type === "All" ? t("filter.all") : formatTypeLabel(type)}
+                {type === "All" ? t("filter.all") : t(type)}
               </button>
             ))}
           </motion.div>

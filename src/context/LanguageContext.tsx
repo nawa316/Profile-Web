@@ -285,6 +285,114 @@ export const translations: Translations = {
     id: "UI/UX adalah aspek yang sering diabaikan dalam pengembangan aplikasi, padahal sangat penting untuk kesuksesan produk.\n\n## Apa itu UI/UX?\n\nUI (User Interface) adalah tampilan visual dari aplikasi, sedangkan UX (User Experience) adalah pengalaman pengguna saat menggunakan aplikasi.\n\n## Mengapa Penting?\n\nAplikasi dengan UI/UX yang baik akan meningkatkan kepuasan pengguna dan retensi.\n\n## Best Practices\n\n- Konsisten dalam desain\n- Fokus pada kebutuhan pengguna\n- Lakukan user testing",
     en: "UI/UX is an aspect often overlooked in application development, even though it is crucial for a product's success.\n\n## What is UI/UX?\n\nUI (User Interface) is the visual look of the application, while UX (User Experience) is the user experience when using the application.\n\n## Why is it Important?\n\nApplications with good UI/UX will increase user satisfaction and retention.\n\n## Best Practices\n\n- Consistency in design\n- Focus on user needs\n- Perform user testing",
     de: "UI/UX ist ein Aspekt, der bei der Anwendungsentwicklung oft übersehen wird, obwohl er für den Erfolg eines Produkts entscheidend ist.\n\n## Was ist UI/UX?\n\nUI (User Interface) ist das visuelle Erscheinungsbild der Anwendung, während UX (User Experience) die Erfahrung des Benutzers bei der Verwendung der Anwendung ist.\n\n## Warum ist es wichtig?\n\nAnwendungen mit einer guten UI/UX erhöhen die Benutzerzufriedenheit und die Benutzerbindung.\n\n## Best Practices\n\n- Konsistenz im Design\n- Fokus auf Benutzerbedürfnisse\n- Benutzertests durchführen"
+  },
+
+  // Missing Translation Keys
+  "Location": { id: "Lokasi", en: "Location", de: "Standort" },
+  "Surabaya, Jawa Timur, Indonesia": {
+    id: "Surabaya, Jawa Timur, Indonesia",
+    en: "Surabaya, East Java, Indonesia",
+    de: "Surabaya, Ost-Java, Indonesien"
+  },
+  "Back to Portfolio": {
+    id: "Kembali ke Portofolio",
+    en: "Back to Portfolio",
+    de: "Zurück zum Portfolio"
+  },
+  "Back to Experience": {
+    id: "Kembali ke Pengalaman",
+    en: "Back to Experience",
+    de: "Zurück zur Erfahrung"
+  },
+  "Back to Main Page": {
+    id: "Kembali ke Halaman Utama",
+    en: "Back to Main Page",
+    de: "Zurück zur Hauptseite"
+  },
+  "Visit": { id: "Kunjungi", en: "Visit", de: "Besuchen" },
+  "Code": { id: "Kode", en: "Code", de: "Code" },
+  "min.read": { id: "menit baca", en: "min read", de: "Min. Lesedauer" },
+  "min": { id: "menit", en: "min", de: "Min." },
+  "more": { id: "lebih banyak", en: "more", de: "weitere" },
+  "Generating PDF...": {
+    id: "Membuat PDF...",
+    en: "Generating PDF...",
+    de: "PDF wird generiert..."
+  },
+  "Download Portfolio (PDF)": {
+    id: "Unduh Portofolio (PDF)",
+    en: "Download Portfolio (PDF)",
+    de: "Portfolio herunterladen (PDF)"
+  },
+  "Failed to generate PDF. Please try again later.": {
+    id: "Gagal membuat PDF. Silakan coba beberapa saat lagi.",
+    en: "Failed to generate PDF. Please try again later.",
+    de: "Fehler beim Generieren der PDF. Bitte versuchen Sie es später noch einmal."
+  },
+  "Hey I'm": {
+    id: "Halo Saya",
+    en: "Hey I'm",
+    de: "Hallo, ich bin"
+  },
+  "Tech Stack & Skills": {
+    id: "Keahlian & Teknologi",
+    en: "Tech Stack & Skills",
+    de: "Tech Stack & Fähigkeiten"
+  },
+  "Education": {
+    id: "Pendidikan",
+    en: "Education",
+    de: "Ausbildung"
+  },
+  "Experiences": {
+    id: "Pengalaman",
+    en: "Experiences",
+    de: "Erfahrungen"
+  },
+  "Licenses & Certifications": {
+    id: "Lisensi & Sertifikasi",
+    en: "Licenses & Certifications",
+    de: "Lizenzen & Zertifizierungen"
+  },
+  "Achievements": {
+    id: "Prestasi",
+    en: "Achievements",
+    de: "Erfolge"
+  },
+  "Volunteer Experience": {
+    id: "Pengalaman Sukarelawan",
+    en: "Volunteer Experience",
+    de: "Ehrenamtliche Erfahrung"
+  },
+  "Download CV (PDF)": {
+    id: "Unduh CV (PDF)",
+    en: "Download CV (PDF)",
+    de: "Lebenslauf herunterladen (PDF)"
+  },
+  "LinkedIn Profile": {
+    id: "Profil LinkedIn",
+    en: "LinkedIn Profile",
+    de: "LinkedIn Profil"
+  },
+  "Phone / WhatsApp": {
+    id: "Telepon / WhatsApp",
+    en: "Phone / WhatsApp",
+    de: "Telefon / WhatsApp"
+  },
+  "Loading CV Data...": {
+    id: "Memuat data CV...",
+    en: "Loading CV Data...",
+    de: "CV-Daten werden geladen..."
+  },
+  "GPA / Grade": {
+    id: "IPK / Nilai",
+    en: "GPA / Grade",
+    de: "GPA / Note"
+  },
+  "cv.defaultBio": {
+    id: "Seorang mahasiswa Sistem Informasi dengan passion dalam pengembangan web, pengembangan perangkat lunak, dan kecerdasan buatan. Berpengalaman bekerja dalam tim dengan komunikasi yang kuat, teliti, dan dapat diandalkan. Memiliki pendekatan dinamis dalam menyelesaikan masalah di dunia pemrograman.",
+    en: "An Information Systems student with a passion for web development, software engineering, and artificial intelligence. Experienced in working in teams with strong communication, detail-oriented, and reliable. Has a dynamic approach to problem-solving in the programming world.",
+    de: "Ein Wirtschaftsinformatik-Student mit einer Leidenschaft für Webentwicklung, Software Engineering und Künstliche Intelligenz. Erfahren in der Teamarbeit mit starker Kommunikation, detailorientiert und zuverlässig. Besitzt einen dynamischen Ansatz zur Problemlösung in der Welt der Programmierung."
   }
 };
 

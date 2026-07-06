@@ -84,7 +84,7 @@ export default function Home() {
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
-                {profileData?.tagline || t("hero.tagline")}
+                {profileData?.tagline ? t(profileData.tagline) : t("hero.tagline")}
               </p>
               <div
                 className="flex flex-row w-full h-full gap-4 items-center justify-center mt-4"
@@ -138,7 +138,7 @@ export default function Home() {
                   <p className="text-center md:text-left">
                     <span className="text-2xl md:text-4xl font-bold">Muhammad Ade Dzakwan</span>{" "}
                     <br />
-                    <span className="text-lg md:text-2xl">Surabaya, Jawa Timur</span>
+                    <span className="text-lg md:text-2xl">{t(profileData?.location || "Surabaya, Jawa Timur")}</span>
                   </p>
                   <Image
                     src="/images/Lambang ITS.png"
@@ -151,7 +151,7 @@ export default function Home() {
                  <div className="text-center md:text-left">
                   <h2 className="text-lg md:text-xl font-medium">{t("desc.title")}</h2>
                   <div className="text-base md:text-lg whitespace-pre-wrap">
-                    {profileData?.about_text || t("about.desc1")}
+                    {profileData?.about_text ? t(profileData.about_text) : t("about.desc1")}
                   </div>
                 </div>
                 <div className="text-center md:text-left">

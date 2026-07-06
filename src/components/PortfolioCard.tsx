@@ -82,7 +82,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
               className="flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors text-sm"
             >
               <FaGithub />
-              <span>Code</span>
+              <span>{t("Code")}</span>
             </a>
           )}
           {item.link && (
@@ -93,7 +93,7 @@ export default function PortfolioCard({ item, index }: { item: Portfolio; index:
               className="flex items-center gap-2 text-slate-500 hover:text-[#6b8af6] transition-colors text-sm"
             >
               <FaExternalLinkAlt />
-              <span>Live Demo</span>
+              <span>{t("Live Demo")}</span>
             </a>
           )}
         </div>

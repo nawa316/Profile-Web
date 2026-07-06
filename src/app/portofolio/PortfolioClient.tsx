@@ -77,7 +77,7 @@ export default function PortfolioClient({ initialData, experienceData, profileDa
                     : "bg-white text-slate-600 border border-slate-200 hover:border-[#6b8af6]/50 hover:text-[#6b8af6]"
                 }`}
               >
-                {category === "All" ? t("filter.all") : category}
+                {category === "All" ? t("filter.all") : t(category)}
               </button>
             ))}
           </motion.div>

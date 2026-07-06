@@ -18,14 +18,14 @@ export default function ContactPage() {
     },
     {
       icon: <Phone className="w-5 h-5 text-[#6b8af6]" />,
-      title: "Phone / WhatsApp",
+      title: t("Phone / WhatsApp"),
       value: "+62 895-1360-1357",
       link: "https://wa.me/6289513601357",
     },
     {
       icon: <MapPin className="w-5 h-5 text-[#6b8af6]" />,
-      title: t("contact.info").split(" ")[1] || "Location",
-      value: "Surabaya, Jawa Timur, Indonesia",
+      title: t("Location"),
+      value: t("Surabaya, Jawa Timur, Indonesia"),
       link: null,
     },
     {

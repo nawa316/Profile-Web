@@ -10,7 +10,7 @@ import remarkGfm from "remark-gfm";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const unwrappedParams = use(params);
   const [blog, setBlog] = useState<Blog | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -67,11 +67,11 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           <header className="mb-10">
             <div className="flex flex-wrap items-center gap-3 text-slate-500 text-sm mb-6">
               <span className="px-4 py-1.5 bg-[#6b8af6]/10 text-[#6b8af6] rounded-full font-semibold">
-                {blog.category}
+                {t(blog.category)}
               </span>
               <span className="flex items-center gap-1.5">
                 <FaCalendar className="text-[#6b8af6]" />
-                {new Date(blog.published_at).toLocaleDateString('id-ID', {
+                {new Date(blog.published_at).toLocaleDateString(language === 'id' ? 'id-ID' : language === 'de' ? 'de-DE' : 'en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'
@@ -79,12 +79,12 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
               </span>
               <span className="flex items-center gap-1.5">
                 <FaClock className="text-[#6b8af6]" />
-                {blog.read_time} min read
+                {blog.read_time} {t("min.read")}
               </span>
             </div>
 
             <h1 className="dm_serif_text text-4xl md:text-5xl lg:text-6xl text-slate-800 mb-8 leading-tight">
-              {blog.title}
+              {t(blog.title)}
             </h1>
 
             <div className="flex items-center gap-4 border-b border-slate-200 pb-8">
@@ -115,7 +115,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
             [&>hr]:border-slate-200 [&>hr]:my-8
           ">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {blog.content}
+              {t(blog.content)}
             </ReactMarkdown>
           </article>
 
@@ -130,7 +130,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
                     className="flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-[#6b8af6]/5 border border-slate-200 hover:border-[#6b8af6]/40 transition-colors text-slate-600 rounded-lg text-sm cursor-default"
                   >
                     <FaTag className="text-xs text-[#6b8af6]" />
-                    {tag}
+                    {t(tag)}
                   </span>
                 ))}
               </div>
