@@ -575,6 +575,54 @@ export const useLanguage = () => {
   return context;
 };
 
+const isAlreadyIndonesian = (str: string): boolean => {
+  const commonIdWords = /\b(dan|di|yang|untuk|adalah|dengan|sebagai|mahasiswa|sistem|informasi|dari|dalam|pada|atau|bisa|juga|saya|ini|itu|akan|telah|oleh)\b/i;
+  return commonIdWords.test(str);
+};
+
+const fetchTranslationChunk = async (text: string, targetLang: string): Promise<string> => {
+  const response = await fetch(
+    `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`
+  );
+  if (!response.ok) throw new Error("Translation chunk failed");
+  const data = await response.json();
+  if (data && data[0]) {
+    return data[0].map((item: any) => item[0]).join("");
+  }
+  return text;
+};
+
+const translateLargeText = async (text: string, targetLang: string): Promise<string> => {
+  if (text.length < 1500) {
+    return fetchTranslationChunk(text, targetLang);
+  }
+
+  const paragraphs = text.split("\n");
+  const chunks: string[] = [];
+  let currentChunk = "";
+
+  for (const paragraph of paragraphs) {
+    if ((currentChunk + "\n" + paragraph).length > 1500) {
+      if (currentChunk) chunks.push(currentChunk);
+      currentChunk = paragraph;
+    } else {
+      currentChunk = currentChunk ? currentChunk + "\n" + paragraph : paragraph;
+    }
+  }
+  if (currentChunk) chunks.push(currentChunk);
+
+  const translatedChunks = await Promise.all(
+    chunks.map(chunk => 
+      fetchTranslationChunk(chunk, targetLang).catch(err => {
+        console.error("Chunk translation error:", err);
+        return chunk;
+      })
+    )
+  );
+
+  return translatedChunks.join("\n");
+};
+
 export const useTranslate = (text: string | null | undefined): string => {
   const { language, t } = useLanguage();
   const [translated, setTranslated] = useState(text || "");
@@ -591,7 +639,15 @@ export const useTranslate = (text: string | null | undefined): string => {
       return;
     }
 
-    if (language === "id") {
+    // If target language is Indonesian, and text is already in Indonesian, skip translation
+    if (language === "id" && isAlreadyIndonesian(text)) {
+      setTranslated(text);
+      return;
+    }
+
+    // If target language matches the potential origin (e.g. they typed in English and language is English), skip
+    const isEnglishText = (str: string) => /\b(the|and|of|is|in|to|for|with|developer|staff)\b/i.test(str);
+    if (language === "en" && isEnglishText(text)) {
       setTranslated(text);
       return;
     }
@@ -609,13 +665,9 @@ export const useTranslate = (text: string | null | undefined): string => {
       return;
     }
 
-    fetch(
-      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${language}&dt=t&q=${encodeURIComponent(text)}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data && data[0]) {
-          const translatedVal = data[0].map((item: any) => item[0]).join("");
+    translateLargeText(text, language)
+      .then((translatedVal) => {
+        if (isMounted) {
           try {
             localStorage.setItem(cacheKey, translatedVal);
           } catch (e) {}

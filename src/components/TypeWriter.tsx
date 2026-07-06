@@ -19,6 +19,12 @@ export default function TypeWriter({
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   useEffect(() => {
+    setDisplayedText("");
+    setCurrentIndex(0);
+    setIsTypingComplete(false);
+  }, [text]);
+
+  useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + text[currentIndex]);
