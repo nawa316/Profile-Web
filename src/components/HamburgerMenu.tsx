@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -78,12 +80,19 @@ export default function HamburgerMenu() {
 
         {/* Mobile Actions (Language & Theme Switcher Placeholder) */}
         <div className="flex flex-col items-center gap-6 mt-8 pt-8 border-t border-white/10 w-52 justify-center">
-          {/* Theme Toggle Placeholder */}
+          {/* Theme Toggle Button */}
           <div className="flex items-center gap-3">
             <span className="text-white/80 text-sm font-medium">Theme:</span>
-            <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white cursor-pointer transition-all" title="Theme Toggle (Placeholder)">
-              <span className="text-sm">🌓</span>
-            </div>
+            <button
+              onClick={() => {
+                toggleTheme();
+                closeMenu();
+              }}
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white cursor-pointer transition-all text-sm"
+              title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+            >
+              {theme === "light" ? "🌙" : "☀️"}
+            </button>
           </div>
 
           {/* Language Switcher */}

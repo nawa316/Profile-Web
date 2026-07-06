@@ -3,10 +3,12 @@ import React, { useState, useRef, useEffect } from "react";
 import HamburgerMenu from "@/components/HamburgerMenu";
 import Link from "next/link";
 import { useLanguage, Language } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 import { Globe, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -61,10 +63,14 @@ export default function Navbar() {
 
       {/* Right: Desktop Action Buttons */}
       <div className="hidden md:flex flex-1 justify-end items-center gap-4">
-        {/* Placeholder for future Theme Toggle button */}
-        <div className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white cursor-pointer transition-all opacity-40 hover:opacity-100" title="Theme Toggle (Placeholder)">
-          <span className="text-xs">🌓</span>
-        </div>
+        {/* Theme Toggle button */}
+        <button
+          onClick={toggleTheme}
+          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white cursor-pointer transition-all text-sm"
+          title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
 
         {/* Custom Language Dropdown Switcher */}
         <div className="relative" ref={dropdownRef}>

@@ -32,3 +32,140 @@
 .animate-blink {
   animation: blink 1s infinite;
 }
+
+/* --- DARK THEME STYLES --- */
+.dark body {
+  background-color: #0f172a !important; /* slate-900 */
+  color: #f8fafc !important; /* slate-50 */
+}
+
+/* Page background overrides */
+.dark .bg-slate-50 {
+  background-color: #0f172a !important;
+}
+
+.dark .section {
+  background-color: #0f172a !important;
+}
+
+/* Card overrides */
+.dark .bg-white {
+  background-color: #1e293b !important; /* slate-800 */
+  color: #f8fafc !important;
+}
+
+/* Text overrides */
+.dark .text-slate-800 {
+  color: #f1f5f9 !important; /* slate-100 */
+}
+
+.dark .text-slate-700 {
+  color: #cbd5e1 !important; /* slate-300 */
+}
+
+.dark .text-slate-600 {
+  color: #94a3b8 !important; /* slate-400 */
+}
+
+.dark .text-gray-600 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-gray-700 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-gray-900 {
+  color: #f1f5f9 !important;
+}
+
+/* Border overrides */
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-gray-200 {
+  border-color: #334155 !important; /* slate-700 */
+}
+
+/* Shadow overrides */
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Navbar glassmorphism in dark mode */
+.dark nav {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Hamburger menu items text on mobile list */
+.dark .mobile-menu-active {
+  background-color: rgba(107, 138, 246, 0.15) !important;
+}
+
+/* Form controls overrides */
+.dark input, 
+.dark textarea, 
+.dark select {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark input::placeholder, 
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Language selector dropdown */
+.dark .absolute.bg-white\/95 {
+  background-color: rgba(30, 41, 59, 0.95) !important;
+  border-color: #334155 !important;
+}
+
+.dark .absolute.bg-white\/95 button {
+  color: #cbd5e1 !important;
+}
+
+.dark .absolute.bg-white\/95 button:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Markdown prose overrides */
+.dark article h2,
+.dark article h3,
+.dark article strong {
+  color: #f1f5f9 !important;
+}
+
+.dark article hr {
+  border-color: #334155 !important;
+}
+
+.dark article {
+  color: #cbd5e1 !important;
+}
+
+/* ProfileCard specific overrides */
+.dark .bg-slate-100 {
+  background-color: #0f172a !important;
+}
+
+/* Modal overrides */
+.dark .modal-content {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+/* Experience filter tabs */
+.dark .bg-[#6b8af6]\/10 {
+  background-color: rgba(107, 138, 246, 0.15) !important;
+}

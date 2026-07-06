@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function RootLayout({
   children,
@@ -30,9 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSerifText.variable} ${playfairDisplay.variable}`}>
       <body>
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
