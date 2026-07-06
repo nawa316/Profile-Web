@@ -76,7 +76,7 @@ export default function Home() {
                 data-aos="fade-down"
                 data-aos-delay="100"
               >
-                <TypeWriter text={t("hero.greeting_prefix") + (profileData?.name ? (profileData.name.split(" ").pop() || "Awan") : "Awan")} typingSpeed={150} />
+                <TypeWriter text={t("hero.greeting")} typingSpeed={150} />
                 <span className="text-[#3c45b9]">.</span>
               </p>
               <p
@@ -126,7 +126,7 @@ export default function Home() {
                 <div className="w-[260px] h-[480px] bg-gray-200 animate-pulse rounded-2xl" />
               ) : (
                 <div data-aos="fade-up" data-aos-delay="100">
-                  <ProfileCard photoUrl={profileData?.photo_url} name={profileData?.name ? (profileData.name.split(" ").pop() || "Awan") : "Awan"} />
+                  <ProfileCard photoUrl={profileData?.photo_url} name="Awan" />
                 </div>
               )}
               <div

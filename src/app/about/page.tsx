@@ -72,7 +72,7 @@ export default function AboutPage() {
                 {isLoading ? (
                   <div className="w-[260px] h-[480px] bg-slate-200 animate-pulse rounded-2xl" />
                 ) : (
-                  <ProfileCard photoUrl={profile?.photo_url} name={profile?.name ? (profile.name.split(" ").pop() || "Awan") : "Awan"} />
+                  <ProfileCard photoUrl={profile?.photo_url} name="Awan" />
                 )}
               </motion.div>
 
