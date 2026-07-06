@@ -40,13 +40,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  if (!mounted) {
-    return <div className="opacity-0">{children}</div>;
-  }
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+      <div className={mounted ? "" : "opacity-0"}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };
