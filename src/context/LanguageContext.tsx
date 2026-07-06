@@ -197,6 +197,7 @@ export const translations: Translations = {
     en: "Media & Information Staff",
     de: "Mitarbeiter für Medien & Information"
   },
+  "Staff Divisi IT": {
     id: "Staf Divisi IT",
     en: "IT Division Staff",
     de: "Mitarbeiter der IT-Abteilung"
