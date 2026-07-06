@@ -55,28 +55,31 @@
 }
 
 /* Text overrides */
-.dark .text-slate-800 {
-  color: #f1f5f9 !important; /* slate-100 */
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-gray-900,
+.dark .text-gray-800 {
+  color: #ffffff !important; /* Pure white for headings */
 }
 
-.dark .text-slate-700 {
-  color: #cbd5e1 !important; /* slate-300 */
-}
-
-.dark .text-slate-600 {
-  color: #94a3b8 !important; /* slate-400 */
-}
-
-.dark .text-gray-600 {
-  color: #94a3b8 !important;
-}
-
+.dark .text-slate-700,
 .dark .text-gray-700 {
-  color: #cbd5e1 !important;
+  color: #f1f5f9 !important; /* slate-100 for primary text */
 }
 
-.dark .text-gray-900 {
-  color: #f1f5f9 !important;
+.dark .text-slate-600,
+.dark .text-gray-600 {
+  color: #e2e8f0 !important; /* slate-200 for readable descriptions/body */
+}
+
+.dark .text-slate-500,
+.dark .text-gray-500 {
+  color: #cbd5e1 !important; /* slate-300 for readable secondary/metadata/tags */
+}
+
+.dark .text-slate-400,
+.dark .text-gray-400 {
+  color: #cbd5e1 !important; /* slate-300 */
 }
 
 /* Border overrides */

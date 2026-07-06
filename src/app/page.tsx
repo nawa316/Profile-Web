@@ -114,7 +114,7 @@ export default function Home() {
 
           {/* ── About Section ── */}
           <section
-            className="flex flex-col w-full min-h-screen justify-center items-center section px-4 md:px-0 py-8 md:py-0"
+            className="flex flex-col w-full min-h-screen justify-center items-center section px-4 md:px-0 py-8 md:py-0 text-slate-800 dark:text-slate-100"
             id="about"
           >
             <div className="flex flex-col items-center mb-8 md:mb-12" data-aos="fade-down">
