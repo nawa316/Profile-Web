@@ -184,3 +184,27 @@
 .dark .bg-[#6b8af6]\/10 {
   background-color: rgba(107, 138, 246, 0.15) !important;
 }
+
+/* Hamburger overlay — override .dark nav so it stays solid regardless of theme */
+.dark .hamburger-overlay,
+.hamburger-overlay {
+  background-color: #05081c !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Ensure all links/text inside the overlay are always visible */
+.hamburger-overlay a,
+.hamburger-overlay span,
+.hamburger-overlay button {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.hamburger-overlay a:hover {
+  color: #6b8af6 !important;
+}
+
+.hamburger-overlay .text-slate-300 {
+  color: #cbd5e1 !important;
+}

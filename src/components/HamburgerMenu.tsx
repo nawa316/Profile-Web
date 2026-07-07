@@ -53,8 +53,8 @@ export default function HamburgerMenu() {
 
       {/* Menu Overlay */}
       <motion.div
-        className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-8"
-        style={{ backgroundColor: "rgba(5, 8, 20, 0.97)", zIndex: 55 }}
+        className="hamburger-overlay fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-8"
+        style={{ backgroundColor: "#05081c", zIndex: 55, pointerEvents: isOpen ? "auto" : "none" }}
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? "0%" : "100%" }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
