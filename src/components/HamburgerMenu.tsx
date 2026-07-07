@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -9,8 +10,13 @@ import { useTheme } from "@/context/ThemeContext";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -52,13 +58,14 @@ export default function HamburgerMenu() {
       </button>
 
       {/* Menu Overlay */}
-      <motion.div
-        className="hamburger-overlay fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-8"
-        style={{ backgroundColor: "#05081c", zIndex: 55, pointerEvents: isOpen ? "auto" : "none" }}
-        initial={{ x: "100%" }}
-        animate={{ x: isOpen ? "0%" : "100%" }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-      >
+      {mounted && createPortal(
+        <motion.div
+          className="hamburger-overlay fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-8"
+          style={{ backgroundColor: "#05081c", zIndex: 9999, pointerEvents: isOpen ? "auto" : "none" }}
+          initial={{ x: "100%" }}
+          animate={{ x: isOpen ? "0%" : "100%" }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        >
         {/* Close Button */}
         <button
           onClick={closeMenu}
@@ -124,7 +131,9 @@ export default function HamburgerMenu() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </motion.div>,
+      document.body
+    )}
     </div>
   );
 }
