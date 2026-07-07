@@ -30,35 +30,44 @@ export default function HamburgerMenu() {
     <div className="relative">
       {/* Button Hamburger */}
       <button
-        className="flex flex-col justify-between w-10 h-8 z-50 relative"
+        className="flex flex-col justify-between w-10 h-8 z-[60] relative"
         onClick={toggleMenu}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
       >
         <motion.div
           className="w-10 h-1 bg-white rounded origin-left"
-          animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 0 : 0 }}
+          animate={{ rotate: isOpen ? 42 : 0, translateY: isOpen ? 1 : 0 }}
           transition={{ duration: 0.3 }}
         />
         <motion.div
           className="w-10 h-1 bg-white rounded"
-          animate={{ opacity: isOpen ? 0 : 1 }}
-          transition={{ duration: 0.3 }}
+          animate={{ opacity: isOpen ? 0 : 1, scaleX: isOpen ? 0 : 1 }}
+          transition={{ duration: 0.2 }}
         />
         <motion.div
           className="w-10 h-1 bg-white rounded origin-left"
-          animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? 0 : 0 }}
+          animate={{ rotate: isOpen ? -42 : 0, translateY: isOpen ? -1 : 0 }}
           transition={{ duration: 0.3 }}
         />
       </button>
 
-      {/* Menu */}
+      {/* Menu Overlay */}
       <motion.div
-        className={`fixed top-0 left-0 w-full h-full bg-black/95 flex flex-col items-center justify-center gap-8 transition-transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-8"
+        style={{ backgroundColor: "rgba(5, 8, 20, 0.97)", zIndex: 55 }}
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? "0%" : "100%" }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
       >
+        {/* Close Button */}
+        <button
+          onClick={closeMenu}
+          className="absolute top-5 right-6 text-white/60 hover:text-white transition-colors text-3xl font-light"
+          aria-label="Close menu"
+        >
+          ✕
+        </button>
+
         <Link href="/" onClick={closeMenu} className="text-white text-2xl hover:text-[#6b8af6] transition-colors dm_serif_text">
           {t("nav.home")}
         </Link>
@@ -78,7 +87,7 @@ export default function HamburgerMenu() {
           {t("nav.contact")}
         </Link>
 
-        {/* Mobile Actions (Language & Theme Switcher Placeholder) */}
+        {/* Mobile Actions (Language & Theme Switcher) */}
         <div className="flex flex-col items-center gap-6 mt-8 pt-8 border-t border-white/10 w-52 justify-center">
           {/* Theme Toggle Button */}
           <div className="flex items-center gap-3">
