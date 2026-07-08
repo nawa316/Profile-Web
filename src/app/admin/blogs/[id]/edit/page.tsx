@@ -25,6 +25,7 @@ export default function EditBlogPage() {
     author: '',
     category: '',
     tags: [] as string[],
+    status: 'draft' as 'draft' | 'published',
     published_at: '',
     read_time: 5,
   });
@@ -47,6 +48,7 @@ export default function EditBlogPage() {
         author: blog.author,
         category: blog.category,
         tags: blog.tags || [],
+        status: blog.status || 'draft',
         published_at: blog.published_at.split('T')[0],
         read_time: blog.read_time,
       });
@@ -59,8 +61,12 @@ export default function EditBlogPage() {
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (targetStatus: 'draft' | 'published') => {
+    if (!formData.title || !formData.slug || !formData.content || !formData.category) {
+      alert('Please fill in all required fields marked with *');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -92,6 +98,7 @@ export default function EditBlogPage() {
         author: formData.author,
         category: formData.category,
         tags: formData.tags,
+        status: targetStatus,
         published_at: formData.published_at,
         read_time: formData.read_time,
       };
@@ -130,7 +137,7 @@ export default function EditBlogPage() {
           </button>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
               {/* Title */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -285,12 +292,21 @@ export default function EditBlogPage() {
                   Cancel
                 </button>
                 <button
-                  type="submit"
+                  type="button"
                   disabled={isLoading}
+                  onClick={() => handleSubmit('draft')}
+                  className="px-6 py-2 border border-[#6b8af6] text-[#6b8af6] hover:bg-[#6b8af6]/5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Save as Draft
+                </button>
+                <button
+                  type="button"
+                  disabled={isLoading}
+                  onClick={() => handleSubmit('published')}
                   className="flex items-center gap-2 px-6 py-2 bg-[#6b8af6] text-white rounded-lg hover:bg-[#3c45b9] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Save size={20} />
-                  <span>{isLoading ? 'Updating...' : 'Update Blog'}</span>
+                  <span>Publish</span>
                 </button>
               </div>
             </form>

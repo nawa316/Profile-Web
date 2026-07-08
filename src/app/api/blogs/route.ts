@@ -5,13 +5,15 @@ export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
     const query = searchParams.get('q');
+    const status = searchParams.get('status');
+    const isAdmin = status === 'all';
     
     if (query) {
-      const blogs = await BlogModel.search(query);
+      const blogs = await BlogModel.search(query, { admin: isAdmin });
       return NextResponse.json({ success: true, data: blogs });
     }
     
-    const blogs = await BlogModel.findAll();
+    const blogs = await BlogModel.findAll({ admin: isAdmin });
     return NextResponse.json({ success: true, data: blogs });
   } catch (error: any) {
     return NextResponse.json(

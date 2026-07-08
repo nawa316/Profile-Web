@@ -10,6 +10,7 @@ export interface Blog {
   author: string;
   category: string;
   tags: string[];
+  status: 'draft' | 'published';
   published_at: string;
   read_time: number;
   created_at: string;
@@ -54,6 +55,7 @@ export interface CreateBlogInput {
   author: string;
   category: string;
   tags?: string[];
+  status?: 'draft' | 'published';
   published_at: string;
   read_time: number;
 }
@@ -67,6 +69,7 @@ export interface UpdateBlogInput {
   author?: string;
   category?: string;
   tags?: string[];
+  status?: 'draft' | 'published';
   published_at?: string;
   read_time?: number;
 }

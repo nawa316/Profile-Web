@@ -77,14 +77,14 @@ async function fetcher<T>(
 
 // Blog API
 export const blogApi = {
-  getAll: () => fetcher<Blog[]>('/blogs'),
+  getAll: (status?: string) => fetcher<Blog[]>(status ? `/blogs?status=${status}` : '/blogs'),
   getById: (id: number) => fetcher<Blog>(`/blogs/${id}`),
   getBySlug: (slug: string) => fetcher<Blog>(`/blogs/slug/${slug}`),
-  getByCategory: (category: string) => fetcher<Blog[]>(`/blogs/category/${category}`),
-  getByTag: (tag: string) => fetcher<Blog[]>(`/blogs/tag/${tag}`),
-  getCategories: () => fetcher<string[]>('/blogs/categories'),
-  getTags: () => fetcher<string[]>('/blogs/tags'),
-  search: (query: string) => fetcher<Blog[]>(`/blogs/search?q=${encodeURIComponent(query)}`),
+  getByCategory: (category: string, status?: string) => fetcher<Blog[]>(status ? `/blogs/category/${category}?status=${status}` : `/blogs/category/${category}`),
+  getByTag: (tag: string, status?: string) => fetcher<Blog[]>(status ? `/blogs/tag/${tag}?status=${status}` : `/blogs/tag/${tag}`),
+  getCategories: (status?: string) => fetcher<string[]>(status ? `/blogs/categories?status=${status}` : '/blogs/categories'),
+  getTags: (status?: string) => fetcher<string[]>(status ? `/blogs/tags?status=${status}` : '/blogs/tags'),
+  search: (query: string, status?: string) => fetcher<Blog[]>(status ? `/blogs/search?q=${encodeURIComponent(query)}&status=${status}` : `/blogs/search?q=${encodeURIComponent(query)}`),
   create:  (data: CreateBlogInput) => fetcher<Blog>('/blogs', {
     method: 'POST',
     body: JSON.stringify(data),

@@ -18,7 +18,7 @@ export default function AdminDashboard() {
     const fetchStats = async () => {
       try {
         const [blogs, portfolios, experiences] = await Promise.all([
-          blogApi.getAll(),
+          blogApi.getAll('all'),
           portfolioApi.getAll(),
           experienceApi.getAll(),
         ]);

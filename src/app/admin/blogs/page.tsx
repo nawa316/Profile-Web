@@ -47,7 +47,7 @@ export default function BlogsPage() {
 
   const fetchBlogs = async () => {
     try {
-      const data = await blogApi.getAll();
+      const data = await blogApi.getAll('all');
       setBlogs(data);
       setFilteredBlogs(data);
     } catch (error) {
@@ -59,7 +59,7 @@ export default function BlogsPage() {
 
   const fetchCategories = async () => {
     try {
-      const data = await blogApi.getCategories();
+      const data = await blogApi.getCategories('all');
       setCategories(data);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
@@ -155,6 +155,9 @@ export default function BlogsPage() {
                       Category
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Author
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -179,6 +182,15 @@ export default function BlogsPage() {
                       <td className="px-6 py-4">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#6b8af6]/10 text-[#6b8af6]">
                           {blog.category}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+                          blog.status === 'draft'
+                            ? 'bg-amber-50 text-amber-700 border-amber-200'
+                            : 'bg-green-50 text-green-700 border-green-200'
+                        }`}>
+                          {blog.status === 'draft' ? 'Draft' : 'Published'}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900">

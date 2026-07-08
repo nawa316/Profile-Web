@@ -17,6 +17,7 @@ CREATE TABLE blogs (
     author VARCHAR(100) DEFAULT 'Muhammad Ade Dzakwan',
     category VARCHAR(100) NOT NULL,
     tags TEXT[] DEFAULT '{}', -- Array of tags
+    status VARCHAR(20) DEFAULT 'published' CHECK (status IN ('draft', 'published')),
     published_at DATE DEFAULT CURRENT_DATE,
     read_time INTEGER DEFAULT 5, -- in minutes
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

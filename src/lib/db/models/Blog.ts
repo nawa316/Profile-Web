@@ -4,8 +4,10 @@ import { AppError } from '../errors';
 
 export class BlogModel {
   // Get all blogs
-  static async findAll(): Promise<Blog[]> {
-    const query = 'SELECT * FROM blogs ORDER BY published_at DESC, created_at DESC';
+  static async findAll(options?: { admin?: boolean }): Promise<Blog[]> {
+    const query = options?.admin
+      ? 'SELECT * FROM blogs ORDER BY published_at DESC, created_at DESC'
+      : "SELECT * FROM blogs WHERE status = 'published' ORDER BY published_at DESC, created_at DESC";
     const result = await pool.query<Blog>(query);
     return result.rows;
   }
@@ -23,8 +25,10 @@ export class BlogModel {
   }
 
   // Get blog by slug
-  static async findBySlug(slug: string): Promise<Blog | null> {
-    const query = 'SELECT * FROM blogs WHERE slug = $1';
+  static async findBySlug(slug: string, options?: { admin?: boolean }): Promise<Blog | null> {
+    const query = options?.admin
+      ? 'SELECT * FROM blogs WHERE slug = $1'
+      : "SELECT * FROM blogs WHERE slug = $1 AND status = 'published'";
     const result = await pool.query<Blog>(query, [slug]);
     
     if (result.rows.length === 0) {
@@ -35,15 +39,19 @@ export class BlogModel {
   }
 
   // Get blogs by category
-  static async findByCategory(category: string): Promise<Blog[]> {
-    const query = 'SELECT * FROM blogs WHERE category = $1 ORDER BY published_at DESC';
+  static async findByCategory(category: string, options?: { admin?: boolean }): Promise<Blog[]> {
+    const query = options?.admin
+      ? 'SELECT * FROM blogs WHERE category = $1 ORDER BY published_at DESC'
+      : "SELECT * FROM blogs WHERE category = $1 AND status = 'published' ORDER BY published_at DESC";
     const result = await pool.query<Blog>(query, [category]);
     return result.rows;
   }
 
   // Get blogs by tag
-  static async findByTag(tag: string): Promise<Blog[]> {
-    const query = 'SELECT * FROM blogs WHERE $1 = ANY(tags) ORDER BY published_at DESC';
+  static async findByTag(tag: string, options?: { admin?: boolean }): Promise<Blog[]> {
+    const query = options?.admin
+      ? 'SELECT * FROM blogs WHERE $1 = ANY(tags) ORDER BY published_at DESC'
+      : "SELECT * FROM blogs WHERE $1 = ANY(tags) AND status = 'published' ORDER BY published_at DESC";
     const result = await pool.query<Blog>(query, [tag]);
     return result.rows;
   }
@@ -59,15 +67,16 @@ export class BlogModel {
       author, 
       category, 
       tags, 
+      status,
       published_at,
       read_time 
     } = input;
     
     const query = `
       INSERT INTO blogs (
-        title, slug, excerpt, content, image, author, category, tags, published_at, read_time
+        title, slug, excerpt, content, image, author, category, tags, status, published_at, read_time
       ) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) 
       RETURNING *
     `;
     
@@ -80,6 +89,7 @@ export class BlogModel {
       author || 'Muhammad Ade Dzakwan',
       category,
       tags || [],
+      status || 'draft',
       published_at || new Date(),
       read_time || 5
     ]);
@@ -126,6 +136,10 @@ export class BlogModel {
       updates.push(`tags = $${paramCount++}`);
       values.push(input.tags);
     }
+    if (input.status !== undefined) {
+      updates.push(`status = $${paramCount++}`);
+      values.push(input.status);
+    }
     if (input.published_at !== undefined) {
       updates.push(`published_at = $${paramCount++}`);
       values.push(input.published_at);
@@ -166,10 +180,16 @@ export class BlogModel {
   }
 
   // Search blogs by title or content
-  static async search(searchTerm: string): Promise<Blog[]> {
-    const query = `
+  static async search(searchTerm: string, options?: { admin?: boolean }): Promise<Blog[]> {
+    const query = options?.admin
+      ? `
       SELECT * FROM blogs 
       WHERE title ILIKE $1 OR content ILIKE $1 OR excerpt ILIKE $1
+      ORDER BY published_at DESC
+    `
+      : `
+      SELECT * FROM blogs 
+      WHERE (title ILIKE $1 OR content ILIKE $1 OR excerpt ILIKE $1) AND status = 'published'
       ORDER BY published_at DESC
     `;
     const result = await pool.query<Blog>(query, [`%${searchTerm}%`]);
@@ -177,15 +197,19 @@ export class BlogModel {
   }
 
   // Get all unique categories
-  static async getCategories(): Promise<string[]> {
-    const query = 'SELECT DISTINCT category FROM blogs ORDER BY category';
+  static async getCategories(options?: { admin?: boolean }): Promise<string[]> {
+    const query = options?.admin
+      ? 'SELECT DISTINCT category FROM blogs ORDER BY category'
+      : "SELECT DISTINCT category FROM blogs WHERE status = 'published' ORDER BY category";
     const result = await pool.query<{ category: string }>(query);
     return result.rows.map((row: any) => row.category);
   }
 
   // Get all unique tags
-  static async getTags(): Promise<string[]> {
-    const query = 'SELECT DISTINCT UNNEST(tags) as tag FROM blogs ORDER BY tag';
+  static async getTags(options?: { admin?: boolean }): Promise<string[]> {
+    const query = options?.admin
+      ? 'SELECT DISTINCT UNNEST(tags) as tag FROM blogs ORDER BY tag'
+      : "SELECT DISTINCT UNNEST(tags) as tag FROM blogs WHERE status = 'published' ORDER BY tag";
     const result = await pool.query<{ tag: string }>(query);
     return result.rows.map((row: any) => row.tag);
   }

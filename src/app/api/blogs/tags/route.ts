@@ -3,7 +3,11 @@ import { BlogModel } from '@/lib/db/models/Blog';
 
 export async function GET(req: NextRequest) {
   try {
-    const tags = await BlogModel.getTags();
+    const searchParams = req.nextUrl.searchParams;
+    const status = searchParams.get('status');
+    const isAdmin = status === 'all';
+
+    const tags = await BlogModel.getTags({ admin: isAdmin });
     return NextResponse.json({ success: true, data: tags });
   } catch (error: any) {
     return NextResponse.json(
