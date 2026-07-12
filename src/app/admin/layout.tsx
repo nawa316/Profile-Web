@@ -21,7 +21,7 @@ export default function AdminLayout({
   }, [router]);
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 transition-colors duration-250">
       <Sidebar />
       <main className="flex-1">
         {children}

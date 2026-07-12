@@ -1,6 +1,7 @@
 'use client';
 
-import { Bell, User } from 'lucide-react';
+import { Bell, User, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 interface HeaderProps {
   title: string;
@@ -8,6 +9,8 @@ interface HeaderProps {
 }
 
 export default function Header({ title, subtitle }: HeaderProps) {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <header className="bg-white border-b border-gray-200 px-8 py-6">
       <div className="flex items-center justify-between">
@@ -17,6 +20,18 @@ export default function Header({ title, subtitle }: HeaderProps) {
         </div>
         
         <div className="flex items-center gap-4">
+          <button 
+            onClick={toggleTheme} 
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} className="text-yellow-400" />
+            ) : (
+              <Moon size={20} className="text-gray-600" />
+            )}
+          </button>
+
           <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <Bell size={20} className="text-gray-600" />
           </button>

@@ -40,7 +40,8 @@
 }
 
 /* Page background overrides */
-.dark .bg-slate-50 {
+.dark .bg-slate-50,
+.dark .bg-gray-50 {
   background-color: #0f172a !important;
 }
 
@@ -58,19 +59,33 @@
   background-color: rgba(30, 41, 59, 0.8) !important; /* slate-800 with 80% opacity */
 }
 
-.dark .bg-slate-200 {
+.dark .bg-slate-200,
+.dark .bg-gray-200 {
   background-color: #334155 !important; /* slate-700 */
 }
 
-.dark .hover\:bg-slate-200:hover {
+.dark .bg-gray-100 {
+  background-color: #1e293b !important; /* slate-800 */
+}
+
+.dark .hover\:bg-slate-200:hover,
+.dark .hover\:bg-gray-100:hover,
+.dark .hover\:bg-gray-200:hover {
   background-color: #475569 !important; /* slate-600 */
+}
+
+.dark .hover\:bg-gray-50:hover,
+.dark .hover\:bg-slate-50:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Text overrides */
 .dark .text-slate-900,
 .dark .text-slate-800,
 .dark .text-gray-900,
-.dark .text-gray-800 {
+.dark .text-gray-800,
+.dark .text-gray-950,
+.dark .text-slate-950 {
   color: #ffffff !important; /* Pure white for headings */
 }
 
@@ -97,7 +112,8 @@
 /* Border overrides */
 .dark .border-slate-100,
 .dark .border-slate-200,
-.dark .border-gray-200 {
+.dark .border-gray-200,
+.dark .border-gray-300 {
   border-color: #334155 !important; /* slate-700 */
 }
 
@@ -127,12 +143,18 @@
 }
 
 /* Form controls overrides */
-.dark input, 
-.dark textarea, 
+.dark input:not(.bg-transparent), 
+.dark textarea:not(.bg-transparent), 
 .dark select {
   background-color: #1e293b !important;
   color: #f8fafc !important;
   border-color: #334155 !important;
+}
+
+.dark input.bg-transparent {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  border-width: 0 !important;
 }
 
 .dark input::placeholder, 
