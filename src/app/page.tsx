@@ -17,6 +17,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import ProfileCard from "@/components/ProfileCard";
 import { useLanguage, Translate } from "@/context/LanguageContext";
+import { CardSkeleton, BlogCardSkeleton, ProfileCardSkeleton, GridSkeleton } from "@/components/Skeleton";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -123,7 +124,7 @@ export default function Home() {
             </div>
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 px-4 md:px-40">
               {isLoading ? (
-                <div className="w-[260px] h-[480px] bg-gray-200 animate-pulse rounded-2xl" />
+                <ProfileCardSkeleton />
               ) : (
                 <div data-aos="fade-up" data-aos-delay="100">
                   <ProfileCard photoUrl={profileData?.photo_url} name="Awan" />
@@ -189,17 +190,21 @@ export default function Home() {
               <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.experience")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
-              {experienceData.slice(0, 3).map((item, index) => (
-                <div
-                  key={item.id}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <ExperienceCard item={item} index={index} />
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <GridSkeleton count={3} Card={CardSkeleton} />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
+                {experienceData.slice(0, 3).map((item, index) => (
+                  <div
+                    key={item.id}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                  >
+                    <ExperienceCard item={item} index={index} />
+                  </div>
+                ))}
+              </div>
+            )}
             <Link
               href="/experience"
               className="mt-8 p-3 px-8 bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/10 rounded-full hover:bg-[#5271df] hover:shadow-lg hover:shadow-[#6b8af6]/25 hover:-translate-y-0.5 transition-all duration-300 font-medium text-sm md:text-base"
@@ -219,17 +224,21 @@ export default function Home() {
               <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.portfolio")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
-              {portfolioData.slice(0, 3).map((item, index) => (
-                <div
-                  key={item.id}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <PortfolioCard item={item} index={index} />
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <GridSkeleton count={3} Card={CardSkeleton} />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
+                {portfolioData.slice(0, 3).map((item, index) => (
+                  <div
+                    key={item.id}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                  >
+                    <PortfolioCard item={item} index={index} />
+                  </div>
+                ))}
+              </div>
+            )}
             <Link
               href="/portofolio"
               className="mt-8 p-3 px-8 bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/10 rounded-full hover:bg-[#5271df] hover:shadow-lg hover:shadow-[#6b8af6]/25 hover:-translate-y-0.5 transition-all duration-300 font-medium text-sm md:text-base"
@@ -249,17 +258,21 @@ export default function Home() {
               <h2 className="dm_serif_text text-3xl md:text-5xl text-slate-800 text-center">{t("section.blog")}</h2>
               <div className="w-12 h-1 bg-[#6b8af6] rounded-full mt-2" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
-              {blogData.slice(0, 3).map((item, index) => (
-                <div
-                  key={item.id}
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <BlogCard post={item} index={index} />
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <GridSkeleton count={3} Card={BlogCardSkeleton} />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto w-full">
+                {blogData.slice(0, 3).map((item, index) => (
+                  <div
+                    key={item.id}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                  >
+                    <BlogCard post={item} index={index} />
+                  </div>
+                ))}
+              </div>
+            )}
             <Link
               href="/blog"
               className="mt-8 p-3 px-8 bg-[#6b8af6] text-white shadow-md shadow-[#6b8af6]/10 rounded-full hover:bg-[#5271df] hover:shadow-lg hover:shadow-[#6b8af6]/25 hover:-translate-y-0.5 transition-all duration-300 font-medium text-sm md:text-base"

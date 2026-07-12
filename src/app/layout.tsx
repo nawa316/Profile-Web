@@ -22,6 +22,8 @@ export const metadata: Metadata = {
 
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function RootLayout({
   children,
@@ -33,7 +35,9 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <LanguageProvider>
+            <ScrollProgressBar />
             {children}
+            <ScrollToTop />
           </LanguageProvider>
         </ThemeProvider>
       </body>

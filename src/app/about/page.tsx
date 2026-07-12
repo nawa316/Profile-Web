@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import ProfileCard from "@/components/ProfileCard";
 import { Code2, Laptop, Palette, Terminal, Database, Award, ExternalLink, FileText, Calendar } from "lucide-react";
 import { useLanguage, Translate } from "@/context/LanguageContext";
+import { ProfileCardSkeleton } from "@/components/Skeleton";
 
 export default function AboutPage() {
   const { t } = useLanguage();
@@ -88,7 +89,7 @@ export default function AboutPage() {
               {/* ProfileCard (hanging ID card) */}
               <motion.div variants={itemVariants} className="w-full md:w-1/3 flex justify-center items-start pt-8">
                 {isLoading ? (
-                  <div className="w-[260px] h-[480px] bg-slate-200 animate-pulse rounded-2xl" />
+                  <ProfileCardSkeleton />
                 ) : (
                   <ProfileCard photoUrl={profile?.photo_url} name="Awan" />
                 )}
@@ -133,7 +134,15 @@ export default function AboutPage() {
             </motion.div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {skills.length > 0 ? (
+              {isLoading ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className="bg-white border border-slate-200 rounded-xl p-5 animate-pulse">
+                    <div className="w-12 h-12 bg-slate-200 rounded-lg mx-auto mb-3" />
+                    <div className="h-4 bg-slate-200 rounded w-3/4 mx-auto" />
+                    <div className="h-3 bg-slate-200 rounded w-1/2 mx-auto mt-2" />
+                  </div>
+                ))
+              ) : skills.length > 0 ? (
                 skills.map((skill, index) => (
                   <motion.div
                     key={skill.id}
@@ -162,9 +171,9 @@ export default function AboutPage() {
                     )}
                   </motion.div>
                 ))
-              ) : (
+              ) : !isLoading ? (
                 <p className="text-slate-400 text-center col-span-full">{t("portfolio.notFound")}</p>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
