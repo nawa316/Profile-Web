@@ -19,7 +19,10 @@ import type {
   UpdateCertificationInput,
   Achievement,
   CreateAchievementInput,
-  UpdateAchievementInput
+  UpdateAchievementInput,
+  Skill,
+  CreateSkillInput,
+  UpdateSkillInput
 } from './types';
 
 const API_BASE_URL = '/api';
@@ -198,5 +201,22 @@ export const achievementApi = {
   }),
 };
 
+// Skill API
+export const skillApi = {
+  getAll: () => fetcher<Skill[]>('/skills'),
+  getById: (id: number) => fetcher<Skill>(`/skills/${id}`),
+  create: (data: CreateSkillInput) => fetcher<Skill>('/skills', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  update: (id: number, data: UpdateSkillInput) => fetcher<Skill>(`/skills/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
+  delete: (id: number) => fetcher<void>(`/skills/${id}`, {
+    method: 'DELETE',
+  }),
+};
+
 export { ApiError };
-export type { Blog, Portfolio, Experience, Profile, Education, Certification, Achievement };
+export type { Blog, Portfolio, Experience, Profile, Education, Certification, Achievement, Skill };

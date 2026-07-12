@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Header from '../components/Header';
 import DeleteModal from '../components/DeleteModal';
 import { certificationApi } from '@/lib/api';
-import { Plus, Edit2, Trash2, Search } from 'lucide-react';
+import { Plus, Edit2, Trash2, Search, FileText, ExternalLink } from 'lucide-react';
 
 export default function CertificationsPage() {
   const router = useRouter();
@@ -29,7 +29,8 @@ export default function CertificationsPage() {
     if (searchTerm) {
       filtered = filtered.filter(item =>
         (item.name && item.name.toString().toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (item.issuer && item.issuer.toString().toLowerCase().includes(searchTerm.toLowerCase()))
+        (item.issuer && item.issuer.toString().toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.description && item.description.toString().toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
     setFilteredData(filtered);
@@ -114,6 +115,7 @@ export default function CertificationsPage() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Certification Name</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Issuer</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">File</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -130,6 +132,27 @@ export default function CertificationsPage() {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
                         {formatDate(item.date)}
+                      </td>
+                      <td className="px-6 py-4 text-sm">
+                        {item.file_url ? (
+                          <a
+                            href={item.file_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[#3c45b9] hover:text-[#483D8B] hover:underline"
+                          >
+                            {item.file_url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
+                              <img src={item.file_url} alt="Thumb" className="w-8 h-8 rounded object-cover border border-gray-200" />
+                            ) : (
+                              <>
+                                <FileText size={16} />
+                                <ExternalLink size={12} />
+                              </>
+                            )}
+                          </a>
+                        ) : (
+                          <span className="text-gray-400">-</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 text-right text-sm font-medium">
                         <button

@@ -17,12 +17,12 @@ export class CertificationModel {
 
   static async create(input: CreateCertificationInput): Promise<Certification> {
     const query = `
-      INSERT INTO certifications (name, issuer, date, description, credential_url)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO certifications (name, issuer, date, expiry_date, description, credential_url, file_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
     `;
     const result = await pool.query<Certification>(query, [
-      input.name, input.issuer, input.date, input.description || null, input.credential_url || null
+      input.name, input.issuer, input.date, input.expiry_date || null, input.description || null, input.credential_url || null, input.file_url || null
     ]);
     return result.rows[0];
   }

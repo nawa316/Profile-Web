@@ -4,7 +4,11 @@ const path = require('path');
 
 const envContent = fs.readFileSync(path.resolve(__dirname, '.env'), 'utf8');
 const dbUrlMatch = envContent.match(/DATABASE_URL="([^"]+)"/);
-const dbUrl = dbUrlMatch ? dbUrlMatch[1] : null;
+let dbUrl = dbUrlMatch ? dbUrlMatch[1] : null;
+
+if (dbUrl) {
+  dbUrl = dbUrl.replace(/\\(\$)/g, '$1');
+}
 
 async function migrate() {
   const client = new Client({

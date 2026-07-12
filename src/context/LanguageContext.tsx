@@ -44,6 +44,10 @@ export const translations: Translations = {
 
   // About Page
   "about.keahlian": { id: "Keahlian & Fokus", en: "Skills & Focus", de: "Fähigkeiten & Fokus" },
+  "about.sertifikasi": { id: "Sertifikasi & Lisensi", en: "Certifications & Licenses", de: "Zertifikate & Lizenzen" },
+  "about.viewCredential": { id: "Lihat Kredensial", en: "View Credential", de: "Anmeldeinformationen anzeigen" },
+  "about.viewPdf": { id: "Lihat PDF", en: "View PDF", de: "PDF anzeigen" },
+  "about.viewImage": { id: "Lihat Gambar", en: "View Image", de: "Bild anzeigen" },
   "about.desc1": { 
     id: "Halo! Saya Muhammad Ade Dzakwan, atau biasa dipanggil Awan. Saya adalah mahasiswa Sistem Informasi di Institut Teknologi Sepuluh Nopember (ITS) Surabaya.", 
     en: "Hello! I am Muhammad Ade Dzakwan, or commonly called Awan. I am an Information Systems student at Institut Teknologi Sepuluh Nopember (ITS) Surabaya.", 
@@ -486,6 +490,7 @@ export const translations: Translations = {
     en: "Licenses & Certifications",
     de: "Lizenzen & Zertifizierungen"
   },
+  "Expired": { id: "Kadaluarsa", en: "Expired", de: "Abgelaufen" },
   "Achievements": {
     id: "Prestasi",
     en: "Achievements",

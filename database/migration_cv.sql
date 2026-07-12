@@ -32,11 +32,23 @@ CREATE TABLE IF NOT EXISTS certifications (
     name VARCHAR(255) NOT NULL,
     issuer VARCHAR(255) NOT NULL,
     date DATE NOT NULL,
+    expiry_date DATE,
     description TEXT,
     credential_url VARCHAR(500),
+    file_url VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+DO $$ BEGIN
+    ALTER TABLE certifications ADD COLUMN IF NOT EXISTS expiry_date DATE;
+EXCEPTION WHEN duplicate_column THEN NULL;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE certifications ADD COLUMN IF NOT EXISTS file_url VARCHAR(500);
+EXCEPTION WHEN duplicate_column THEN NULL;
+END $$;
 
 CREATE TABLE IF NOT EXISTS achievements (
     id SERIAL PRIMARY KEY,
@@ -56,3 +68,30 @@ WHERE NOT EXISTS (SELECT 1 FROM profile);
 INSERT INTO educations (institution, degree, major, start_date, gpa, description)
 SELECT 'Institut Teknologi Sepuluh Nopember', 'S1', 'Sistem Informasi', '2023-08-01', '3.64 / 3.50', 'Active student.'
 WHERE NOT EXISTS (SELECT 1 FROM educations);
+
+CREATE TABLE IF NOT EXISTS skills (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    image VARCHAR(500),
+    category VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Seed some default skills if the table is empty
+INSERT INTO skills (name, category)
+SELECT name, category FROM (
+    VALUES 
+    ('Next.js', 'Frontend'),
+    ('React', 'Frontend'),
+    ('TypeScript', 'Frontend'),
+    ('Tailwind CSS', 'Frontend'),
+    ('Node.js', 'Backend'),
+    ('Express.js', 'Backend'),
+    ('PostgreSQL', 'Database'),
+    ('MongoDB', 'Database'),
+    ('Git', 'Tools'),
+    ('Docker', 'Tools'),
+    ('Figma', 'Design')
+) AS default_skills(name, category)
+WHERE NOT EXISTS (SELECT 1 FROM skills);

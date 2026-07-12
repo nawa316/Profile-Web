@@ -187,8 +187,10 @@ export interface Certification {
   name: string;
   issuer: string;
   date: string;
+  expiry_date: string | null;
   description: string;
   credential_url: string;
+  file_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -197,16 +199,20 @@ export interface CreateCertificationInput {
   name: string;
   issuer: string;
   date: string;
-  description?: string;
-  credential_url?: string;
+  expiry_date?: string | null;
+  description?: string | null;
+  credential_url?: string | null;
+  file_url?: string | null;
 }
 
 export interface UpdateCertificationInput {
   name?: string;
   issuer?: string;
   date?: string;
-  description?: string;
-  credential_url?: string;
+  expiry_date?: string | null;
+  description?: string | null;
+  credential_url?: string | null;
+  file_url?: string | null;
 }
 
 export interface Achievement {
@@ -228,4 +234,25 @@ export interface UpdateAchievementInput {
   title?: string;
   description?: string;
   year?: number;
+}
+
+export interface Skill {
+  id: number;
+  name: string;
+  image: string | null;
+  category: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateSkillInput {
+  name: string;
+  image?: string | null;
+  category?: string | null;
+}
+
+export interface UpdateSkillInput {
+  name?: string;
+  image?: string | null;
+  category?: string | null;
 }
