@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Sidebar from './components/Sidebar';
+import { SidebarProvider } from '@/context/SidebarContext';
 
 export default function AdminLayout({
   children,
@@ -21,9 +22,17 @@ export default function AdminLayout({
   }, [router]);
 
   return (
+    <SidebarProvider>
+      <AdminLayoutContent>{children}</AdminLayoutContent>
+    </SidebarProvider>
+  );
+}
+
+function AdminLayoutContent({ children }: { children: React.ReactNode }) {
+  return (
     <div className="flex min-h-screen bg-gray-50 transition-colors duration-250">
       <Sidebar />
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         {children}
       </main>
     </div>

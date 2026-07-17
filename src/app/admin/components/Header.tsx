@@ -1,7 +1,8 @@
 'use client';
 
-import { Bell, User, Sun, Moon } from 'lucide-react';
+import { Bell, User, Sun, Moon, Menu } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { useSidebar } from '@/context/SidebarContext';
 
 interface HeaderProps {
   title: string;
@@ -10,13 +11,24 @@ interface HeaderProps {
 
 export default function Header({ title, subtitle }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const { toggleSidebar } = useSidebar();
 
   return (
-    <header className="bg-white border-b border-gray-200 px-8 py-6">
+    <header className="bg-white border-b border-gray-200 px-4 md:px-8 py-6">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dm_serif_text">{title}</h1>
-          {subtitle && <p className="text-gray-600 mt-1">{subtitle}</p>}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleSidebar}
+            className="p-2 hover:bg-gray-100 rounded-lg lg:hidden transition-colors"
+            title="Toggle Sidebar"
+            aria-label="Toggle Sidebar"
+          >
+            <Menu size={24} className="text-gray-600" />
+          </button>
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dm_serif_text">{title}</h1>
+            {subtitle && <p className="text-gray-600 mt-1 text-sm md:text-base">{subtitle}</p>}
+          </div>
         </div>
         
         <div className="flex items-center gap-4">
