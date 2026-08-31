@@ -5,6 +5,7 @@ import type { Profile, Portfolio, Skill, Certification } from "@/lib/types";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import ProfileCard from "@/components/ProfileCard";
+import GitHubProgress from "@/components/GitHubProgress";
 import { Code2, Laptop, Palette, Terminal, Database, Award, ExternalLink, FileText, Calendar } from "lucide-react";
 import { useLanguage, Translate } from "@/context/LanguageContext";
 import { ProfileCardSkeleton } from "@/components/Skeleton";
@@ -119,8 +120,11 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* GitHub Progress & Activity Section */}
+        <GitHubProgress username={profile?.github || "nawa316"} />
+
         {/* Skills Section */}
-        <div className="py-16 px-4 bg-white border-t border-slate-100">
+        <div className="py-16 px-4 bg-slate-50 border-t border-slate-100">
           <div className="max-w-6xl mx-auto">
             <motion.div
               className="text-center mb-12"
@@ -180,7 +184,7 @@ export default function AboutPage() {
 
         {/* Certifications Section */}
         {certifications.length > 0 && (
-          <div className="py-16 px-4 bg-slate-50 border-t border-slate-100">
+          <div className="py-16 px-4 bg-white border-t border-slate-100">
             <div className="max-w-6xl mx-auto">
               <motion.div
                 className="text-center mb-12"
