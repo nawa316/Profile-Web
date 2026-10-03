@@ -80,6 +80,11 @@
 }
 
 /* Text overrides */
+.dark .text-white,
+.dark .dark\:text-white {
+  color: #ffffff !important;
+}
+
 .dark .text-slate-900,
 .dark .text-slate-800,
 .dark .text-gray-900,
@@ -176,19 +181,55 @@
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
-/* Markdown prose overrides */
+/* Markdown prose & Blog dark mode overrides */
+.dark article,
+.dark article p,
+.dark article li,
+.dark article ul,
+.dark article ol,
+.dark article span,
+.dark article h1,
 .dark article h2,
 .dark article h3,
-.dark article strong {
-  color: #f1f5f9 !important;
+.dark article h4,
+.dark article h5,
+.dark article h6,
+.dark article strong,
+.dark article b,
+.dark article em,
+.dark article i,
+.dark article blockquote {
+  color: #ffffff !important;
+}
+
+.dark article a {
+  color: #6b8af6 !important;
+}
+
+.dark article a:hover {
+  color: #93c5fd !important;
+}
+
+.dark article code {
+  color: #93c5fd !important;
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark article pre {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid #334155 !important;
+}
+
+.dark article blockquote {
+  border-left-color: #6b8af6 !important;
+  background-color: rgba(107, 138, 246, 0.1) !important;
+  color: #ffffff !important;
 }
 
 .dark article hr {
   border-color: #334155 !important;
-}
-
-.dark article {
-  color: #cbd5e1 !important;
 }
 
 /* ProfileCard specific overrides */
@@ -203,7 +244,7 @@
 }
 
 /* Experience filter tabs */
-.dark .bg-[#6b8af6]\/10 {
+.dark [class*="bg-[#6b8af6]/10"] {
   background-color: rgba(107, 138, 246, 0.15) !important;
 }
 
