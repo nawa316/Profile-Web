@@ -5,6 +5,8 @@ import type { Blog } from "@/lib/types";
 import Navbar from "@/components/Navbar";
 import { FaClock, FaUser, FaCalendar, FaTag, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
+import ImageModal from "@/components/ImageModal";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useLanguage, useTranslate } from "@/context/LanguageContext";
@@ -14,6 +16,14 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   const unwrappedParams = use(params);
   const [blog, setBlog] = useState<Blog | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
   const translatedContent = useTranslate(blog?.content);
   const translatedTitle = useTranslate(blog?.title);
   const translatedCategory = useTranslate(blog?.category);
@@ -67,7 +77,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           </Link>
 
           {/* Header */}
-          <header className="mb-10">
+          <header className="mb-8">
             <div className="flex flex-wrap items-center gap-3 text-slate-500 dark:text-white text-sm mb-6">
               <span className="px-4 py-1.5 bg-[#6b8af6]/10 text-[#6b8af6] rounded-full font-semibold">
                 {translatedCategory}
@@ -100,6 +110,28 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
           </header>
+
+          {/* Featured Image */}
+          {blog.image && (
+            <div 
+              className="relative w-full h-64 sm:h-80 md:h-[450px] rounded-2xl md:rounded-3xl overflow-hidden mb-10 shadow-lg border border-slate-200 dark:border-slate-800 group cursor-pointer"
+              onClick={() => openModal(blog.image!)}
+            >
+              <Image
+                src={blog.image}
+                alt={blog.title}
+                fill
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 900px"
+              />
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span className="text-white text-sm font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-sm">
+                  {t("Click to enlarge")}
+                </span>
+              </div>
+            </div>
+          )}
 
           {/* Markdown Content */}
           <article className="
@@ -140,6 +172,16 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
             </div>
           )}
         </main>
+
+        {/* Image Modal for full size view */}
+        {selectedImage && (
+          <ImageModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            imageUrl={selectedImage}
+            altText={blog.title}
+          />
+        )}
       </div>
     </>
   );
